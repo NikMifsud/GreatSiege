@@ -12,6 +12,7 @@ public class timerbarsoldier : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+	//line added
 	void Update () {
 		myAmount = activemovement.Movementtime / 10;
 		Image myImage = GetComponent<Image>();
