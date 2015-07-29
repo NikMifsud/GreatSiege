@@ -137,7 +137,6 @@ public class Enemy : MonoBehaviour {
 
 	public void getNextMove(){
 		bool attack = false;
-		GameObject enemyToAttack = null;
 		enemies = new ArrayList ();
 		//1. find your surroundings and see what they are exactly
 		//the more detail we have, the more precise decision we can make about things 
@@ -167,53 +166,48 @@ public class Enemy : MonoBehaviour {
 				allyCounter++;
 			}
 		}
+
 		//Debug.Log ("Enemy Counter: " + enemyCounter + " Ally Counter: " + allyCounter);
+		if (enemyCounter <= allyCounter) {
+			enemies.ToArray ();
 
-		enemies.ToArray ();
-
-		foreach (GameObject enemy in enemies) {
-			if(enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit"){
-				if(enemy.GetComponent<Artillery>().curr_Health <= curr_Health){
-					enemyToAttack = enemy;
-					attack = true;
+			foreach (GameObject enemy in enemies) {
+				if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
+					if (enemy.GetComponent<Artillery> ().curr_Health <= curr_Health) {
+						if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
+							if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
+								enemy.GetComponent<Artillery> ().DealtDamage (Attack);
+								DecreaseCooldown ();
+								return;
+							}
+						}
+					}
 				}
-			}
-			if(enemy.tag == "RangedUnit" || enemy.tag == "SelectedRangedUnit"){
-				if(enemy.GetComponent<Rangedsoldier>().curr_Health <= curr_Health){
-					enemyToAttack = enemy;
-					attack = true;
+				if (enemy.tag == "RangedUnit" || enemy.tag == "SelectedRangedUnit") {
+					if (enemy.GetComponent<Rangedsoldier> ().curr_Health <= curr_Health) {
+						if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
+							if (enemy.tag == "RangedUnit" || enemy.tag == "SelectedRangedUni") {
+								enemy.GetComponent<Rangedsoldier> ().DealtDamage (Attack);
+								DecreaseCooldown ();
+								return;
+							}
+						}
+					}
 				}
-			}
-			if(enemy.tag == "FootUnit" || enemy.tag == "SelectedFootUnit"){
-				if(enemy.GetComponent<Footsoldier>().curr_Health <= curr_Health){
-					enemyToAttack = enemy;
-					attack = true;
+				if (enemy.tag == "FootUnit" || enemy.tag == "SelectedFootUnit") {
+					if (enemy.GetComponent<Footsoldier> ().curr_Health <= curr_Health) {
+						if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
+							if (enemy.tag == "FootUnit" || enemy.tag == "SelectedFootUnit") {
+								enemy.GetComponent<Footsoldier> ().DealtDamage (Attack);
+								DecreaseCooldown ();
+								return;
+							}
+						}
+					}
 				}
 			}
 		}
 
-		//if see weak enemy then go attack it 
-		if (attack) {
-			if(PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemyToAttack.GetComponent<CharacterMovement>().unitOriginalTile.tile).ToList().Count <= (AttackRange+1)){
-				if(enemyToAttack.tag == "FootUnit" || enemyToAttack.tag == "SelectedFootUnit"){
-					enemyToAttack.GetComponent<Footsoldier>().DealtDamage(Attack);
-					DecreaseCooldown ();
-				}
-				if(enemyToAttack.tag == "RangedUnit" || enemyToAttack.tag == "SelectedRangedUni"){
-					enemyToAttack.GetComponent<Rangedsoldier>().DealtDamage(Attack);
-					DecreaseCooldown ();
-				}
-				if(enemyToAttack.tag == "SiegeUnit" || enemyToAttack.tag == "SelectedSiegeUnit"){
-					enemyToAttack.GetComponent<Artillery>().DealtDamage(Attack);
-					DecreaseCooldown ();
-				}
-			}
-			else{
-				//move to a tile close to the enemy 
-
-				PathFinder.FindPath(this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemyToAttack.GetComponent<CharacterMovement>().unitOriginalTile.tile);
-			}
-		}
 
 		//if more enemies than allies, move back one
 		else if (enemyCounter > allyCounter) {
