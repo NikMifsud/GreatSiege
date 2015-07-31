@@ -72,7 +72,7 @@ public class spawnsoldier : MonoBehaviour {
 			tiles.Add(child);
 		}
 		tiles.Reverse ();
-		tiles.RemoveRange (28, (tiles.Count - 28));
+		tiles.RemoveRange (22, (tiles.Count - 22));
 		tiles.ToArray ();
 		for (int k = 0; k < tiles.Count; k++) {
 			if(tiles[k].gameObject.tag == "StoneTile")

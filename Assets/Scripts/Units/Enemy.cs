@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour {
 		Armor = 10;
 		Movement = 2;
 		AttackRange = 1;
-		canMove = true;
+		canMove = false;
 		Attack = 50;
 		Movementtime = 10;
 		isSelected = false;
@@ -64,6 +64,7 @@ public class Enemy : MonoBehaviour {
 			Vector3 down = Vector3.down;
 			if (Physics.Raycast(this.transform.position, down, out objectHit, 50))
 			{
+			
 				//do something if hit object ie
 				if(objectHit.collider.gameObject.tag == "AttackableDirtTile"){
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = false;
@@ -75,12 +76,12 @@ public class Enemy : MonoBehaviour {
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = true;
 					objectHit.collider.gameObject.tag = "StoneTile";
 				}
-			else 	if(objectHit.collider.gameObject.tag == "AttackableMudTile"){
+				else if(objectHit.collider.gameObject.tag == "AttackableMudTile"){
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = false;
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = true;
 					objectHit.collider.gameObject.tag = "MudTile";
 				}
-			else 	if(objectHit.collider.gameObject.tag == "AttackableOutpostTile"){
+				else if(objectHit.collider.gameObject.tag == "AttackableOutpostTile"){
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = false;
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = true;
 					objectHit.collider.gameObject.tag = "OutpostTile";
@@ -108,12 +109,10 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public void CheckDeath(){
-		if (curr_Health <= 0) {
-			
+		if (curr_Health <= 0) {	
 			RaycastHit objectHit;
 			Vector3 down = Vector3.down;
 			if (Physics.Raycast (this.transform.position, down, out objectHit, 50)) {
-				//do something if hit object ie
 				if (objectHit.collider.gameObject.tag == "AttackableDirtTile") {
 					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isEnemy = false;
 					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
@@ -169,112 +168,68 @@ public class Enemy : MonoBehaviour {
 
 		//Debug.Log ("Enemy Counter: " + enemyCounter + " Ally Counter: " + allyCounter);
 		if (enemyCounter <= allyCounter) {
+			Debug.Log ("Going to attack");
 			enemies.ToArray ();
-
-			foreach (GameObject enemy in enemies) {
-				if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
-					if (enemy.GetComponent<Artillery> ().curr_Health <= curr_Health) {
-						if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
-							if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
-								enemy.GetComponent<Artillery> ().DealtDamage (Attack);
-								DecreaseCooldown ();
-								return;
+			if (enemies.Count <= 0) {
+				MoveForward ();
+			} else {
+				foreach (GameObject enemy in enemies) {
+					//if enemy is close then attack him, if not then just move forward
+					if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
+						if (enemy.GetComponent<Artillery> ().curr_Health <= curr_Health) {
+							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
+								if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
+									enemy.GetComponent<Artillery> ().DealtDamage (Attack);
+									enemy.GetComponent<Artillery> ().CheckDeath ();
+									DecreaseCooldown ();
+								}
+							} else {
+								MoveForward ();
 							}
 						}
 					}
-				}
-				if (enemy.tag == "RangedUnit" || enemy.tag == "SelectedRangedUnit") {
-					if (enemy.GetComponent<Rangedsoldier> ().curr_Health <= curr_Health) {
-						if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
-							if (enemy.tag == "RangedUnit" || enemy.tag == "SelectedRangedUni") {
-								enemy.GetComponent<Rangedsoldier> ().DealtDamage (Attack);
-								DecreaseCooldown ();
-								return;
+					if (enemy.tag == "RangedUnit" || enemy.tag == "SelectedRangedUnit") {
+						if (enemy.GetComponent<Rangedsoldier> ().curr_Health <= curr_Health) {
+							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
+								if (enemy.tag == "RangedUnit" || enemy.tag == "SelectedRangedUnit") {
+									enemy.GetComponent<Rangedsoldier> ().DealtDamage (Attack);
+									enemy.GetComponent<Rangedsoldier> ().CheckDeath ();
+									DecreaseCooldown ();
+								}
+							} else {
+								MoveForward ();
 							}
 						}
 					}
-				}
-				if (enemy.tag == "FootUnit" || enemy.tag == "SelectedFootUnit") {
-					if (enemy.GetComponent<Footsoldier> ().curr_Health <= curr_Health) {
-						if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
-							if (enemy.tag == "FootUnit" || enemy.tag == "SelectedFootUnit") {
-								enemy.GetComponent<Footsoldier> ().DealtDamage (Attack);
-								DecreaseCooldown ();
-								return;
+					if (enemy.tag == "FootUnit" || enemy.tag == "SelectedFootUnit") {
+						if (enemy.GetComponent<Footsoldier> ().curr_Health <= curr_Health) {
+							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
+								if (enemy.tag == "FootUnit" || enemy.tag == "SelectedFootUnit") {
+									enemy.GetComponent<Footsoldier> ().DealtDamage (Attack);
+									enemy.GetComponent<Footsoldier> ().CheckDeath ();
+									DecreaseCooldown ();
+								}
+							} else {
+								MoveForward ();
 							}
 						}
 					}
 				}
 			}
 		}
-
 
 		//if more enemies than allies, move back one
 		else if (enemyCounter > allyCounter) {
-			availableMoves = new ArrayList ();
-
-			//only these tile as the rest would be occupied
-			GameObject[] MudTiles = GameObject.FindGameObjectsWithTag ("MudTile");
-			GameObject[] StoneTiles = GameObject.FindGameObjectsWithTag ("StoneTile");
-			GameObject[] OutpostTiles = GameObject.FindGameObjectsWithTag ("OutpostTile");
-			GameObject[] DirtTiles = GameObject.FindGameObjectsWithTag ("DirtTile");
-
-			Vector2 currentPosition = gridManager.calcGridPos (this.transform.position);
-
-			foreach (GameObject tile in MudTiles) {
-				Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
-				if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (Movement) && tilePosition.y < currentPosition.y && tile.gameObject.GetComponent<TileBehaviour>().isPassable == true) {
-					availableMoves.Add (tile);
-				}
-			}
-			foreach (GameObject tile in StoneTiles) {
-				Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
-				if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (Movement) && tilePosition.y < currentPosition.y && tile.gameObject.GetComponent<TileBehaviour>().isPassable == true) {
-					availableMoves.Add (tile);
-				}
-			}
-			foreach (GameObject tile in OutpostTiles) {
-				Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
-				if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (Movement) && tilePosition.y < currentPosition.y && tile.gameObject.GetComponent<TileBehaviour>().isPassable == true) {
-					availableMoves.Add (tile);
-				}
-			}
-			foreach (GameObject tile in DirtTiles) {
-				Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
-				if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (Movement) && tilePosition.y < currentPosition.y && tile.gameObject.GetComponent<TileBehaviour>().isPassable == true) {
-					availableMoves.Add (tile);
-				}
-			}
-
-			//move the actual enemy back to a random tile. 
-			availableMoves.ToArray ();
-
-			int randomTileIndex = UnityEngine.Random.Range (0, availableMoves.Count);
-			GameObject destinationTile = (GameObject)availableMoves [randomTileIndex];
-
-			//keep the tiles updated
-			this.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isPassable = true;
-			this.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isEnemy = false;
-			this.GetComponent<CharacterMovement> ().unitOriginalTile = destinationTile.GetComponent<TileBehaviour> ();
-			this.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isPassable = false;
-			this.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isEnemy = true;
-
-			//set up the movement
-			movement = destinationTile.transform.position;
-			if(destinationTile.tag == "StoneTile"){
-				movement.y = 0.12f;
-			}
-			else
-				movement.y = 0.11f;
-
-			//move 
-			this.transform.position = movement;
-
-			DecreaseCooldown ();
-
+			MoveBackwards();
 		} 
 		//base case just move forward
 		else {
+			MoveForward();
+		}
+	}
+
+	void MoveForward(){
+
 			availableMoves = new ArrayList ();
 			
 			//only these tile as the rest would be occupied
@@ -310,10 +265,13 @@ public class Enemy : MonoBehaviour {
 				}
 			}
 			
-			//move the actual enemy back to a random tile. 
-			availableMoves.ToArray ();
-			
+		//move the actual enemy forward to a random tile. S
+		Debug.Log (availableMoves.Count);
+		if (availableMoves.Count > 0) {
 			int randomTileIndex = UnityEngine.Random.Range (0, availableMoves.Count);
+			Debug.Log (randomTileIndex);
+			availableMoves.ToArray ();
+
 			GameObject destinationTile = (GameObject)availableMoves [randomTileIndex];
 			
 			//keep the tiles updated
@@ -325,18 +283,78 @@ public class Enemy : MonoBehaviour {
 			
 			//set up the movement
 			movement = destinationTile.transform.position;
-			if(destinationTile.tag == "StoneTile"){
+			if (destinationTile.tag == "StoneTile") {
 				movement.y = 0.12f;
-			}
-			else
+			} else
 				movement.y = 0.11f;
-
+			
 			//move 
 			this.transform.position = movement;
-			
-			DecreaseCooldown ();
-
 		}
+			DecreaseCooldown ();
+	}
+
+	void MoveBackwards(){
+		availableMoves = new ArrayList ();
+		
+		//only these tile as the rest would be occupied
+		GameObject[] MudTiles = GameObject.FindGameObjectsWithTag ("MudTile");
+		GameObject[] StoneTiles = GameObject.FindGameObjectsWithTag ("StoneTile");
+		GameObject[] OutpostTiles = GameObject.FindGameObjectsWithTag ("OutpostTile");
+		GameObject[] DirtTiles = GameObject.FindGameObjectsWithTag ("DirtTile");
+		
+		Vector2 currentPosition = gridManager.calcGridPos (this.transform.position);
+		
+		foreach (GameObject tile in MudTiles) {
+			Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
+			if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (Movement) && tilePosition.y < currentPosition.y && tile.gameObject.GetComponent<TileBehaviour>().isPassable == true) {
+				availableMoves.Add (tile);
+			}
+		}
+		foreach (GameObject tile in StoneTiles) {
+			Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
+			if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (Movement) && tilePosition.y < currentPosition.y && tile.gameObject.GetComponent<TileBehaviour>().isPassable == true) {
+				availableMoves.Add (tile);
+			}
+		}
+		foreach (GameObject tile in OutpostTiles) {
+			Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
+			if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (Movement) && tilePosition.y < currentPosition.y && tile.gameObject.GetComponent<TileBehaviour>().isPassable == true) {
+				availableMoves.Add (tile);
+			}
+		}
+		foreach (GameObject tile in DirtTiles) {
+			Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
+			if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (Movement) && tilePosition.y < currentPosition.y && tile.gameObject.GetComponent<TileBehaviour>().isPassable == true) {
+				availableMoves.Add (tile);
+			}
+		}
+		
+		//move the actual enemy back to a random tile. 
+		availableMoves.ToArray ();
+		
+		int randomTileIndex = UnityEngine.Random.Range (0, availableMoves.Count);
+		GameObject destinationTile = (GameObject)availableMoves [randomTileIndex];
+		
+		//keep the tiles updated
+		this.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isPassable = true;
+		this.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isEnemy = false;
+		this.GetComponent<CharacterMovement> ().unitOriginalTile = destinationTile.GetComponent<TileBehaviour> ();
+		this.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isPassable = false;
+		this.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isEnemy = true;
+		
+		//set up the movement
+		movement = destinationTile.transform.position;
+		if(destinationTile.tag == "StoneTile"){
+			movement.y = 0.12f;
+		}
+		else
+			movement.y = 0.11f;
+		
+		//move 
+		this.transform.position = movement;
+		
+		DecreaseCooldown ();
 	}
 
 /*	// used to see the sphere *DEBUGGING PURPOSES*

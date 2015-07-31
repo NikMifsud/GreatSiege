@@ -63,4 +63,23 @@ public class Rangedsoldier : MonoBehaviour {
 		healthBar.transform.localScale = new Vector3 (myHealth,healthBar.transform.localScale.y, healthBar.transform.localScale.x);
 		healthBar.transform.localScale = new Vector3(Mathf.Clamp(myHealth,0f ,1f), healthBar.transform.localScale.y, healthBar.transform.localScale.z);
 	}
+
+	public void CheckDeath(){
+		if (curr_Health <= 0) {			
+			RaycastHit objectHit;
+			Vector3 down = Vector3.down;
+			if (Physics.Raycast (this.transform.position, down, out objectHit, 50)) {
+				if (objectHit.collider.gameObject.tag == "DirtTile") {
+					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
+				} else if (objectHit.collider.gameObject.tag == "StoneTile") {
+					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
+				} else 	if (objectHit.collider.gameObject.tag == "MudTile") {
+					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
+				} else 	if (objectHit.collider.gameObject.tag == "OutpostTile") {
+					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
+				}
+			}
+		}
+	}
+
 }
