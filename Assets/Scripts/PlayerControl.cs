@@ -14,7 +14,7 @@ public class PlayerControl : MonoBehaviour {
 	public int unitAttackRange;
 	public int unitAttack;
 	public bool highlightingTiles;
-	public Material highlightedMaterial;
+	public Material highlightedMaterial, stoneMaterial,outpostMaterial,mudMaterial,dirtMaterial;
 	public Material enemyMaterial;
 	public GameObject attackRangeIndicatorOne;
 	public GameObject attackRangeIndicatorTwo;
@@ -34,6 +34,12 @@ public class PlayerControl : MonoBehaviour {
 	void Update () {
 		// Look for Mouse Inputs
 		GetMouseInputs();
+
+		if (gameManager.gameState == 1) {
+			highlightAvailableTiles (unitMovement, selectedCharacter.gameObject.GetComponent<CharacterMovement> ().unitOriginalTile.tile);
+			CheckIfPassable(unitMovement, selectedCharacter.gameObject.GetComponent<CharacterMovement> ().unitOriginalTile.tile);
+		}
+
 		
 	}
 	
@@ -179,7 +185,6 @@ public class PlayerControl : MonoBehaviour {
 									selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
 									selectedCharacter.gameObject.GetComponent<Artillery> ().DecreaseCooldown();
 									selectedCharacter.gameObject.tag = "SiegeUnit";
-
 								}
 								revertbackEnemies();
 								Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
@@ -412,7 +417,9 @@ public class PlayerControl : MonoBehaviour {
 			if (path.ToList ().Count <= (movement + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isPassable == true) {
 				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
 				mychildtransform.GetComponent<Renderer> ().material = highlightedMaterial;
-			} else if (path.ToList ().Count <= (unitAttackRange + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isEnemy == true) {
+			} 
+
+			if (path.ToList ().Count <= (unitAttackRange + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isEnemy == true) {
 				tile.gameObject.tag = "AttackableMudTile";
 				RaycastHit objectHit;
 				Vector3 up = Vector3.up;
@@ -434,7 +441,9 @@ public class PlayerControl : MonoBehaviour {
 			if (path.ToList ().Count <= (movement + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isPassable == true) {
 				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
 				mychildtransform.GetComponent<Renderer> ().material = highlightedMaterial;
-			} else if (path.ToList ().Count <= (unitAttackRange + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isEnemy == true) {
+			} 
+
+			if (path.ToList ().Count <= (unitAttackRange + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isEnemy == true) {
 				tile.gameObject.tag = "AttackableStoneTile";
 				RaycastHit objectHit;
 				Vector3 up = Vector3.up;
@@ -457,7 +466,9 @@ public class PlayerControl : MonoBehaviour {
 			if (path.ToList ().Count <= (movement + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isPassable == true) {
 				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
 				mychildtransform.GetComponent<Renderer> ().material = highlightedMaterial;
-			} else if (path.ToList ().Count <= (unitAttackRange + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isEnemy == true) {
+			} 
+
+			if (path.ToList ().Count <= (unitAttackRange + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isEnemy == true) {
 				tile.gameObject.tag = "AttackableOutpostTile";
 				RaycastHit objectHit;
 				Vector3 up = Vector3.up;
@@ -480,7 +491,9 @@ public class PlayerControl : MonoBehaviour {
 			if (path.ToList ().Count <= (movement + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isPassable == true) {
 				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
 				mychildtransform.GetComponent<Renderer> ().material = highlightedMaterial;
-			} else if (path.ToList ().Count <= (unitAttackRange + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isEnemy == true) {
+			} 
+
+			if (path.ToList ().Count <= (unitAttackRange + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isEnemy == true) {
 				tile.gameObject.tag = "AttackableDirtTile";
 				RaycastHit objectHit;
 				Vector3 up = Vector3.up;
@@ -542,6 +555,68 @@ public class PlayerControl : MonoBehaviour {
 			Instantiate(attackRangeIndicatorThree,rangeIndicatorPosition,Quaternion.identity);
 		if(attackRange == 4)
 			Instantiate(attackRangeIndicatorFour,rangeIndicatorPosition,Quaternion.identity);
+	}
+
+	void CheckIfPassable(int movement, Tile originalTile){
+		//1. find all the tiles in the scene
+		GameObject[] MudTiles = GameObject.FindGameObjectsWithTag ("MudTile");
+		GameObject[] StoneTiles = GameObject.FindGameObjectsWithTag ("StoneTile");
+		GameObject[] OutpostTiles = GameObject.FindGameObjectsWithTag ("OutpostTile");
+		GameObject[] DirtTiles = GameObject.FindGameObjectsWithTag ("DirtTile");
+		
+		foreach (GameObject tile in MudTiles) { 
+			var path = PathFinder.FindPath (originalTile, tile.gameObject.GetComponent<TileBehaviour> ().tile);
+			if (path.ToList ().Count <= (movement + 1) && path.ToList ().Count >= (unitAttackRange + 1)  && tile.gameObject.GetComponent<TileBehaviour> ().isPassable == false) {
+				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = mudMaterial;
+			} 
+			//keep the things updated out of the circle (blue material mostly)
+			if (path.ToList ().Count > (movement + 1) && tile.gameObject.GetComponent<TileBehaviour>().isPassable == true){
+				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = mudMaterial;
+			}
+		}
+		
+		foreach (GameObject tile in StoneTiles) {
+			var path = PathFinder.FindPath (originalTile, tile.gameObject.GetComponent<TileBehaviour> ().tile);
+			if (path.ToList ().Count <= (movement + 1) && path.ToList ().Count >= (unitAttackRange + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isPassable == false) {
+				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = stoneMaterial;
+			} 
+			//keep the things updated out of the circle (blue material mostly)
+			if (path.ToList ().Count > (movement + 1)&& tile.gameObject.GetComponent<TileBehaviour>().isPassable == true){
+				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = stoneMaterial;
+			}
+		}
+		
+		foreach (GameObject tile in OutpostTiles) {
+			var path = PathFinder.FindPath (originalTile, tile.gameObject.GetComponent<TileBehaviour> ().tile);
+			if (path.ToList ().Count <= (movement + 1) && path.ToList ().Count >= (unitAttackRange + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isPassable == false) {
+				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = outpostMaterial;
+			} 
+			//keep the things updated out of the circle (blue material mostly)
+			if (path.ToList ().Count > (movement + 1)&& tile.gameObject.GetComponent<TileBehaviour>().isPassable == true){
+				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = outpostMaterial;
+			}
+		}
+		
+		foreach (GameObject tile in DirtTiles) {
+			var path = PathFinder.FindPath (originalTile, tile.gameObject.GetComponent<TileBehaviour> ().tile);
+			//keep the things updated in the circle 
+			if (path.ToList ().Count <= (movement + 1) && path.ToList ().Count >= (unitAttackRange + 1) && tile.gameObject.GetComponent<TileBehaviour> ().isPassable == false) {
+				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = dirtMaterial;
+			} 
+
+			//keep the things updated out of the circle (blue material mostly)
+			if (path.ToList ().Count > (movement + 1)&& tile.gameObject.GetComponent<TileBehaviour>().isPassable == true){
+				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = dirtMaterial;
+			}
+		}
 	}
 
 

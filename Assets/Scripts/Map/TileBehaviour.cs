@@ -31,11 +31,6 @@ public class TileBehaviour: MonoBehaviour
 	}
 
 	void Update(){
-	//	if (this.isEnemy == true && this.isPassable == false) {
-	//		Transform mychildtransform = this.transform.FindChild("Cylinder");
-	//		mychildtransform.GetComponent<Renderer> ().material = enemyMaterial;
-	//	}
-
 		if (this.isEnemy == false && this.isPassable == false) {
 			Transform mychildtransform = this.transform.FindChild("Cylinder");
 			mychildtransform.GetComponent<Renderer> ().material = allyMaterial;

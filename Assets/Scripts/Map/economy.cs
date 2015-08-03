@@ -15,7 +15,7 @@ public class economy : MonoBehaviour {
 	void Update () {
 		number += Time.deltaTime;
 	if (number >= 5){
-		Food += 1;
+		Food += 10;
 		number = 0;
 		}
 		thetext.text = "" + Food;

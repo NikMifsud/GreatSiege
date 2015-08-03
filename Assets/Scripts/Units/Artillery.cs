@@ -48,7 +48,7 @@ public class Artillery : MonoBehaviour {
 		if (DamageTaken <= 19) {
 			DamageTaken = 0;
 		}
-		if (curr_Health == 0) {
+		if (curr_Health <= 0) {
 			Destroy (this.gameObject);
 		}
 		if (DamageTaken >= 1) {
@@ -82,6 +82,45 @@ public class Artillery : MonoBehaviour {
 				} else 	if (objectHit.collider.gameObject.tag == "OutpostTile") {
 					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
 				}
+			}
+			if(this.tag == "SelectedSiegeUnit"){
+				Camera.main.GetComponent<PlayerControl>().highlightingTiles = false;
+				revertbackEnemies();
+				Camera.main.GetComponent<GameMaster>().gameState = 0;
+				Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
+			}
+		}
+	}
+
+	public void revertbackEnemies(){
+		GameObject[] enemies = GameObject.FindGameObjectsWithTag("AttackableEnemy");
+		if(enemies !=null){
+			foreach(GameObject enemy in enemies){
+				enemy.tag = "Enemy";
+			}
+		}
+		GameObject[] mudTiles = GameObject.FindGameObjectsWithTag("AttackableMudTile");
+		if(mudTiles !=null){
+			foreach(GameObject tile in mudTiles){
+				tile.tag = "MudTile";
+			}
+		}
+		GameObject[] stoneTiles = GameObject.FindGameObjectsWithTag("AttackableStoneTile");
+		if(stoneTiles !=null){
+			foreach(GameObject tile in stoneTiles){
+				tile.tag = "StoneTile";
+			}
+		}
+		GameObject[] outpostTiles = GameObject.FindGameObjectsWithTag("AttackableOutpostTile");
+		if(outpostTiles !=null){
+			foreach(GameObject tile in outpostTiles){
+				tile.tag = "OutpostTile";
+			}
+		}
+		GameObject[] dirtTiles = GameObject.FindGameObjectsWithTag("AttackableDirtTile");
+		if(dirtTiles !=null){
+			foreach(GameObject tile in dirtTiles){
+				tile.tag = "DirtTile";
 			}
 		}
 	}

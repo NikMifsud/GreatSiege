@@ -22,8 +22,8 @@ public class timerbarcannon : MonoBehaviour {
 			finishedanim.SetBool ("finished", true);
 		} 
 		myAmount = activemovement.Movementtime / 30;
-			Image myImage = GetComponent<Image>();
-			myImage.fillAmount = myAmount;
+		Image myImage = GetComponent<Image>();
+		myImage.fillAmount = myAmount;
 		Transform cannon = this.transform.Find ("cannon");
 	}
 }

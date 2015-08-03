@@ -64,8 +64,6 @@ public class Enemy : MonoBehaviour {
 			Vector3 down = Vector3.down;
 			if (Physics.Raycast(this.transform.position, down, out objectHit, 50))
 			{
-			
-				//do something if hit object ie
 				if(objectHit.collider.gameObject.tag == "AttackableDirtTile"){
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = false;
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = true;
@@ -275,6 +273,22 @@ public class Enemy : MonoBehaviour {
 			GameObject destinationTile = (GameObject)availableMoves [randomTileIndex];
 			
 			//keep the tiles updated
+			if(this.GetComponent<CharacterMovement>().unitOriginalTile.gameObject.tag == "AttackableDirtTile"){
+				this.GetComponent<CharacterMovement>().unitOriginalTile.gameObject.tag = "DirtTile";
+			}
+
+			if(this.GetComponent<CharacterMovement>().unitOriginalTile.gameObject.tag == "AttackableStoneTile"){
+				this.GetComponent<CharacterMovement>().unitOriginalTile.gameObject.tag = "StoneTile";
+			}
+
+			if(this.GetComponent<CharacterMovement>().unitOriginalTile.gameObject.tag == "AttackableMudTile"){
+				this.GetComponent<CharacterMovement>().unitOriginalTile.gameObject.tag = "MudTile";
+			}
+
+			if(this.GetComponent<CharacterMovement>().unitOriginalTile.gameObject.tag == "AttackableOutpostTile"){
+				this.GetComponent<CharacterMovement>().unitOriginalTile.gameObject.tag = "OutpostTile";
+			}
+
 			this.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isPassable = true;
 			this.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isEnemy = false;
 			this.GetComponent<CharacterMovement> ().unitOriginalTile = destinationTile.GetComponent<TileBehaviour> ();
@@ -292,6 +306,7 @@ public class Enemy : MonoBehaviour {
 			this.transform.position = movement;
 		}
 			DecreaseCooldown ();
+			Camera.main.GetComponent<PlayerControl> ().highlightingTiles = false;
 	}
 
 	void MoveBackwards(){
@@ -355,6 +370,7 @@ public class Enemy : MonoBehaviour {
 		this.transform.position = movement;
 		
 		DecreaseCooldown ();
+		Camera.main.GetComponent<PlayerControl> ().highlightingTiles = false;
 	}
 
 /*	// used to see the sphere *DEBUGGING PURPOSES*
