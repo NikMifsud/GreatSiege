@@ -17,13 +17,21 @@ public class timerbarcannon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (activemovement.Movementtime <= 0) {
+		if (activemovement.canMove == true) {
 			timeranim.SetBool ("movement", true);
 			finishedanim.SetBool ("finished", true);
-		} 
-		myAmount = activemovement.Movementtime / 30;
-		Image myImage = GetComponent<Image>();
-		myImage.fillAmount = myAmount;
+		}
+		
+		if (activemovement.canMove == false) {
+			timeranim.SetBool ("movement", false);
+			finishedanim.SetBool ("finished", false);
+			Image myImage = GetComponent<Image> ();
+			if(activemovement.isMud)
+				myAmount = activemovement.Movementtime / 35;
+			else
+				myAmount = activemovement.Movementtime / 30;
+			myImage.fillAmount = myAmount;
+		}
 		Transform cannon = this.transform.Find ("cannon");
 	}
 }

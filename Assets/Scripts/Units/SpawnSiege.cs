@@ -18,7 +18,6 @@ public class SpawnSiege : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (SpawnSoldier == true && Input.GetMouseButtonDown (0)) {
-			if (food.Food >= 80) {
 				//deselect all those in the scene in order to avoid user error
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hit = new RaycastHit ();
@@ -29,8 +28,8 @@ public class SpawnSiege : MonoBehaviour {
 					} else if (hit.collider.GetComponent<TileBehaviour> ().isPassable == true && (hit.collider.tag == "SpawnStoneTile" || hit.collider.tag == "SpawnDirtTile" || hit.collider.tag == "SpawnOutpostTile" || hit.collider.tag == "SpawnMudTile")) {
 						var cubeTemp = hit.collider.transform.position;
 						if (hit.collider.gameObject.tag == "SpawnStoneTile") {
-							Soldier.transform.FindChild ("SiegeUnit").GetComponent<Artillery> ().AttackRange = 4;
-							Soldier.transform.FindChild ("SiegeUnit").GetComponent<Artillery> ().Armor = 25;
+							Soldier.transform.FindChild ("cannon").GetComponent<Artillery> ().AttackRange = 4;
+							Soldier.transform.FindChild ("cannon").GetComponent<Artillery> ().Armor = 25;
 							cubeTemp.y = 0.2f;
 						} else
 							cubeTemp.y = 0.1f;
@@ -47,20 +46,20 @@ public class SpawnSiege : MonoBehaviour {
 						SpawnSoldier = false;
 						gameMaster.gameState = 0;
 					}
-				} else {
-					RemoveSpawnArea ();
-					SpawnSoldier = false;
-					gameMaster.gameState = 0;
-				}
 			}
 		}
 	}
 	
 	public void ButtonClicked () {
 		playerControl.highlightingTiles = false;
-		SpawnSoldier = true;
-		gameMaster.gameState = 3;
-		GenerateSpawnArea();
+		if (food.Food >= 80) {
+			SpawnSoldier = true;
+			GenerateSpawnArea ();
+			gameMaster.gameState = 3;
+		} else {
+			SpawnSoldier = false;
+			gameMaster.gameState = 0;
+		}
 	}
 
 	public void GenerateSpawnArea(){
@@ -71,7 +70,7 @@ public class SpawnSiege : MonoBehaviour {
 			tiles.Add(child);
 		}
 		tiles.Reverse ();
-		tiles.RemoveRange (28, (tiles.Count - 28));
+		tiles.RemoveRange (22, (tiles.Count - 22));
 		tiles.ToArray ();
 		for (int k = 0; k < tiles.Count; k++) {
 			if(tiles[k].gameObject.tag == "StoneTile")

@@ -19,7 +19,6 @@ public class spawnsoldier : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (SpawnSoldier == true && Input.GetMouseButtonDown (0)) {
-			if (food.Food >= 30) {
 				//deselect all those in the scene in order to avoid user error
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hit = new RaycastHit ();
@@ -48,20 +47,21 @@ public class spawnsoldier : MonoBehaviour {
 						SpawnSoldier = false;
 						gameMaster.gameState = 0;
 					}
-				} else {
-					RemoveSpawnArea ();
-					SpawnSoldier = false;
-					gameMaster.gameState = 0;
-				}
+				
 			}
 		}
 	}
 
 	public void ButtonClicked () {
 		playerControl.highlightingTiles = false;
-		SpawnSoldier = true;
-		gameMaster.gameState = 3;
-		GenerateSpawnArea();
+		if (food.Food >= 30) {
+			SpawnSoldier = true;
+			GenerateSpawnArea ();
+			gameMaster.gameState = 3;
+		} else {
+			SpawnSoldier = false;
+			gameMaster.gameState = 0;
+		}
 	}
 
 	public void GenerateSpawnArea(){

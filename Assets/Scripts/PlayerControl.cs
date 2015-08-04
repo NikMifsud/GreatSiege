@@ -10,6 +10,7 @@ public class PlayerControl : MonoBehaviour {
 	private GameMaster gameManager; // GameObject responsible for the management of the game
 	public GameObject selectedCharacter;
 	public GridManager gridManager;
+	public economy economy;
 	public int unitMovement;
 	public int unitAttackRange;
 	public int unitAttack;
@@ -122,7 +123,6 @@ public class PlayerControl : MonoBehaviour {
 							Vector3 movement = _hitInfo.collider.gameObject.transform.position;
 							if (_hitInfo.collider.gameObject.tag == "StoneTile") {
 								if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
-									
 									selectedCharacter.GetComponent<Footsoldier> ().Armor = 15;
 									movement.y = 0.2f;
 								}
@@ -139,6 +139,50 @@ public class PlayerControl : MonoBehaviour {
 									movement.y = 0.2f;
 								}
 							}
+							if(_hitInfo.collider.gameObject.tag == "OutpostTile"){
+								economy.outpost += 1;
+								if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
+									
+									selectedCharacter.GetComponent<Footsoldier> ().AttackRange = 1;
+									selectedCharacter.GetComponent<Footsoldier> ().Armor = 10;
+									movement.y = 0.1f;
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
+									
+									selectedCharacter.GetComponent<Rangedsoldier> ().AttackRange = 2;
+									selectedCharacter.GetComponent<Rangedsoldier> ().Armor = 0;
+									movement.y = 0.1f;
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
+									
+									selectedCharacter.GetComponent<Artillery> ().AttackRange = 3;
+									selectedCharacter.GetComponent<Artillery> ().Armor = 20;
+									movement.y = 0.1f;
+								}
+							}
+						if(_hitInfo.collider.gameObject.tag == "MudTile" ){
+							if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
+								
+								selectedCharacter.GetComponent<Footsoldier> ().AttackRange = 1;
+								selectedCharacter.GetComponent<Footsoldier> ().Armor = 10;
+								selectedCharacter.GetComponent<Footsoldier> ().isMud = true;
+								movement.y = 0.1f;
+							}
+							if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
+								
+								selectedCharacter.GetComponent<Rangedsoldier> ().AttackRange = 2;
+								selectedCharacter.GetComponent<Rangedsoldier> ().Armor = 0;
+								selectedCharacter.GetComponent<Rangedsoldier> ().isMud = true;
+								movement.y = 0.1f;
+							}
+							if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
+								
+								selectedCharacter.GetComponent<Artillery> ().AttackRange = 3;
+								selectedCharacter.GetComponent<Artillery> ().Armor = 20;
+								selectedCharacter.GetComponent<Artillery> ().isMud = true;
+								movement.y = 0.1f;
+							}
+						}
 							if (_hitInfo.collider.gameObject.tag == "MudTile" || _hitInfo.collider.gameObject.tag == "OutpostTile" || _hitInfo.collider.gameObject.tag == "DirtTile") {
 								if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
 									
@@ -169,6 +213,9 @@ public class PlayerControl : MonoBehaviour {
 							if (path.ToList ().Count <= (unitMovement + 1) && selectedCharacter.GetComponent<CharacterMovement> ().destinationTile.isPassable == true) {
 								selectedCharacter.transform.position = movement;
 								selectedCharacter.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isPassable = true;
+								if(selectedCharacter.GetComponent<CharacterMovement>().unitOriginalTile.gameObject.tag == "OutpostTile" && _hitInfo.collider.gameObject.tag != "OutpostTile"){
+									economy.outpost -= 1;
+								}
 								selectedCharacter.GetComponent<CharacterMovement> ().unitOriginalTile = _hitInfo.collider.gameObject.GetComponent<TileBehaviour> ();
 								selectedCharacter.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isPassable = false;
 								if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){

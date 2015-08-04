@@ -14,8 +14,8 @@ public class Footsoldier : MonoBehaviour {
 	public GameObject healthBar;
 	public GameObject pivotPoint;
 	public bool isSelected;
-
-
+	public economy economy;
+	public bool isMud;
 	// Use this for initialization
 	void Start () {
 		max_Health = 100;
@@ -27,10 +27,8 @@ public class Footsoldier : MonoBehaviour {
 		canMove = true;
 		isSelected = false;
 		Movementtime = 10;
-	}
-
-	public void Movementcheck(){
-		Movementtime = 10;
+		isMud = false;
+		economy = GameObject.FindGameObjectWithTag ("Economy").GetComponent<economy>();
 	}
 
 	
@@ -40,6 +38,11 @@ public class Footsoldier : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (isMud) {
+			Movementtime = 15;
+			isMud = false;
+		}
+
 		if (Movementtime <= 0) {
 			canMove = true;
 			Movementtime = 10;
@@ -83,6 +86,7 @@ public class Footsoldier : MonoBehaviour {
 					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
 				} else 	if (objectHit.collider.gameObject.tag == "OutpostTile") {
 					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
+					economy.outpost -= 1;
 				}
 			}
 			if(this.tag == "SelectedFootUnit"){

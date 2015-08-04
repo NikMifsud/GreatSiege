@@ -13,6 +13,8 @@ public class Artillery : MonoBehaviour {
 	public bool canMove;
 	public GameObject healthBar;
 	public bool isSelected;
+	public bool isMud;
+	public economy economy;
 	
 	// Use this for initialization
 	void Start () {
@@ -23,12 +25,17 @@ public class Artillery : MonoBehaviour {
 		AttackRange = 3;
 		Attack = 80;
 		isSelected = false;
+		isMud = false;
 		canMove = true;
 		Movementtime = 30;
+		economy = GameObject.FindGameObjectWithTag ("Economy").GetComponent<economy>();
 	}
 
 	public void Movementcheck(){
-		Movementtime = 30;
+		if (isMud) {
+			Movementtime = 35;
+		} else
+			Movementtime = 30;
 	}
 
 	public void DecreaseCooldown(){
@@ -37,10 +44,9 @@ public class Artillery : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (Movementtime);
 		if (Movementtime <= 0) {
-			Movementtime = 30;
 			canMove = true;
+			Movementcheck();
 		}
 		if (canMove == false) {
 			Movementtime -= Time.deltaTime;
@@ -81,6 +87,7 @@ public class Artillery : MonoBehaviour {
 					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
 				} else 	if (objectHit.collider.gameObject.tag == "OutpostTile") {
 					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
+					economy.outpost -= 1;
 				}
 			}
 			if(this.tag == "SelectedSiegeUnit"){

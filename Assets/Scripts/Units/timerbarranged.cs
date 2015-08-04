@@ -20,14 +20,15 @@ public class timerbarranged : MonoBehaviour {
 		if (activemovement.canMove == true) {
 			timeranim.SetBool ("movement", true);
 			finishedanim.SetBool ("finished", true);
-			Debug.Log ("haq");
 		}
 
 		if (activemovement.canMove == false) {
 			timeranim.SetBool ("movement", false);
 			finishedanim.SetBool ("finished", false);
 			Image myImage = GetComponent<Image> ();
-			myAmount = activemovement.Movementtime / 15;
+			if(activemovement.isMud){
+				myAmount = activemovement.Movementtime / 20;
+			}else myAmount = activemovement.Movementtime / 15;
 			myImage.fillAmount = myAmount;
 		}
 		Transform ranged = this.transform.Find ("ranged");

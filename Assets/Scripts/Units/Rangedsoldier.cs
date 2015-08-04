@@ -13,7 +13,8 @@ public class Rangedsoldier : MonoBehaviour {
 	public bool canMove;
 	public GameObject healthBar;
 	public bool isSelected;
-
+	public economy economy;
+	public bool isMud;
 	// Use this for initialization
 	void Start () {
 		max_Health = 100;
@@ -25,11 +26,17 @@ public class Rangedsoldier : MonoBehaviour {
 		canMove = true;
 		isSelected = false;
 		Movementtime = 15;
+		isMud = false;
+		economy = GameObject.FindGameObjectWithTag ("Economy").GetComponent<economy>();
 	}
 
 	public void Movementcheck(){
-		Movementtime = 15;
+		if (isMud) {
+			Movementtime = 20;
+		} else
+			Movementtime = 15;
 	}
+
 
 	public void DecreaseCooldown(){
 		canMove = false;
@@ -39,7 +46,7 @@ public class Rangedsoldier : MonoBehaviour {
 	void Update () {
 		if (Movementtime <= 0) {
 			canMove = true;
-			Movementtime = 15;
+			Movementcheck();
 
 		}
 		if (canMove == false) {
@@ -78,6 +85,7 @@ public class Rangedsoldier : MonoBehaviour {
 					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
 				} else 	if (objectHit.collider.gameObject.tag == "OutpostTile") {
 					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
+					economy.outpost -= 1;
 				}
 			}
 			if(this.tag == "SelectedRangedUnit"){
