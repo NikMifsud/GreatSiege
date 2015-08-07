@@ -21,7 +21,7 @@ public class Rangedsoldier : MonoBehaviour {
 		curr_Health = 100;
 		Armor = 0;
 		Movement = 2;
-		AttackRange = 2;
+		//AttackRange = 4;
 		Attack = 30;
 		canMove = true;
 		isSelected = false;
@@ -30,24 +30,20 @@ public class Rangedsoldier : MonoBehaviour {
 		economy = GameObject.FindGameObjectWithTag ("Economy").GetComponent<economy>();
 	}
 
-	public void Movementcheck(){
-		if (isMud) {
-			Movementtime = 20;
-		} else
-			Movementtime = 15;
-	}
-
-
 	public void DecreaseCooldown(){
 		canMove = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
+		if (isMud) {
+			Movementtime = 20;
+			isMud = false;
+		}
+
 		if (Movementtime <= 0) {
 			canMove = true;
-			Movementcheck();
-
+			Movementtime = 15;
 		}
 		if (canMove == false) {
 			Movementtime -= Time.deltaTime;

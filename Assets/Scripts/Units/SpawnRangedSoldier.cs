@@ -28,7 +28,7 @@ public class SpawnRangedSoldier : MonoBehaviour {
 					} else if (hit.collider.GetComponent<TileBehaviour> ().isPassable == true && (hit.collider.tag == "SpawnStoneTile" || hit.collider.tag == "SpawnDirtTile" || hit.collider.tag == "SpawnOutpostTile" || hit.collider.tag == "SpawnMudTile")) {
 						var cubeTemp = hit.collider.transform.position;
 						if (hit.collider.gameObject.tag == "SpawnStoneTile") {
-							Soldier.transform.FindChild ("ranged").GetComponent<Rangedsoldier> ().AttackRange = 3;
+							Soldier.transform.FindChild ("ranged").GetComponent<Rangedsoldier> ().AttackRange = 5;
 							Soldier.transform.FindChild ("ranged").GetComponent<Rangedsoldier> ().Armor = 5;
 							cubeTemp.y = 0.2f;
 						} else
@@ -41,12 +41,17 @@ public class SpawnRangedSoldier : MonoBehaviour {
 						RemoveSpawnArea ();
 						SpawnSoldier = false;
 						gameMaster.gameState = 0;
+						
 					} else {
 						RemoveSpawnArea ();
 						SpawnSoldier = false;
 						gameMaster.gameState = 0;
 					}
 				
+			}else{
+				RemoveSpawnArea ();
+				SpawnSoldier = false;
+				gameMaster.gameState = 0;
 			}
 		}
 	}

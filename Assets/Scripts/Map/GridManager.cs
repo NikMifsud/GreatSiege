@@ -124,7 +124,7 @@ public class GridManager: MonoBehaviour
 
 		//int[] integers = new int[] {0,1,2,4};
 
-		if (tileCounter >= 0 && tileCounter <= 75) {
+		if (tileCounter >= 0 && tileCounter <= 50) { //75
 			if(stoneCounter == 15){
 				num = 3;
 			}

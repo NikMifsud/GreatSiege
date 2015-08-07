@@ -32,12 +32,11 @@ public class timerbarsoldier : MonoBehaviour {
 			finishedanim.SetBool ("finished", false);
 			Image myImage = GetComponent<Image> ();
 			if(mudTimer)
-				Debug.Log ("MudTimer");
 				myAmount = activemovement.Movementtime / 15;
 			if(!mudTimer) 
 				myAmount = activemovement.Movementtime / 10;
 			myImage.fillAmount = myAmount;
 		}
-		Transform foot = this.transform.Find ("FootSoldier");
+		Transform foot = this.transform;
 	}
 }

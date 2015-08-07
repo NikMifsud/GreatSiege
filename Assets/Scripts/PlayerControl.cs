@@ -21,12 +21,20 @@ public class PlayerControl : MonoBehaviour {
 	public GameObject attackRangeIndicatorTwo;
 	public GameObject attackRangeIndicatorThree;
 	public GameObject attackRangeIndicatorFour;
+	public GameObject attackRangeIndicatorFive;
+	public GameObject attackRangeIndicatorSix;
+	public GameObject attackRangeIndicatorSeven;
+	public AudioClip cannonShotEffect, footHitEffect, bowShotEffect;
+	private AudioSource source;
 	public bool canMove;
+
+	public PlayFootAnimation animation;
 
 	// Use this for initialization
 	void Start ()
 	{
-		PlayerCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>(); // Find the Camera's GameObject from its tag
+		PlayerCam = Camera.main.GetComponent<Camera>(); // Find the Camera's GameObject from its tag
+		source = Camera.main.GetComponent<AudioSource> ();
 		gameManager = Camera.main.GetComponent<GameMaster> ();
 		gridManager = Camera.main.GetComponent<GridManager> ();
 	}
@@ -128,13 +136,13 @@ public class PlayerControl : MonoBehaviour {
 								}
 							    if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
 
-									selectedCharacter.GetComponent<Rangedsoldier> ().AttackRange = 3;
+									selectedCharacter.GetComponent<Rangedsoldier> ().AttackRange = (5);
 									selectedCharacter.GetComponent<Rangedsoldier> ().Armor = 5;
 									movement.y = 0.2f;
 								}
 							    if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
 									
-									selectedCharacter.GetComponent<Artillery> ().AttackRange = 4;
+									selectedCharacter.GetComponent<Artillery> ().AttackRange = (7);
 									selectedCharacter.GetComponent<Artillery> ().Armor = 25;
 									movement.y = 0.2f;
 								}
@@ -149,56 +157,53 @@ public class PlayerControl : MonoBehaviour {
 								}
 								if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
 									
-									selectedCharacter.GetComponent<Rangedsoldier> ().AttackRange = 2;
+									selectedCharacter.GetComponent<Rangedsoldier> ().AttackRange = (4);
 									selectedCharacter.GetComponent<Rangedsoldier> ().Armor = 0;
 									movement.y = 0.1f;
 								}
 								if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
 									
-									selectedCharacter.GetComponent<Artillery> ().AttackRange = 3;
+								selectedCharacter.GetComponent<Artillery> ().AttackRange = (6);
 									selectedCharacter.GetComponent<Artillery> ().Armor = 20;
 									movement.y = 0.1f;
 								}
 							}
-						if(_hitInfo.collider.gameObject.tag == "MudTile" ){
-							if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
-								
-								selectedCharacter.GetComponent<Footsoldier> ().AttackRange = 1;
-								selectedCharacter.GetComponent<Footsoldier> ().Armor = 10;
-								selectedCharacter.GetComponent<Footsoldier> ().isMud = true;
-								movement.y = 0.1f;
-							}
-							if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
-								
-								selectedCharacter.GetComponent<Rangedsoldier> ().AttackRange = 2;
-								selectedCharacter.GetComponent<Rangedsoldier> ().Armor = 0;
-								selectedCharacter.GetComponent<Rangedsoldier> ().isMud = true;
-								movement.y = 0.1f;
-							}
-							if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-								
-								selectedCharacter.GetComponent<Artillery> ().AttackRange = 3;
-								selectedCharacter.GetComponent<Artillery> ().Armor = 20;
-								selectedCharacter.GetComponent<Artillery> ().isMud = true;
-								movement.y = 0.1f;
-							}
-						}
-							if (_hitInfo.collider.gameObject.tag == "MudTile" || _hitInfo.collider.gameObject.tag == "OutpostTile" || _hitInfo.collider.gameObject.tag == "DirtTile") {
+							if(_hitInfo.collider.gameObject.tag == "MudTile" ){
 								if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
 									
+									selectedCharacter.GetComponent<Footsoldier> ().AttackRange = 1;
+									selectedCharacter.GetComponent<Footsoldier> ().Armor = 10;
+									selectedCharacter.GetComponent<Footsoldier> ().isMud = true;
+									movement.y = 0.1f;
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
+									
+									selectedCharacter.GetComponent<Rangedsoldier> ().AttackRange = 4;
+									selectedCharacter.GetComponent<Rangedsoldier> ().Armor = 0;
+									selectedCharacter.GetComponent<Rangedsoldier> ().isMud = true;
+									movement.y = 0.1f;
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
+									
+									selectedCharacter.GetComponent<Artillery> ().AttackRange = 6;
+									selectedCharacter.GetComponent<Artillery> ().Armor = 20;
+									selectedCharacter.GetComponent<Artillery> ().isMud = true;
+									movement.y = 0.1f;
+								}
+							}
+							if (_hitInfo.collider.gameObject.tag == "DirtTile") {
+								if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
 									selectedCharacter.GetComponent<Footsoldier> ().AttackRange = 1;
 									selectedCharacter.GetComponent<Footsoldier> ().Armor = 10;
 									movement.y = 0.1f;
 								}
 								if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
-
-									selectedCharacter.GetComponent<Rangedsoldier> ().AttackRange = 2;
+									selectedCharacter.GetComponent<Rangedsoldier> ().AttackRange = 4;
 									selectedCharacter.GetComponent<Rangedsoldier> ().Armor = 0;
 									movement.y = 0.1f;
 								}
 								if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-
-									selectedCharacter.GetComponent<Artillery> ().AttackRange = 3;
+									selectedCharacter.GetComponent<Artillery> ().AttackRange = 6;
 									selectedCharacter.GetComponent<Artillery> ().Armor = 20;
 									movement.y = 0.1f;
 								}
@@ -238,15 +243,46 @@ public class PlayerControl : MonoBehaviour {
 								highlightingTiles = false;
 								gameManager.gameState = 0;
 							}
+						else{
+							revertbackEnemies();
+							
+							highlightingTiles = false;
+							if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
+								selectedCharacter.gameObject.GetComponent<Footsoldier> ().isSelected = false;
+								selectedCharacter.gameObject.tag = "FootUnit";
+							}
+							if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
+								selectedCharacter.gameObject.GetComponent<Rangedsoldier>().isSelected = false;
+								selectedCharacter.gameObject.tag = "RangedUnit";
+							}
+							if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
+								selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
+								selectedCharacter.gameObject.tag = "SiegeUnit";
+							}
+							Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
+							gameManager.gameState = 0;
+						}
 						
 
-					}else if(_hitInfo.collider.gameObject.tag == "AttackableEnemy"){
-						//do the damage
-						_hitInfo.collider.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
-						//revert back
-						_hitInfo.collider.transform.parent.tag = "Enemy";
-						_hitInfo.collider.gameObject.tag = "Enemy";
-						_hitInfo.collider.gameObject.GetComponent<Enemy>().CheckDeath();
+					}else if(_hitInfo.collider.gameObject.tag == "AttackableEnemy" || _hitInfo.collider.gameObject.tag == "AttackableRangedEnemy"){
+						if(_hitInfo.collider.gameObject.tag == "AttackableEnemy" ){
+							//do the damage
+							_hitInfo.collider.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
+
+							//revert back
+							_hitInfo.collider.transform.parent.tag = "Enemy";
+							_hitInfo.collider.gameObject.tag = "Enemy";
+							_hitInfo.collider.gameObject.GetComponent<Enemy>().CheckDeath();
+						}
+						if(_hitInfo.collider.gameObject.tag == "AttackableRangedEnemy"){
+							//do the damage
+
+							_hitInfo.collider.gameObject.GetComponent<EnemyRanged>().DealtDamage(unitAttack);
+							//revert back
+							_hitInfo.collider.transform.parent.tag = "RangedEnemy";
+							_hitInfo.collider.gameObject.tag = "RangedEnemy";
+							_hitInfo.collider.gameObject.GetComponent<EnemyRanged>().CheckDeath();
+						}
 						RaycastHit objectHit;
 						Vector3 down = Vector3.down;
 						if (Physics.Raycast(_hitInfo.collider.transform.position, down, out objectHit, 50))
@@ -265,16 +301,29 @@ public class PlayerControl : MonoBehaviour {
 							}
 						}
 						if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
+							source.PlayOneShot(footHitEffect,1.0f);
+
+							//look at the enemy
+							selectedCharacter.gameObject.transform.LookAt(_hitInfo.collider.gameObject.transform.position);
+
+						//	var lookPos = _hitInfo.collider.gameObject.transform.position - selectedCharacter.gameObject.transform.position;
+						//	lookPos.y = 0;
+						//	var rotation = Quaternion.LookRotation(lookPos);
+						//	selectedCharacter.gameObject.transform.rotation = Quaternion.Slerp(selectedCharacter.gameObject.transform.rotation, rotation, Time.deltaTime * 1f);
+
+							selectedCharacter.gameObject.GetComponent<Footsoldier> ().attack = true;
 							selectedCharacter.gameObject.GetComponent<Footsoldier> ().isSelected = false;
 							selectedCharacter.gameObject.GetComponent<Footsoldier> ().DecreaseCooldown();
 							selectedCharacter.gameObject.tag = "FootUnit";
 						}
 						if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
+							source.PlayOneShot(bowShotEffect,1.0f);
 							selectedCharacter.gameObject.GetComponent<Rangedsoldier>().isSelected = false;
 							selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
 							selectedCharacter.gameObject.tag = "RangedUnit";
 						}
 						if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
+							source.PlayOneShot(cannonShotEffect,1.0f);
 							selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
 							selectedCharacter.gameObject.GetComponent<Artillery> ().DecreaseCooldown();
 							selectedCharacter.gameObject.tag = "SiegeUnit";
@@ -295,6 +344,13 @@ public class PlayerControl : MonoBehaviour {
 								objectHit.collider.transform.parent.tag = "Enemy";
 								objectHit.collider.gameObject.tag = "Enemy";
 								objectHit.collider.gameObject.GetComponent<Enemy>().CheckDeath();
+							}
+
+							if(objectHit.collider.gameObject.tag == "AttackableRangedEnemy"){
+								objectHit.collider.gameObject.GetComponent<EnemyRanged>().DealtDamage(unitAttack);
+								objectHit.collider.transform.parent.tag = "RangedEnemy";
+								objectHit.collider.gameObject.tag = "RangedEnemy";
+								objectHit.collider.gameObject.GetComponent<EnemyRanged>().CheckDeath();
 							}
 						}
 						//revert back
@@ -328,6 +384,13 @@ public class PlayerControl : MonoBehaviour {
 								objectHit.collider.gameObject.tag = "Enemy";
 								objectHit.collider.gameObject.GetComponent<Enemy>().CheckDeath();
 							}
+
+							if(objectHit.collider.gameObject.tag == "AttackableRangedEnemy"){
+								objectHit.collider.gameObject.GetComponent<EnemyRanged>().DealtDamage(unitAttack);
+								objectHit.collider.transform.parent.tag = "RangedEnemy";
+								objectHit.collider.gameObject.tag = "RangedEnemy";
+								objectHit.collider.gameObject.GetComponent<EnemyRanged>().CheckDeath();
+							}
 						}
 						//revert back
 						if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
@@ -359,6 +422,13 @@ public class PlayerControl : MonoBehaviour {
 								objectHit.collider.transform.parent.tag = "Enemy";
 								objectHit.collider.gameObject.tag = "Enemy";
 								objectHit.collider.gameObject.GetComponent<Enemy>().CheckDeath();
+							}
+
+							if(objectHit.collider.gameObject.tag == "AttackableRangedEnemy"){
+								objectHit.collider.gameObject.GetComponent<EnemyRanged>().DealtDamage(unitAttack);
+								objectHit.collider.transform.parent.tag = "RangedEnemy";
+								objectHit.collider.gameObject.tag = "RangedEnemy";
+								objectHit.collider.gameObject.GetComponent<EnemyRanged>().CheckDeath();
 							}
 						}
 						//revert back
@@ -394,6 +464,13 @@ public class PlayerControl : MonoBehaviour {
 								objectHit.collider.gameObject.tag = "Enemy";
 								objectHit.collider.gameObject.GetComponent<Enemy>().CheckDeath();
 							}
+
+							if(objectHit.collider.gameObject.tag == "AttackableRangedEnemy"){
+								objectHit.collider.gameObject.GetComponent<EnemyRanged>().DealtDamage(unitAttack);
+								objectHit.collider.transform.parent.tag = "RangedEnemy";
+								objectHit.collider.gameObject.tag = "RangedEnemy";
+								objectHit.collider.gameObject.GetComponent<EnemyRanged>().CheckDeath();
+							}
 						}
 						//revert back
 						if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
@@ -415,7 +492,71 @@ public class PlayerControl : MonoBehaviour {
 						highlightingTiles = false;
 						gameManager.gameState = 0;
 					}
-					else if (_hitInfo.collider.gameObject.tag == "SelectedFootUnit" || _hitInfo.collider.gameObject.tag == "SelectedRangedUnit" || _hitInfo.collider.gameObject.tag == "SelectedSiegeUnit"){
+					else if (_hitInfo.collider.gameObject.tag == "FootUnit" || _hitInfo.collider.gameObject.tag == "RangedUnit" || _hitInfo.collider.gameObject.tag == "SiegeUnit"){
+						revertbackEnemies();
+						Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
+						highlightingTiles = false;
+						if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
+							selectedCharacter.gameObject.GetComponent<Footsoldier> ().isSelected = false;
+							selectedCharacter.gameObject.tag = "FootUnit";
+						}if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
+							selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().isSelected = false;
+							selectedCharacter.gameObject.tag = "RangedUnit";
+						}if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
+							selectedCharacter.gameObject.GetComponent<Artillery> ().isSelected = false;
+							selectedCharacter.gameObject.tag = "SiegeUnit";
+						}if (_hitInfo.collider.gameObject.tag == "FootUnit") {
+							canMove = _hitInfo.collider.gameObject.GetComponent<Footsoldier>().canMove;
+							if(canMove){
+								selectedCharacter = _hitInfo.collider.gameObject;
+								gridManager.selectedCharacter = _hitInfo.collider.gameObject;
+								gameManager.gameState = 1;
+								selectedCharacter.gameObject.tag = "SelectedFootUnit";
+								unitMovement = _hitInfo.collider.gameObject.GetComponent<Footsoldier>().Movement;
+								unitAttackRange = _hitInfo.collider.gameObject.GetComponent<Footsoldier>().AttackRange;
+								unitAttack = _hitInfo.collider.gameObject.GetComponent<Footsoldier>().Attack;
+								_hitInfo.collider.gameObject.GetComponent<Footsoldier>().isSelected = true;
+								highlightAvailableTiles (unitMovement, selectedCharacter.gameObject.GetComponent<CharacterMovement> ().unitOriginalTile.tile);
+								Vector3 rangeIndicatorPosition = new Vector3(selectedCharacter.transform.position.x,0.078f,selectedCharacter.transform.position.z);
+								calculateAttackIndicator(unitAttackRange);
+							}
+						} if (_hitInfo.collider.gameObject.tag == "RangedUnit") {
+							canMove = _hitInfo.collider.gameObject.GetComponent<Rangedsoldier>().canMove;
+							if(canMove){
+								selectedCharacter = _hitInfo.collider.gameObject;
+								gridManager.selectedCharacter = _hitInfo.collider.gameObject;
+								gameManager.gameState = 1;
+								selectedCharacter.gameObject.tag = "SelectedRangedUnit";
+								unitMovement = _hitInfo.collider.gameObject.GetComponent<Rangedsoldier>().Movement;
+								unitAttackRange = _hitInfo.collider.gameObject.GetComponent<Rangedsoldier>().AttackRange;
+								unitAttack = _hitInfo.collider.gameObject.GetComponent<Rangedsoldier>().Attack;
+								_hitInfo.collider.gameObject.GetComponent<Rangedsoldier>().isSelected = true;
+								highlightAvailableTiles (unitMovement, selectedCharacter.gameObject.GetComponent<CharacterMovement> ().unitOriginalTile.tile);
+								Vector3 rangeIndicatorPosition = new Vector3(selectedCharacter.transform.position.x,0.078f,selectedCharacter.transform.position.z);
+								calculateAttackIndicator(unitAttackRange);
+							}
+						} if (_hitInfo.collider.gameObject.tag == "SiegeUnit") {
+							canMove = _hitInfo.collider.gameObject.GetComponent<Artillery>().canMove;
+							if(canMove){
+								selectedCharacter = _hitInfo.collider.gameObject;
+								gridManager.selectedCharacter = _hitInfo.collider.gameObject;
+								gameManager.gameState = 1;
+								selectedCharacter.gameObject.tag = "SelectedSiegeUnit";
+								unitMovement = _hitInfo.collider.gameObject.GetComponent<Artillery>().Movement;
+								unitAttackRange = _hitInfo.collider.gameObject.GetComponent<Artillery>().AttackRange;
+								unitAttack = _hitInfo.collider.gameObject.GetComponent<Artillery>().Attack;
+								_hitInfo.collider.gameObject.GetComponent<Artillery>().isSelected = true;
+								highlightAvailableTiles (unitMovement, selectedCharacter.gameObject.GetComponent<CharacterMovement> ().unitOriginalTile.tile);
+								Vector3 rangeIndicatorPosition = new Vector3(selectedCharacter.transform.position.x,0.078f,selectedCharacter.transform.position.z);
+								calculateAttackIndicator(unitAttackRange);
+							}
+						}
+						else {
+							return;
+						}
+					}
+
+					else if (_hitInfo.collider.gameObject.tag == "SelectedFootUnit" || _hitInfo.collider.gameObject.tag == "SelectedRangedUnit" || _hitInfo.collider.gameObject.tag == "SelectedSiegeUnit" ||  _hitInfo.collider.gameObject.tag == "DirtTile" ||  _hitInfo.collider.gameObject.tag == "MudTile" ||  _hitInfo.collider.gameObject.tag == "OutpostTile" ||  _hitInfo.collider.gameObject.tag == "StoneTile" ||  _hitInfo.collider.gameObject.tag == "Enemy" ||  _hitInfo.collider.gameObject.tag == "RangedEnemy"){
 
 						revertbackEnemies();
 
@@ -434,19 +575,24 @@ public class PlayerControl : MonoBehaviour {
 						}
 						Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 						gameManager.gameState = 0;
-
 					}
 				}
 			}
 		}else if (gameManager.gameState == 3) {
-			if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
-				selectedCharacter.gameObject.tag = "FootUnit";
+			GameObject selectedFoot = GameObject.FindGameObjectWithTag("SelectedFootUnit");
+			GameObject selectedRanged = GameObject.FindGameObjectWithTag("SelectedRangedUnit");
+			GameObject selectedSiege = GameObject.FindGameObjectWithTag("SelectedSiegeUnit");
+			if(selectedFoot != null){
+				selectedFoot.gameObject.tag = "FootUnit";
+				Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 			}
-			if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
-				selectedCharacter.gameObject.tag = "RangedUnit";
+			if(selectedRanged!= null){
+				selectedRanged.gameObject.tag = "RangedUnit";
+				Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 			}
-			if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-				selectedCharacter.gameObject.tag = "SiegeUnit";
+			if(selectedSiege!= null){
+				selectedSiege.gameObject.tag = "SiegeUnit";
+				Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 			}
 		}
 	}
@@ -473,9 +619,13 @@ public class PlayerControl : MonoBehaviour {
 				if (Physics.Raycast (tile.transform.position, up, out objectHit, 5)) {
 
 					if (objectHit.collider.gameObject.tag == "Enemy") {
-
 						objectHit.collider.transform.parent.tag = "AttackableEnemy";
 						objectHit.collider.gameObject.tag = "AttackableEnemy";
+					}
+
+					if (objectHit.collider.gameObject.tag == "RangedEnemy") {
+						objectHit.collider.transform.parent.tag = "AttackableRangedEnemy";
+						objectHit.collider.gameObject.tag = "AttackableRangedEnemy";
 					}
 				}
 				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
@@ -498,9 +648,12 @@ public class PlayerControl : MonoBehaviour {
 				if (Physics.Raycast (tile.transform.position, up, out objectHit, 5)) {
 
 					if (objectHit.collider.gameObject.tag == "Enemy") {
-
 						objectHit.collider.transform.parent.tag = "AttackableEnemy";
 						objectHit.collider.gameObject.tag = "AttackableEnemy";
+					}
+					if (objectHit.collider.gameObject.tag == "RangedEnemy") {
+						objectHit.collider.transform.parent.tag = "AttackableRangedEnemy";
+						objectHit.collider.gameObject.tag = "AttackableRangedEnemy";
 					}
 				}
 				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
@@ -527,6 +680,10 @@ public class PlayerControl : MonoBehaviour {
 						objectHit.collider.transform.parent.tag = "AttackableEnemy";
 						objectHit.collider.gameObject.tag = "AttackableEnemy";
 					}
+					if (objectHit.collider.gameObject.tag == "RangedEnemy") {
+						objectHit.collider.transform.parent.tag = "AttackableRangedEnemy";
+						objectHit.collider.gameObject.tag = "AttackableRangedEnemy";
+					}
 				}
 				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
 				mychildtransform.GetComponent<Renderer> ().material = enemyMaterial;
@@ -552,6 +709,10 @@ public class PlayerControl : MonoBehaviour {
 						objectHit.collider.transform.parent.tag = "AttackableEnemy";
 						objectHit.collider.gameObject.tag = "AttackableEnemy";
 					}
+					if (objectHit.collider.gameObject.tag == "RangedEnemy") {
+						objectHit.collider.transform.parent.tag = "AttackableRangedEnemy";
+						objectHit.collider.gameObject.tag = "AttackableRangedEnemy";
+					}
 				}
 				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
 				mychildtransform.GetComponent<Renderer> ().material = enemyMaterial;
@@ -561,9 +722,15 @@ public class PlayerControl : MonoBehaviour {
 
 	public void revertbackEnemies(){
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag("AttackableEnemy");
+		GameObject[] rangedEnemies = GameObject.FindGameObjectsWithTag("AttackableRangedEnemy");
 		if(enemies !=null){
 			foreach(GameObject enemy in enemies){
 				enemy.tag = "Enemy";
+			}
+		}
+		if(rangedEnemies !=null){
+			foreach(GameObject enemy in rangedEnemies){
+				enemy.tag = "RangedEnemy";
 			}
 		}
 		GameObject[] mudTiles = GameObject.FindGameObjectsWithTag("AttackableMudTile");
@@ -602,6 +769,12 @@ public class PlayerControl : MonoBehaviour {
 			Instantiate(attackRangeIndicatorThree,rangeIndicatorPosition,Quaternion.identity);
 		if(attackRange == 4)
 			Instantiate(attackRangeIndicatorFour,rangeIndicatorPosition,Quaternion.identity);
+		if(attackRange == 5)
+			Instantiate(attackRangeIndicatorFive,rangeIndicatorPosition,Quaternion.identity);
+		if(attackRange == 6)
+			Instantiate(attackRangeIndicatorSix,rangeIndicatorPosition,Quaternion.identity);
+		if(attackRange == 7)
+			Instantiate(attackRangeIndicatorSeven,rangeIndicatorPosition,Quaternion.identity);
 	}
 
 	void CheckIfPassable(int movement, Tile originalTile){
@@ -666,5 +839,11 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
+	IEnumerator WaitForAnimation(GameObject enemy){
+		enemy.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
+		Debug.Log("Before");
+		yield return new WaitForSeconds (3);
+		Debug.Log ("After");
 
+	}
 }

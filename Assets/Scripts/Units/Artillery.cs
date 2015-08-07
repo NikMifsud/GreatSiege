@@ -22,7 +22,7 @@ public class Artillery : MonoBehaviour {
 		curr_Health = 250;
 		Armor = 20;
 		Movement = 1;
-		AttackRange = 3;
+		//AttackRange = 6;
 		Attack = 80;
 		isSelected = false;
 		isMud = false;
@@ -31,22 +31,21 @@ public class Artillery : MonoBehaviour {
 		economy = GameObject.FindGameObjectWithTag ("Economy").GetComponent<economy>();
 	}
 
-	public void Movementcheck(){
-		if (isMud) {
-			Movementtime = 35;
-		} else
-			Movementtime = 30;
-	}
-
 	public void DecreaseCooldown(){
 		canMove = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (isMud) {
+			Movementtime = 35;
+			isMud = false;
+		}
+
 		if (Movementtime <= 0) {
 			canMove = true;
-			Movementcheck();
+			Movementtime = 30;
 		}
 		if (canMove == false) {
 			Movementtime -= Time.deltaTime;

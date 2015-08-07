@@ -34,8 +34,8 @@ public class spawnsoldier : MonoBehaviour {
 							cubeTemp.y = 0.2f;
 						} else
 							cubeTemp.y = 0.1f;
-						Transform myUnitTransform = Soldier.transform.FindChild ("FootSoldier");
-						myUnitTransform.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
+					//	Transform myUnitTransform = Soldier.transform.FindChild ("FootSoldier");
+						Soldier.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
 						Instantiate (Soldier, cubeTemp, Quaternion.identity);
 						food.Food = food.Food - 30;
 						hit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = false;
@@ -48,6 +48,10 @@ public class spawnsoldier : MonoBehaviour {
 						gameMaster.gameState = 0;
 					}
 				
+			} else{
+				RemoveSpawnArea ();
+				SpawnSoldier = false;
+				gameMaster.gameState = 0;
 			}
 		}
 	}

@@ -8,6 +8,7 @@ public class timerbarranged : MonoBehaviour {
 	public Animator timeranim;
 	public Animator finishedanim;
 	public bool done;
+	public bool mudTimer;
 	public bool canMove;
 	// Use this for initialization
 	void Start () {
@@ -22,13 +23,18 @@ public class timerbarranged : MonoBehaviour {
 			finishedanim.SetBool ("finished", true);
 		}
 
+		if (activemovement.isMud) {
+			mudTimer = true;
+		}
+
 		if (activemovement.canMove == false) {
 			timeranim.SetBool ("movement", false);
 			finishedanim.SetBool ("finished", false);
 			Image myImage = GetComponent<Image> ();
-			if(activemovement.isMud){
+			if(mudTimer)
 				myAmount = activemovement.Movementtime / 20;
-			}else myAmount = activemovement.Movementtime / 15;
+			if(!mudTimer) 
+				myAmount = activemovement.Movementtime / 15;
 			myImage.fillAmount = myAmount;
 		}
 		Transform ranged = this.transform.Find ("ranged");

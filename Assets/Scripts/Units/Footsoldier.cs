@@ -15,6 +15,9 @@ public class Footsoldier : MonoBehaviour {
 	public GameObject pivotPoint;
 	public bool isSelected;
 	public economy economy;
+	public bool attack;
+	public Animator anim;
+	public RuntimeAnimatorController runtimeAnimatorController;
 	public bool isMud;
 	// Use this for initialization
 	void Start () {
@@ -27,10 +30,11 @@ public class Footsoldier : MonoBehaviour {
 		canMove = true;
 		isSelected = false;
 		Movementtime = 10;
+		attack = false;
 		isMud = false;
 		economy = GameObject.FindGameObjectWithTag ("Economy").GetComponent<economy>();
+		runtimeAnimatorController = anim.runtimeAnimatorController;
 	}
-
 	
 	public void DecreaseCooldown(){
 		canMove = false;
@@ -42,9 +46,9 @@ public class Footsoldier : MonoBehaviour {
 			Movementtime = 15;
 			isMud = false;
 		}
-
 		if (Movementtime <= 0) {
 			canMove = true;
+			attack = false;
 			Movementtime = 10;
 		}
 		if (canMove == false) {
@@ -54,7 +58,8 @@ public class Footsoldier : MonoBehaviour {
 			DamageTaken = 0;
 		}
 		if (curr_Health <= 0) {
-			Destroy (pivotPoint.gameObject);
+			anim.SetBool("isDead",true);
+			Destroy (this.gameObject);
 		}
 		if (DamageTaken >= 1) {
 			curr_Health = curr_Health + (Armor - DamageTaken);

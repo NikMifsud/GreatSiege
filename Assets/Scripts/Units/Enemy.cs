@@ -21,8 +21,13 @@ public class Enemy : MonoBehaviour {
 	public ArrayList availableMoves;
 	public ArrayList enemies;
 	Collider[] colliders;
+	bool enemyHit,isOnOutpost, outpostTileClose;
 	int enemyCounter,allyCounter,footCounter,rangedCounter,siegeCounter;
 	Vector3 movement;
+	GameObject outpostTile;
+	public bool isMud;
+	public AudioClip footHitEffect;
+	private AudioSource source;
 
 	// Use this for initialization
 	void Start () {
@@ -36,10 +41,9 @@ public class Enemy : MonoBehaviour {
 		Attack = 50;
 		Movementtime = 10;
 		isSelected = false;
-	}
-
-	public void Movementcheck(){
-		Movementtime = 10;
+		enemyHit = false;
+		outpostTileClose = false;
+		source = Camera.main.GetComponent<AudioSource> ();
 	}
 
 	public void DecreaseCooldown(){
@@ -48,8 +52,14 @@ public class Enemy : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (isMud) {
+			Movementtime = 15;
+			isMud = false;
+		}
+
 		if (Movementtime <= 0) {
 			canMove = true;
+			enemyHit = false;
 			Movementtime = 10;
 		}
 		if (canMove == false) {
@@ -159,77 +169,85 @@ public class Enemy : MonoBehaviour {
 			if(colliderObject.gameObject.tag == "SiegeUnit" || colliderObject.gameObject.tag == "SelectedSiegeUnit"){
 				siegeCounter++;
 			}
-			if(colliderObject.gameObject.tag == "Enemy" || colliderObject.gameObject.tag == "AttackableEnemy"){
+			if(colliderObject.gameObject.tag == "Enemy" || colliderObject.gameObject.tag == "AttackableEnemy" || colliderObject.gameObject.tag == "RangedEnemy" || colliderObject.gameObject.tag == "AttackableRangedEnemy"){
 				allyCounter++;
 			}
 		}
 
-		//Debug.Log ("Enemy Counter: " + enemyCounter + " Ally Counter: " + allyCounter);
+		if (enemyCounter > allyCounter) {
+			MoveBackwards ();
+		}
+
 		if (enemyCounter <= allyCounter) {
-			Debug.Log ("Going to attack");
 			enemies.ToArray ();
-			if (enemies.Count <= 0) {
+			if (enemies.Count <= 0 && isOnOutpost == false) {
 				MoveForward ();
 			} else {
 				foreach (GameObject enemy in enemies) {
 					//if enemy is close then attack him, if not then just move forward
-					if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
+					if (enemyHit == false && (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit")){
 						if (enemy.GetComponent<Artillery> ().curr_Health <= curr_Health) {
 							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 								if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
+									source.PlayOneShot(footHitEffect,1.0f);
 									enemy.GetComponent<Artillery> ().DealtDamage (Attack);
 									enemy.GetComponent<Artillery> ().CheckDeath ();
+									enemyHit = true;
 									DecreaseCooldown ();
 								}
 							} else {
 								MoveForward ();
 							}
 						}
+						else {
+							MoveBackwards ();
+						}
 					}
-					if (enemy.tag == "RangedUnit" || enemy.tag == "SelectedRangedUnit") {
+					if (enemyHit == false && (enemy.tag == "RangedUnit" || enemy.tag == "SelectedRangedUnit")) {
 						if (enemy.GetComponent<Rangedsoldier> ().curr_Health <= curr_Health) {
 							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 								if (enemy.tag == "RangedUnit" || enemy.tag == "SelectedRangedUnit") {
+									source.PlayOneShot(footHitEffect,1.0f);
 									enemy.GetComponent<Rangedsoldier> ().DealtDamage (Attack);
 									enemy.GetComponent<Rangedsoldier> ().CheckDeath ();
+									enemyHit = true;
 									DecreaseCooldown ();
 								}
 							} else {
 								MoveForward ();
 							}
 						}
+						else {
+							MoveBackwards ();
+						}
 					}
-					if (enemy.tag == "FootUnit" || enemy.tag == "SelectedFootUnit") {
+					if (enemyHit == false && (enemy.tag == "FootUnit" || enemy.tag == "SelectedFootUnit")){
 						if (enemy.GetComponent<Footsoldier> ().curr_Health <= curr_Health) {
 							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 								if (enemy.tag == "FootUnit" || enemy.tag == "SelectedFootUnit") {
+									source.PlayOneShot(footHitEffect,1.0f);
 									enemy.GetComponent<Footsoldier> ().DealtDamage (Attack);
 									enemy.GetComponent<Footsoldier> ().CheckDeath ();
+									enemyHit = true;
 									DecreaseCooldown ();
 								}
 							} else {
 								MoveForward ();
 							}
+						}
+						else {
+							MoveBackwards ();
 						}
 					}
 				}
 			}
-		}
-
-		//if more enemies than allies, move back one
-		else if (enemyCounter > allyCounter) {
-			MoveBackwards();
-		} 
-		//base case just move forward
-		else {
-			MoveForward();
 		}
 	}
 
 	void MoveForward(){
 
 			availableMoves = new ArrayList ();
-			
+			outpostTileClose = false;
 			//only these tile as the rest would be occupied
 			GameObject[] MudTiles = GameObject.FindGameObjectsWithTag ("MudTile");
 			GameObject[] StoneTiles = GameObject.FindGameObjectsWithTag ("StoneTile");
@@ -253,6 +271,8 @@ public class Enemy : MonoBehaviour {
 			foreach (GameObject tile in OutpostTiles) {
 				Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
 				if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (Movement) && tilePosition.y > currentPosition.y && tile.gameObject.GetComponent<TileBehaviour>().isPassable == true) {
+					outpostTileClose = true;
+					outpostTile = tile;
 					availableMoves.Add (tile);
 				}
 			}
@@ -264,13 +284,16 @@ public class Enemy : MonoBehaviour {
 			}
 			
 		//move the actual enemy forward to a random tile. S
-		Debug.Log (availableMoves.Count);
 		if (availableMoves.Count > 0) {
 			int randomTileIndex = UnityEngine.Random.Range (0, availableMoves.Count);
-			Debug.Log (randomTileIndex);
 			availableMoves.ToArray ();
-
-			GameObject destinationTile = (GameObject)availableMoves [randomTileIndex];
+			GameObject destinationTile;
+			if(outpostTileClose == false){
+				destinationTile = (GameObject)availableMoves [randomTileIndex];
+			}
+			else{
+				destinationTile = outpostTile;
+			}
 			
 			//keep the tiles updated
 			if(this.GetComponent<CharacterMovement>().unitOriginalTile.gameObject.tag == "AttackableDirtTile"){
@@ -299,9 +322,23 @@ public class Enemy : MonoBehaviour {
 			movement = destinationTile.transform.position;
 			if (destinationTile.tag == "StoneTile") {
 				movement.y = 0.12f;
-			} else
+				isMud = false;
+				isOnOutpost = false;
+			}else if(destinationTile.tag == "OutpostTile"){
 				movement.y = 0.11f;
-			
+				isMud = false;
+				isOnOutpost = true;
+				Camera.main.GetComponent<EnemySpawner>().enemyCount -= 1;
+			}else if(destinationTile.tag == "MudTile"){
+				movement.y = 0.11f;
+				isMud = true;
+				isOnOutpost = false;
+			}
+			else{
+				movement.y = 0.11f;
+				isMud = false;
+				isOnOutpost = false;
+			}
 			//move 
 			this.transform.position = movement;
 		}
@@ -311,7 +348,7 @@ public class Enemy : MonoBehaviour {
 
 	void MoveBackwards(){
 		availableMoves = new ArrayList ();
-		
+		outpostTileClose = false;
 		//only these tile as the rest would be occupied
 		GameObject[] MudTiles = GameObject.FindGameObjectsWithTag ("MudTile");
 		GameObject[] StoneTiles = GameObject.FindGameObjectsWithTag ("StoneTile");
@@ -336,6 +373,8 @@ public class Enemy : MonoBehaviour {
 			Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
 			if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (Movement) && tilePosition.y < currentPosition.y && tile.gameObject.GetComponent<TileBehaviour>().isPassable == true) {
 				availableMoves.Add (tile);
+				outpostTile = tile;
+				outpostTileClose = true;
 			}
 		}
 		foreach (GameObject tile in DirtTiles) {
@@ -349,7 +388,14 @@ public class Enemy : MonoBehaviour {
 		availableMoves.ToArray ();
 		
 		int randomTileIndex = UnityEngine.Random.Range (0, availableMoves.Count);
-		GameObject destinationTile = (GameObject)availableMoves [randomTileIndex];
+		GameObject destinationTile;
+		if(outpostTileClose == false){
+			destinationTile = (GameObject)availableMoves [randomTileIndex];
+		}
+		else{
+			destinationTile = outpostTile;
+		}
+
 		
 		//keep the tiles updated
 		this.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isPassable = true;
@@ -360,11 +406,25 @@ public class Enemy : MonoBehaviour {
 		
 		//set up the movement
 		movement = destinationTile.transform.position;
-		if(destinationTile.tag == "StoneTile"){
+		if (destinationTile.tag == "StoneTile") {
 			movement.y = 0.12f;
-		}
-		else
+			isMud = false;
+			isOnOutpost = false;
+		}else if(destinationTile.tag == "OutpostTile"){
 			movement.y = 0.11f;
+			isMud = false;
+			isOnOutpost = true;
+			Camera.main.GetComponent<EnemySpawner>().enemyCount -= 1;
+		}else if(destinationTile.tag == "MudTile"){
+			movement.y = 0.11f;
+			isMud = true;
+			isOnOutpost = false;
+		}
+		else{
+			movement.y = 0.11f;
+			isMud = false;
+			isOnOutpost = false;
+		}
 		
 		//move 
 		this.transform.position = movement;

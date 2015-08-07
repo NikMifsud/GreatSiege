@@ -3,14 +3,15 @@ using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
 {
-
-	public GameObject enemy;                // The enemy prefab to be spawned.
+	
 	public float spawnTime = 12f;            // How long between each spawn.
 	public int enemyCount; 
 	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
 	public List<Transform> tiles;
 	bool spawn;
 	public GameObject tile;
+	public GameObject[] enemies;
+
 	void Start ()
 	{
 		// Call the Spawn function after a delay of the spawnTime and then continue to call after the same amount of time.
@@ -57,11 +58,27 @@ public class EnemySpawner : MonoBehaviour
 		
 			int randomTileIndex = UnityEngine.Random.Range (0, 22);
 			GameObject spawnTile = tiles [randomTileIndex].gameObject;
-			Vector3 position = new Vector3 (spawnTile.transform.position.x, 0.12f, spawnTile.transform.position.z);
+			Vector3 position = new Vector3(0,0,0);
 			// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
 
-			Transform myUnitTransform = enemy.transform.FindChild ("Enemy");
-		
+			GameObject enemy = enemies[Random.Range(0,2)];
+			Transform myUnitTransform = null;
+			if(enemy.gameObject.tag == "RangedEnemy"){
+				myUnitTransform = enemy.transform.FindChild ("EnemyRanged");
+				position = new Vector3 (spawnTile.transform.position.x, 0.16f, spawnTile.transform.position.z);
+				if(spawnTile.gameObject.tag == "StoneTile"){
+					myUnitTransform.gameObject.GetComponent<EnemyRanged>().AttackRange = 5;
+					position = new Vector3 (spawnTile.transform.position.x, 0.2f, spawnTile.transform.position.z);
+				}
+			}
+			if(enemy.gameObject.tag == "Enemy"){
+				myUnitTransform = enemy.transform.FindChild("Enemy");
+				position = new Vector3 (spawnTile.transform.position.x, 0.11f, spawnTile.transform.position.z);
+				if(spawnTile.gameObject.tag == "StoneTile"){
+					position = new Vector3 (spawnTile.transform.position.x, 0.12f, spawnTile.transform.position.z);
+				}
+			}
+
 			spawnTile.gameObject.GetComponent<TileBehaviour> ().isEnemy = true;
 			spawnTile.gameObject.GetComponent<TileBehaviour> ().isPassable = false;
 			myUnitTransform.GetComponent<CharacterMovement> ().unitOriginalTile = spawnTile.gameObject.GetComponent<TileBehaviour> ();

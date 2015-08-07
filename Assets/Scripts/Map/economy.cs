@@ -22,6 +22,5 @@ public class economy : MonoBehaviour {
 			number = 0;
 		}
 		thetext.text = "" + Food;
-		Debug.Log (outpost);
 	}
 }
