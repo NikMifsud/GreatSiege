@@ -5,6 +5,7 @@ public class SpawnRangedSoldier : MonoBehaviour {
 	public bool SpawnSoldier;
 	public GameObject Soldier;
 	private GameMaster gameMaster;
+	public economy economy;
 	private PlayerControl playerControl;
 	public List<Transform> tiles;
 	public Material highlightedTexture,mudTexture,dirtTexture,outpostTexture,stoneTexture;
@@ -31,8 +32,13 @@ public class SpawnRangedSoldier : MonoBehaviour {
 							Soldier.transform.FindChild ("ranged").GetComponent<Rangedsoldier> ().AttackRange = 5;
 							Soldier.transform.FindChild ("ranged").GetComponent<Rangedsoldier> ().Armor = 5;
 							cubeTemp.y = 0.2f;
-						} else
+						} if(hit.collider.gameObject.tag == "SpawnOutpostTile"){
 							cubeTemp.y = 0.1f;
+							economy.outpost += 1;
+						}
+						if(hit.collider.gameObject.tag == "SpawnMudTile" || hit.collider.gameObject.tag == "SpawnDirtTile"){
+							cubeTemp.y = 0.1f;
+						}
 						Transform myUnitTransform = Soldier.transform.FindChild ("ranged");
 						myUnitTransform.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
 						Instantiate (Soldier, cubeTemp, Quaternion.identity);

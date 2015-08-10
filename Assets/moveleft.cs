@@ -15,7 +15,6 @@ public class moveleft : MonoBehaviour {
 	}
 	
 	void OnMouseOver () {
-		Debug.Log ("it burns");
 		//movingCamera = 1;
 		haqa.speedMod = -0.6f;
 	}

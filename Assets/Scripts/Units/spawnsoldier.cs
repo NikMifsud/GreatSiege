@@ -4,9 +4,11 @@ using System.Collections.Generic;
 public class spawnsoldier : MonoBehaviour {
 	public bool SpawnSoldier;
 	public GameObject Soldier;
+	public economy economy;
 	private GameMaster gameMaster;
 	private PlayerControl playerControl;
 	public Transform[] tileList;
+	public happiness HappyUnits;
 	public Material highlightedTexture,mudTexture,dirtTexture,outpostTexture,stoneTexture;
 	public List<Transform> tiles;
 	public economy food;
@@ -32,12 +34,18 @@ public class spawnsoldier : MonoBehaviour {
 						if (hit.collider.gameObject.tag == "SpawnStoneTile") {
 							Soldier.transform.FindChild ("FootSoldier").GetComponent<Footsoldier> ().Armor = 15;
 							cubeTemp.y = 0.2f;
-						} else
+						} if(hit.collider.gameObject.tag == "SpawnOutpostTile"){
 							cubeTemp.y = 0.1f;
+							economy.outpost += 1;
+						}
+						if(hit.collider.gameObject.tag == "SpawnMudTile" || hit.collider.gameObject.tag == "SpawnDirtTile"){
+							cubeTemp.y = 0.1f;
+						}
 					//	Transform myUnitTransform = Soldier.transform.FindChild ("FootSoldier");
 						Soldier.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
 						Instantiate (Soldier, cubeTemp, Quaternion.identity);
 						food.Food = food.Food - 30;
+						HappyUnits.HappyUnits = HappyUnits.HappyUnits - 10;
 						hit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = false;
 						RemoveSpawnArea ();
 						SpawnSoldier = false;

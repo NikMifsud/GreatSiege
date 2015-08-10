@@ -72,6 +72,7 @@ public class PlayerControl : MonoBehaviour {
 							gridManager.selectedCharacter = hit.collider.gameObject;
 							gameManager.gameState = 1;
 							selectedCharacter.gameObject.tag = "SelectedFootUnit";
+							selectedCharacter.GetComponent<disablinghp>().Appear = true;
 							unitMovement = hit.collider.gameObject.GetComponent<Footsoldier>().Movement;
 							unitAttackRange = hit.collider.gameObject.GetComponent<Footsoldier>().AttackRange;
 							unitAttack = hit.collider.gameObject.GetComponent<Footsoldier>().Attack;
@@ -87,6 +88,7 @@ public class PlayerControl : MonoBehaviour {
 							gridManager.selectedCharacter = hit.collider.gameObject;
 							gameManager.gameState = 1;
 							selectedCharacter.gameObject.tag = "SelectedRangedUnit";
+							selectedCharacter.GetComponent<disablinghp>().Appear = true;
 							unitMovement = hit.collider.gameObject.GetComponent<Rangedsoldier>().Movement;
 							unitAttackRange = hit.collider.gameObject.GetComponent<Rangedsoldier>().AttackRange;
 							unitAttack = hit.collider.gameObject.GetComponent<Rangedsoldier>().Attack;
@@ -102,6 +104,7 @@ public class PlayerControl : MonoBehaviour {
 							gridManager.selectedCharacter = hit.collider.gameObject;
 							gameManager.gameState = 1;
 							selectedCharacter.gameObject.tag = "SelectedSiegeUnit";
+							selectedCharacter.GetComponent<disablinghp>().Appear = true;
 							unitMovement = hit.collider.gameObject.GetComponent<Artillery>().Movement;
 							unitAttackRange = hit.collider.gameObject.GetComponent<Artillery>().AttackRange;
 							unitAttack = hit.collider.gameObject.GetComponent<Artillery>().Attack;
@@ -217,6 +220,8 @@ public class PlayerControl : MonoBehaviour {
 
 							if (path.ToList ().Count <= (unitMovement + 1) && selectedCharacter.GetComponent<CharacterMovement> ().destinationTile.isPassable == true) {
 								selectedCharacter.transform.position = movement;
+								selectedCharacter.GetComponent<disablinghp>().Appear = false;
+								selectedCharacter.gameObject.transform.rotation = Quaternion.identity;
 								selectedCharacter.GetComponent<CharacterMovement> ().unitOriginalTile.GetComponent<TileBehaviour> ().isPassable = true;
 								if(selectedCharacter.GetComponent<CharacterMovement>().unitOriginalTile.gameObject.tag == "OutpostTile" && _hitInfo.collider.gameObject.tag != "OutpostTile"){
 									economy.outpost -= 1;
@@ -268,6 +273,8 @@ public class PlayerControl : MonoBehaviour {
 						if(_hitInfo.collider.gameObject.tag == "AttackableEnemy" ){
 							//do the damage
 							_hitInfo.collider.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
+							selectedCharacter.GetComponent<disablinghp>().Appear = false;
+							_hitInfo.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 
 							//revert back
 							_hitInfo.collider.transform.parent.tag = "Enemy";
@@ -278,6 +285,9 @@ public class PlayerControl : MonoBehaviour {
 							//do the damage
 
 							_hitInfo.collider.gameObject.GetComponent<EnemyRanged>().DealtDamage(unitAttack);
+							selectedCharacter.GetComponent<disablinghp>().Appear = false;
+							_hitInfo.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+
 							//revert back
 							_hitInfo.collider.transform.parent.tag = "RangedEnemy";
 							_hitInfo.collider.gameObject.tag = "RangedEnemy";
@@ -302,15 +312,11 @@ public class PlayerControl : MonoBehaviour {
 						}
 						if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
 							source.PlayOneShot(footHitEffect,1.0f);
-
 							//look at the enemy
-							selectedCharacter.gameObject.transform.LookAt(_hitInfo.collider.gameObject.transform.position);
+							selectedCharacter.GetComponent<disablinghp>().Appear = false;
 
-						//	var lookPos = _hitInfo.collider.gameObject.transform.position - selectedCharacter.gameObject.transform.position;
-						//	lookPos.y = 0;
-						//	var rotation = Quaternion.LookRotation(lookPos);
-						//	selectedCharacter.gameObject.transform.rotation = Quaternion.Slerp(selectedCharacter.gameObject.transform.rotation, rotation, Time.deltaTime * 1f);
-
+							selectedCharacter.gameObject.transform.rotation = Quaternion.LookRotation(new Vector3(_hitInfo.collider.gameObject.transform.position.x, selectedCharacter.gameObject.transform.position.y, _hitInfo.collider.gameObject.transform.position.z) - selectedCharacter.gameObject.transform.position);
+							//animation is for attack
 							selectedCharacter.gameObject.GetComponent<Footsoldier> ().attack = true;
 							selectedCharacter.gameObject.GetComponent<Footsoldier> ().isSelected = false;
 							selectedCharacter.gameObject.GetComponent<Footsoldier> ().DecreaseCooldown();
@@ -318,12 +324,18 @@ public class PlayerControl : MonoBehaviour {
 						}
 						if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
 							source.PlayOneShot(bowShotEffect,1.0f);
+							selectedCharacter.GetComponent<disablinghp>().Appear = false;
+							selectedCharacter.gameObject.transform.rotation = Quaternion.LookRotation(new Vector3(_hitInfo.collider.gameObject.transform.position.x, selectedCharacter.gameObject.transform.position.y, _hitInfo.collider.gameObject.transform.position.z) - selectedCharacter.gameObject.transform.position);
+
 							selectedCharacter.gameObject.GetComponent<Rangedsoldier>().isSelected = false;
 							selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
 							selectedCharacter.gameObject.tag = "RangedUnit";
 						}
 						if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
 							source.PlayOneShot(cannonShotEffect,1.0f);
+							selectedCharacter.GetComponent<disablinghp>().Appear = false;
+							selectedCharacter.gameObject.transform.rotation = Quaternion.LookRotation(new Vector3(_hitInfo.collider.gameObject.transform.position.x, selectedCharacter.gameObject.transform.position.y, _hitInfo.collider.gameObject.transform.position.z) - selectedCharacter.gameObject.transform.position);
+
 							selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
 							selectedCharacter.gameObject.GetComponent<Artillery> ().DecreaseCooldown();
 							selectedCharacter.gameObject.tag = "SiegeUnit";
@@ -337,6 +349,7 @@ public class PlayerControl : MonoBehaviour {
 						//do damage
 						RaycastHit objectHit;
 						Vector3 up = Vector3.up;
+						selectedCharacter.GetComponent<disablinghp>().Appear = false;
 						if (Physics.Raycast(_hitInfo.collider.transform.position, up, out objectHit, 50))
 						{
 							if(objectHit.collider.gameObject.tag == "AttackableEnemy"){
@@ -373,6 +386,7 @@ public class PlayerControl : MonoBehaviour {
 						gameManager.gameState = 0;
 					}
 					else if(_hitInfo.collider.gameObject.tag == "AttackableMudTile"){
+						selectedCharacter.GetComponent<disablinghp>().Appear = false;
 						//do damage
 						RaycastHit objectHit;
 						Vector3 up = Vector3.up;
@@ -412,6 +426,7 @@ public class PlayerControl : MonoBehaviour {
 						gameManager.gameState = 0;
 					}
 					else if(_hitInfo.collider.gameObject.tag == "AttackableStoneTile"){
+						selectedCharacter.GetComponent<disablinghp>().Appear = false;
 						//do damage
 						RaycastHit objectHit;
 						Vector3 up = Vector3.up; //(0,1,0)
@@ -453,6 +468,7 @@ public class PlayerControl : MonoBehaviour {
 						gameManager.gameState = 0;
 					}
 					else if(_hitInfo.collider.gameObject.tag == "AttackableOutpostTile"){
+						selectedCharacter.GetComponent<disablinghp>().Appear = false;
 						//do damage
 						RaycastHit objectHit;
 						Vector3 up = Vector3.up;
@@ -493,6 +509,7 @@ public class PlayerControl : MonoBehaviour {
 						gameManager.gameState = 0;
 					}
 					else if (_hitInfo.collider.gameObject.tag == "FootUnit" || _hitInfo.collider.gameObject.tag == "RangedUnit" || _hitInfo.collider.gameObject.tag == "SiegeUnit"){
+						selectedCharacter.GetComponent<disablinghp>().Appear = false;
 						revertbackEnemies();
 						Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 						highlightingTiles = false;
@@ -512,6 +529,7 @@ public class PlayerControl : MonoBehaviour {
 								gridManager.selectedCharacter = _hitInfo.collider.gameObject;
 								gameManager.gameState = 1;
 								selectedCharacter.gameObject.tag = "SelectedFootUnit";
+								selectedCharacter.GetComponent<disablinghp>().Appear = true;
 								unitMovement = _hitInfo.collider.gameObject.GetComponent<Footsoldier>().Movement;
 								unitAttackRange = _hitInfo.collider.gameObject.GetComponent<Footsoldier>().AttackRange;
 								unitAttack = _hitInfo.collider.gameObject.GetComponent<Footsoldier>().Attack;
@@ -527,6 +545,7 @@ public class PlayerControl : MonoBehaviour {
 								gridManager.selectedCharacter = _hitInfo.collider.gameObject;
 								gameManager.gameState = 1;
 								selectedCharacter.gameObject.tag = "SelectedRangedUnit";
+								selectedCharacter.GetComponent<disablinghp>().Appear = true;
 								unitMovement = _hitInfo.collider.gameObject.GetComponent<Rangedsoldier>().Movement;
 								unitAttackRange = _hitInfo.collider.gameObject.GetComponent<Rangedsoldier>().AttackRange;
 								unitAttack = _hitInfo.collider.gameObject.GetComponent<Rangedsoldier>().Attack;
@@ -542,6 +561,7 @@ public class PlayerControl : MonoBehaviour {
 								gridManager.selectedCharacter = _hitInfo.collider.gameObject;
 								gameManager.gameState = 1;
 								selectedCharacter.gameObject.tag = "SelectedSiegeUnit";
+								selectedCharacter.GetComponent<disablinghp>().Appear = true;
 								unitMovement = _hitInfo.collider.gameObject.GetComponent<Artillery>().Movement;
 								unitAttackRange = _hitInfo.collider.gameObject.GetComponent<Artillery>().AttackRange;
 								unitAttack = _hitInfo.collider.gameObject.GetComponent<Artillery>().Attack;
@@ -557,7 +577,7 @@ public class PlayerControl : MonoBehaviour {
 					}
 
 					else if (_hitInfo.collider.gameObject.tag == "SelectedFootUnit" || _hitInfo.collider.gameObject.tag == "SelectedRangedUnit" || _hitInfo.collider.gameObject.tag == "SelectedSiegeUnit" ||  _hitInfo.collider.gameObject.tag == "DirtTile" ||  _hitInfo.collider.gameObject.tag == "MudTile" ||  _hitInfo.collider.gameObject.tag == "OutpostTile" ||  _hitInfo.collider.gameObject.tag == "StoneTile" ||  _hitInfo.collider.gameObject.tag == "Enemy" ||  _hitInfo.collider.gameObject.tag == "RangedEnemy"){
-
+						selectedCharacter.GetComponent<disablinghp>().Appear = false;
 						revertbackEnemies();
 
 						highlightingTiles = false;
@@ -584,14 +604,17 @@ public class PlayerControl : MonoBehaviour {
 			GameObject selectedSiege = GameObject.FindGameObjectWithTag("SelectedSiegeUnit");
 			if(selectedFoot != null){
 				selectedFoot.gameObject.tag = "FootUnit";
+				selectedFoot.GetComponent<disablinghp>().Appear = false;
 				Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 			}
 			if(selectedRanged!= null){
 				selectedRanged.gameObject.tag = "RangedUnit";
+				selectedRanged.GetComponent<disablinghp>().Appear = false;
 				Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 			}
 			if(selectedSiege!= null){
 				selectedSiege.gameObject.tag = "SiegeUnit";
+				selectedSiege.GetComponent<disablinghp>().Appear = false;
 				Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 			}
 		}

@@ -20,6 +20,7 @@ public class Footsoldier : MonoBehaviour {
 	public RuntimeAnimatorController runtimeAnimatorController;
 	public bool isMud;
 	// Use this for initialization
+
 	void Start () {
 		max_Health = 100;
 		curr_Health = 100;

@@ -5,6 +5,7 @@ public class SpawnSiege : MonoBehaviour {
 	public bool SpawnSoldier;
 	public GameObject Soldier;
 	private GameMaster gameMaster;
+	public economy economy;
 	private PlayerControl playerControl;
 	public Material highlightedTexture,mudTexture,dirtTexture,outpostTexture,stoneTexture;
 	public List<Transform> tiles;
@@ -31,8 +32,14 @@ public class SpawnSiege : MonoBehaviour {
 							Soldier.transform.FindChild ("cannon").GetComponent<Artillery> ().AttackRange = 7;
 							Soldier.transform.FindChild ("cannon").GetComponent<Artillery> ().Armor = 25;
 							cubeTemp.y = 0.2f;
-						} else
+						}
+						if(hit.collider.gameObject.tag == "SpawnOutpostTile"){
 							cubeTemp.y = 0.1f;
+							economy.outpost += 1;
+						}
+						if(hit.collider.gameObject.tag == "SpawnMudTile" || hit.collider.gameObject.tag == "SpawnDirtTile"){
+							cubeTemp.y = 0.1f;
+						}
 						Transform myUnitTransform = Soldier.transform.FindChild ("cannon");
 						myUnitTransform.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
 						Instantiate (Soldier, cubeTemp, Quaternion.identity);
