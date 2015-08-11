@@ -55,6 +55,9 @@ public class Footsoldier : MonoBehaviour {
 		if (canMove == false) {
 			Movementtime -= Time.deltaTime;
 		}
+		if (curr_Health > 100) {
+			curr_Health = 100;
+		}
 		if (DamageTaken <= 9) {
 			DamageTaken = 0;
 		}

@@ -22,7 +22,6 @@ public class Artillery : MonoBehaviour {
 		curr_Health = 250;
 		Armor = 20;
 		Movement = 1;
-		//AttackRange = 6;
 		Attack = 80;
 		isSelected = false;
 		isMud = false;
@@ -37,6 +36,10 @@ public class Artillery : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (curr_Health > 100) {
+			curr_Health = 100;
+		}
 
 		if (isMud) {
 			Movementtime = 35;

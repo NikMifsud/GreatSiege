@@ -36,6 +36,10 @@ public class Rangedsoldier : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (curr_Health > 100) {
+			curr_Health = 100;
+		}
+
 		if (isMud) {
 			Movementtime = 20;
 			isMud = false;
