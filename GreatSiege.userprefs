@@ -1,7 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menus\ChangeToScene.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menus\PlayCutscenes.js">
     <Files>
+      <File FileName="Assets\Scripts\Menus\PlayCutscenes.js" Line="16" Column="2" />
       <File FileName="Assets\Scripts\Menus\ChangeToScene.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
