@@ -43,9 +43,11 @@ public class HealthPowerUps : MonoBehaviour {
 								objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 60;
 							}
 							if (objectHit.collider.gameObject.tag == "RangedUnit") {
+								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 								objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 60;
 							} 
 							if (objectHit.collider.gameObject.tag == "Artillery") {
+								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 								objectHit.collider.gameObject.GetComponent<Artillery> ().curr_Health += 60;
 							}
 						}
@@ -67,9 +69,11 @@ public class HealthPowerUps : MonoBehaviour {
 								objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 60;
 							}
 							if (objectHit.collider.gameObject.tag == "RangedUnit") {
+								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 								objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 60;
 							} 
 							if (objectHit.collider.gameObject.tag == "Artillery") {
+								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 								objectHit.collider.gameObject.GetComponent<Artillery> ().curr_Health += 60;
 							}
 						}
@@ -90,9 +94,11 @@ public class HealthPowerUps : MonoBehaviour {
 								objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 60;
 							}
 							if (objectHit.collider.gameObject.tag == "RangedUnit") {
+								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 								objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 60;
 							} 
 							if (objectHit.collider.gameObject.tag == "Artillery") {
+								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 								objectHit.collider.gameObject.GetComponent<Artillery> ().curr_Health += 60;
 							}
 						}
@@ -113,9 +119,11 @@ public class HealthPowerUps : MonoBehaviour {
 								objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 60;
 							}
 							if (objectHit.collider.gameObject.tag == "RangedUnit") {
+								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 								objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 60;
 							} 
 							if (objectHit.collider.gameObject.tag == "Artillery") {
+								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 								objectHit.collider.gameObject.GetComponent<Artillery> ().curr_Health += 60;
 							}
 						}

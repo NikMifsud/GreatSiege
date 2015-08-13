@@ -281,7 +281,7 @@ public class Enemy : MonoBehaviour {
 			}
 			foreach (GameObject tile in DirtTiles) {
 				Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
-				if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (Movement) && tilePosition.y > currentPosition.y && tile.gameObject.GetComponent<TileBehaviour>().isPassable == true) {
+					if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (Movement) && tilePosition.y > currentPosition.y && tile.gameObject.GetComponent<TileBehaviour>().isPassable == true) {
 					availableMoves.Add (tile);
 				}
 			}

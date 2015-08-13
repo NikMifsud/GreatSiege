@@ -190,6 +190,7 @@ public class EnemyRanged : MonoBehaviour {
 								if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 									if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
 										source.PlayOneShot(rangedHitEffect,1.0f);
+										enemy.GetComponent<disablinghp>().JustHit = true;
 										enemy.GetComponent<Artillery> ().DealtDamage (Attack);
 										enemy.GetComponent<Artillery> ().CheckDeath ();
 										enemyHit = true;
@@ -208,6 +209,7 @@ public class EnemyRanged : MonoBehaviour {
 								if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 									if (enemy.tag == "RangedUnit" || enemy.tag == "SelectedRangedUnit") {
 										source.PlayOneShot(rangedHitEffect,1.0f);
+										enemy.GetComponent<disablinghp>().JustHit = true;
 										enemy.GetComponent<Rangedsoldier> ().DealtDamage (Attack);
 										enemy.GetComponent<Rangedsoldier> ().CheckDeath ();
 										enemyHit = true;
@@ -226,6 +228,7 @@ public class EnemyRanged : MonoBehaviour {
 								if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 									if (enemy.tag == "FootUnit" || enemy.tag == "SelectedFootUnit") {
 										source.PlayOneShot(rangedHitEffect,1.0f);
+										enemy.GetComponent<disablinghp>().JustHit = true;
 										enemy.GetComponent<Footsoldier> ().DealtDamage (Attack);
 										enemy.GetComponent<Footsoldier> ().CheckDeath ();
 										enemyHit = true;

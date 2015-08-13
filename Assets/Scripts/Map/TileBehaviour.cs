@@ -32,7 +32,7 @@ public class TileBehaviour: MonoBehaviour
 	void Start(){
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
-		healthPowerUps = GameObject.Find("PowerUp").GetComponent<HealthPowerUps>();
+		healthPowerUps = GameObject.Find("Medic").GetComponent<HealthPowerUps>();
 		this.isPassable = true;
 		this.isEnemy = false;
 		this.powerUp = false;

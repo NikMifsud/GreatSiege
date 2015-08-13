@@ -37,8 +37,8 @@ public class Artillery : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (curr_Health > 100) {
-			curr_Health = 100;
+		if (curr_Health > 250) {
+			curr_Health = 250;
 		}
 
 		if (isMud) {

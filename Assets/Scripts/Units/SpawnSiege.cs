@@ -34,10 +34,12 @@ public class SpawnSiege : MonoBehaviour {
 							cubeTemp.y = 0.2f;
 						}
 						if(hit.collider.gameObject.tag == "SpawnOutpostTile"){
+						Soldier.transform.FindChild ("cannon").GetComponent<Artillery> ().AttackRange = 6;
 							cubeTemp.y = 0.1f;
 							economy.outpost += 1;
 						}
 						if(hit.collider.gameObject.tag == "SpawnMudTile" || hit.collider.gameObject.tag == "SpawnDirtTile"){
+						Soldier.transform.FindChild ("cannon").GetComponent<Artillery> ().AttackRange = 6;
 							cubeTemp.y = 0.1f;
 						}
 						Transform myUnitTransform = Soldier.transform.FindChild ("cannon");

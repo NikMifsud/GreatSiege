@@ -62,7 +62,9 @@ public class FireWheel : MonoBehaviour {
 		}
 
 		if (tileCount > 7 || enemyHit) {
+			this.GetComponent<CharacterMovement>().unitOriginalTile.GetComponent<TileBehaviour>().isPassable = true;
 			Destroy(this.gameObject);
+
 		}
 
 	}

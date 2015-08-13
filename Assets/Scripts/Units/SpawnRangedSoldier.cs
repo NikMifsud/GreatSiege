@@ -33,10 +33,12 @@ public class SpawnRangedSoldier : MonoBehaviour {
 							Soldier.transform.FindChild ("ranged").GetComponent<Rangedsoldier> ().Armor = 5;
 							cubeTemp.y = 0.2f;
 						} if(hit.collider.gameObject.tag == "SpawnOutpostTile"){
+							Soldier.transform.FindChild ("ranged").GetComponent<Rangedsoldier> ().AttackRange = 4;
 							cubeTemp.y = 0.1f;
 							economy.outpost += 1;
 						}
 						if(hit.collider.gameObject.tag == "SpawnMudTile" || hit.collider.gameObject.tag == "SpawnDirtTile"){
+							Soldier.transform.FindChild ("ranged").GetComponent<Rangedsoldier> ().AttackRange = 4;
 							cubeTemp.y = 0.1f;
 						}
 						Transform myUnitTransform = Soldier.transform.FindChild ("ranged");
