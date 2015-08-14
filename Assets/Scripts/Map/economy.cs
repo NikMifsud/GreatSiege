@@ -10,7 +10,7 @@ public class economy : MonoBehaviour {
 	public int outpost;
 	// Use this for initialization
 	void Start () {
-		Food = 120;
+		Food = 500;
 		outpost = 0;
 	}
 

@@ -16,13 +16,19 @@ public class FlamethrowerCollider : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		Debug.Log (other.gameObject.name);
-
 			if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "AttackableEnemy") {
+				other.gameObject.GetComponent<Enemy> ().CheckDeath();
 				other.gameObject.GetComponent<Enemy> ().DealtDamage (60);
+				other.gameObject.GetComponent<Enemy> ().CheckDeath();
+				other.gameObject.GetComponent<disablinghp> ().JustHit = true;
+				other.gameObject.GetComponent<Enemy> ().CheckDeath();
 			}
 			if (other.gameObject.tag == "RangedEnemy" || other.gameObject.tag == "AttackableRangedEnemy") {
+				other.gameObject.GetComponent<EnemyRanged> ().CheckDeath();
 				other.gameObject.GetComponent<EnemyRanged> ().DealtDamage (60);
+				other.gameObject.GetComponent<EnemyRanged> ().CheckDeath();
+				other.gameObject.GetComponent<disablinghp> ().JustHit = true;
+				other.gameObject.GetComponent<EnemyRanged> ().CheckDeath ();
 			}
 	}
 } 

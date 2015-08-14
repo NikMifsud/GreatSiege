@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour {
 	public bool isMud;
 	public AudioClip footHitEffect;
 	private AudioSource source;
+	public Statistics statistics;
 
 	// Use this for initialization
 	void Start () {
@@ -44,6 +45,7 @@ public class Enemy : MonoBehaviour {
 		enemyHit = false;
 		outpostTileClose = false;
 		source = Camera.main.GetComponent<AudioSource> ();
+		statistics = Camera.main.GetComponent<Statistics> ();
 	}
 
 	public void DecreaseCooldown(){
@@ -74,27 +76,28 @@ public class Enemy : MonoBehaviour {
 			Vector3 down = Vector3.down;
 			if (Physics.Raycast(this.transform.position, down, out objectHit, 50))
 			{
-				if(objectHit.collider.gameObject.tag == "AttackableDirtTile"){
+				if(objectHit.collider.gameObject.tag == "AttackableDirtTile" || objectHit.collider.gameObject.tag == "DirtTile"){
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = false;
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = true;
 					objectHit.collider.gameObject.tag = "DirtTile";
 				}
-				else if(objectHit.collider.gameObject.tag == "AttackableStoneTile"){
+				else if(objectHit.collider.gameObject.tag == "AttackableStoneTile" || objectHit.collider.gameObject.tag == "StoneTile"){
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = false;
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = true;
 					objectHit.collider.gameObject.tag = "StoneTile";
 				}
-				else if(objectHit.collider.gameObject.tag == "AttackableMudTile"){
+				else if(objectHit.collider.gameObject.tag == "AttackableMudTile" || objectHit.collider.gameObject.tag == "MudTile"){
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = false;
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = true;
 					objectHit.collider.gameObject.tag = "MudTile";
 				}
-				else if(objectHit.collider.gameObject.tag == "AttackableOutpostTile"){
+				else if(objectHit.collider.gameObject.tag == "AttackableOutpostTile" || objectHit.collider.gameObject.tag == "OutpostTile"){
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = false;
 					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = true;
 					objectHit.collider.gameObject.tag = "OutpostTile";
 				}
 			}
+			statistics.enemiesKilled += 1;
 			Destroy (this.gameObject);
 		}
 
@@ -121,21 +124,24 @@ public class Enemy : MonoBehaviour {
 			RaycastHit objectHit;
 			Vector3 down = Vector3.down;
 			if (Physics.Raycast (this.transform.position, down, out objectHit, 50)) {
-				if (objectHit.collider.gameObject.tag == "AttackableDirtTile") {
-					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isEnemy = false;
-					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
+				if(objectHit.collider.gameObject.tag == "AttackableDirtTile" || objectHit.collider.gameObject.tag == "DirtTile"){
+					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = false;
+					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = true;
 					objectHit.collider.gameObject.tag = "DirtTile";
-				} else if (objectHit.collider.gameObject.tag == "AttackableStoneTile") {
-					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isEnemy = false;
-					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
+				}
+				else if(objectHit.collider.gameObject.tag == "AttackableStoneTile" || objectHit.collider.gameObject.tag == "StoneTile"){
+					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = false;
+					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = true;
 					objectHit.collider.gameObject.tag = "StoneTile";
-				} else 	if (objectHit.collider.gameObject.tag == "AttackableMudTile") {
-					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isEnemy = false;
-					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
+				}
+				else if(objectHit.collider.gameObject.tag == "AttackableMudTile" || objectHit.collider.gameObject.tag == "MudTile"){
+					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = false;
+					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = true;
 					objectHit.collider.gameObject.tag = "MudTile";
-				} else 	if (objectHit.collider.gameObject.tag == "AttackableOutpostTile") {
-					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isEnemy = false;
-					objectHit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = true;
+				}
+				else if(objectHit.collider.gameObject.tag == "AttackableOutpostTile" || objectHit.collider.gameObject.tag == "OutpostTile"){
+					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = false;
+					objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = true;
 					objectHit.collider.gameObject.tag = "OutpostTile";
 				}
 			}

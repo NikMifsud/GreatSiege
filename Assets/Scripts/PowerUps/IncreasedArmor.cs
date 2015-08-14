@@ -5,20 +5,21 @@ public class IncreasedArmor : MonoBehaviour {
 	
 	public bool CooldownButtonPressed;
 	float armorTimer=0;
-
+	public PlayerControl playerControl;
+	public GameMaster gameMaster;
 
 	// Use this for initialization
 	void Start () {
+		gameMaster = Camera.main.GetComponent<GameMaster> ();
+		playerControl = Camera.main.GetComponent<PlayerControl> ();
 		armorTimer = 0;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (armorTimer >= 1) {
 			armorTimer += Time.deltaTime;
 		}
-
-		Debug.Log (armorTimer);
 
 		if (armorTimer >= 45) {
 			armorTimer = 0;
@@ -83,11 +84,16 @@ public class IncreasedArmor : MonoBehaviour {
 					}
 				}
 			}
+			gameMaster.gameState = 0;
 			CooldownButtonPressed = false;
+
 		}
 	}
 	
 	public void ButtonClicked () {
+		gameMaster.gameState = 3;
+		playerControl.highlightingTiles = false;
 		CooldownButtonPressed = true;
+
 	}
 }

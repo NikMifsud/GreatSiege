@@ -8,11 +8,14 @@ public class HealthPowerUps : MonoBehaviour {
 
 	public bool HealthButtonPressed;
 	public Material highlightedMaterial;
-
-
+	public PlayerControl playerControl;
+	public GameMaster gameMaster;
+	public ParticleSystem healingAura;
+	public bool playing;
 	// Use this for initialization
 	void Start () {
-	
+		playerControl = Camera.main.GetComponent<PlayerControl> ();
+		gameMaster = Camera.main.GetComponent<GameMaster> ();
 	}
 	
 	// Update is called once per frame
@@ -28,10 +31,15 @@ public class HealthPowerUps : MonoBehaviour {
 			GameObject[] DirtTiles = GameObject.FindGameObjectsWithTag ("DirtTile");
 
 			_ray = Camera.main.ScreenPointToRay (Input.mousePosition); // Specify the ray to be casted from the position of the mouse click
-			
+
 			// Raycast and verify that it collided
 			if (Physics.Raycast (_ray, out _hitInfo)) {
-
+				healingAura.transform.position = _hitInfo.collider.gameObject.transform.position;
+				//healingAura.transform.position.y += 0.1;
+				playing = true;
+				healingAura.emissionRate = 200f;
+				healingAura.gameObject.transform.FindChild("Sparkles").gameObject.GetComponent<ParticleSystem>().emissionRate = 10f;
+				StartCoroutine(WaitForAnimation());
 				foreach(GameObject tile in MudTiles){
 				var path = PathFinder.FindPath (_hitInfo.collider.GetComponent<TileBehaviour> ().tile, tile.gameObject.GetComponent<TileBehaviour> ().tile);
 					if (path.ToList ().Count <= 3 && tile.gameObject.GetComponent<TileBehaviour> ().isPassable == false) {
@@ -133,14 +141,29 @@ public class HealthPowerUps : MonoBehaviour {
 					}
 				}
 			}
+			playing = false;
 			HealthButtonPressed = false;
+			gameMaster.gameState = 0;
 
-			//revert tiles back
 		}
 	}
 
 	public void ButtonClicked () {
 		HealthButtonPressed = true;
+		gameMaster.gameState = 3;
+		playerControl.highlightingTiles = false;
+	}
+
+	
+	public IEnumerator WaitForAnimation(){
+		while (true) {
+			if (playing){
+				yield return new WaitForSeconds (2f);
+				healingAura.emissionRate = 0f;
+				healingAura.gameObject.transform.FindChild("Sparkles").gameObject.GetComponent<ParticleSystem>().emissionRate = 0f;
+			}
+			yield return null;
+		}
 	}
 	
 }

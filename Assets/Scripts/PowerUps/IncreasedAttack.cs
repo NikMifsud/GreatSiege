@@ -5,11 +5,14 @@ public class IncreasedAttack : MonoBehaviour {
 	
 	public bool CooldownButtonPressed;
 	float attackTimer=0;
-	
+	public PlayerControl playerControl;
+	public GameMaster gameMaster;
 	
 	// Use this for initialization
 	void Start () {
 		attackTimer = 0;
+		playerControl = Camera.main.GetComponent<PlayerControl> ();
+		gameMaster = Camera.main.GetComponent<GameMaster> ();
 	}
 	
 	// Update is called once per frame
@@ -83,11 +86,14 @@ public class IncreasedAttack : MonoBehaviour {
 					}
 				}
 			}
+			gameMaster.gameState = 0;
 			CooldownButtonPressed = false;
 		}
 	}
 	
 	public void ButtonClicked () {
+		gameMaster.gameState = 3;
+		playerControl.highlightingTiles = false;
 		CooldownButtonPressed = true;
 	}
 }

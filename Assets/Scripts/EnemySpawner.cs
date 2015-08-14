@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class EnemySpawner : MonoBehaviour
 {
 	
-	public float spawnTime = 12f;            // How long between each spawn.
+	public float spawnTime = 0;            // How long between each spawn.
 	public int enemyCount; 
 	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
 	public List<Transform> tiles;
@@ -15,13 +15,13 @@ public class EnemySpawner : MonoBehaviour
 	void Start ()
 	{
 		// Call the Spawn function after a delay of the spawnTime and then continue to call after the same amount of time.
-	//	InvokeRepeating ("Spawn", spawnTime, spawnTime);
+	//	InvokeRepeating ("Spawn", spawnTime, 0);
 		enemyCount = 0;
 		spawn = true;
 	}
 
 	public void Movementcheck(){
-		spawnTime = 12;
+		spawnTime = 15;
 	}
 	
 	public void SpawnDone(){
@@ -32,7 +32,10 @@ public class EnemySpawner : MonoBehaviour
 	void Update () {
 		if (spawnTime <= 0) {
 			spawn = true;
-			spawnTime = 12;
+			spawnTime = 0;
+			if(enemyCount >= 15){
+				spawnTime = 15;
+			}
 		}
 		if (spawn == false) {
 			spawnTime -= Time.deltaTime;
@@ -44,14 +47,12 @@ public class EnemySpawner : MonoBehaviour
 	
 	void Spawn ()
 	{
-		if (enemyCount <= 10) {
+		if (enemyCount <= 30) {
 			tiles = new List<Transform> ();
-
-			//ArrayList tiles = new ArrayList ();
 			Transform transform = GameObject.Find ("HexagonGrid").transform;
 			foreach (Transform child in transform) {
-				//if(child.gameObject.GetComponent<TileBehaviour>().isPassable == true)
-				tiles.Add (child);
+				if(child.gameObject.GetComponent<TileBehaviour>().isPassable == true)
+					tiles.Add (child);
 			}
 			tiles.RemoveRange (22, (tiles.Count - 22));
 			tiles.ToArray ();
@@ -86,39 +87,6 @@ public class EnemySpawner : MonoBehaviour
 			enemyCount += 1;
 			SpawnDone ();
 
-			/*
-		position.y += 0.11f;
-		RaycastHit objectHit;
-		Vector3 down = Vector3.down;
-		Debug.Log ("DRAWINGRAY");
-		Debug.DrawRay (position, Vector3.down * 50, Color.green);
-		if (Physics.Raycast(position, down, out objectHit, 50))
-		{
-			Debug.Log("hit something");
-			Debug.Log(objectHit.collider.gameObject.name);
-			if(objectHit.collider.gameObject.tag == "DirtTile"){
-				objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = true;
-				objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = false;
-				enemy.GetComponent<CharacterMovement>().unitOriginalTile = objectHit.collider.gameObject.GetComponent<TileBehaviour>();
-			}
-			else if(objectHit.collider.gameObject.tag == "MudTile"){
-				objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = true;
-				objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = false;
-				enemy.GetComponent<CharacterMovement>().unitOriginalTile = objectHit.collider.gameObject.GetComponent<TileBehaviour>();
-			}
-			else if(objectHit.collider.gameObject.tag == "StoneTile"){
-				objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = true;
-				objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = false;
-				enemy.GetComponent<CharacterMovement>().unitOriginalTile = objectHit.collider.gameObject.GetComponent<TileBehaviour>();
-			} 
-			else if(objectHit.collider.gameObject.tag == "OutpostTile"){
-				objectHit.collider.gameObject.GetComponent<TileBehaviour>().isEnemy = true;
-				objectHit.collider.gameObject.GetComponent<TileBehaviour>().isPassable = false;
-				enemy.GetComponent<CharacterMovement>().unitOriginalTile = objectHit.collider.gameObject.GetComponent<TileBehaviour>();
-			}
-		}
-*/
-			//	enemy.GetComponent<CharacterMovement>().unitOriginalTile;
 		}
 	}
 }

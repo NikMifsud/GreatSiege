@@ -4,21 +4,21 @@ using System.Collections.Generic;
 public class CooldownRefresh : MonoBehaviour {
 
 	public bool CooldownButtonPressed;
-
+	public PlayerControl playerControl;
+	public GameMaster gameMaster;
+	
 	// Use this for initialization
 	void Start () {
-	
+		playerControl = Camera.main.GetComponent<PlayerControl> ();
+		gameMaster = Camera.main.GetComponent<GameMaster> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (CooldownButtonPressed == true) {
 			GameObject[] footUnits = GameObject.FindGameObjectsWithTag("FootUnit");
 			GameObject[] rangedUnits = GameObject.FindGameObjectsWithTag("RangedUnit");
 			GameObject[] siegeUnits = GameObject.FindGameObjectsWithTag("SiegeUnit");
-		//	GameObject selectedFootUnit = GameObject.FindGameObjectWithTag("SelectedFootUnit");
-	//		GameObject selectedRangedUnit = GameObject.FindGameObjectWithTag("SelectedRangedUnit");
-	//		GameObject selectedSiegeUnit = GameObject.FindGameObjectWithTag("SelectedSiegeUnit");
 
 			if(footUnits != null){
 				foreach(GameObject unit in footUnits){
@@ -48,21 +48,16 @@ public class CooldownRefresh : MonoBehaviour {
 					}
 				}
 			}
-	/*		if(selectedFootUnit != null){
-				selectedFootUnit.GetComponent<Footsoldier>().Movementtime = 0;
-			}
-			if(selectedRangedUnit != null){
-				selectedRangedUnit.GetComponent<Footsoldier>().Movementtime = 0;
-			}
-			if(selectedSiegeUnit != null){
-				selectedSiegeUnit.GetComponent<Footsoldier>().Movementtime = 0;
-			}
-*/
+
+			gameMaster.gameState = 0;
 			CooldownButtonPressed = false;
 		}
 	}
 
 	public void ButtonClicked () {
+		gameMaster.gameState = 3;
+		playerControl.highlightingTiles = false;
 		CooldownButtonPressed = true;
+
 	}
 }

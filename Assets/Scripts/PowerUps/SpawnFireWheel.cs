@@ -39,14 +39,15 @@ public class SpawnFireWheel : MonoBehaviour {
 					hit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = false;
 					SpawnSoldier = false;
 					RemoveSpawnArea();
-					
+					gameMaster.gameState = 0;
 				} else {
+					gameMaster.gameState = 0;
 					SpawnSoldier = false;
 					RemoveSpawnArea();
 				}
 				
 			}else{
-
+				gameMaster.gameState = 0;
 				SpawnSoldier = false;
 				RemoveSpawnArea();
 			}
@@ -54,6 +55,7 @@ public class SpawnFireWheel : MonoBehaviour {
 	}
 	
 	public void ButtonClicked () {
+		gameMaster.gameState = 3;
 		playerControl.highlightingTiles = false;
 		SpawnSoldier = true;
 		GenerateSpawnArea ();

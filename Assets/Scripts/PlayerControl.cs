@@ -283,7 +283,7 @@ public class PlayerControl : MonoBehaviour {
 
 								TileBehaviour mainEnemyTile = _hitInfo.collider.gameObject.GetComponent<CharacterMovement>().unitOriginalTile.GetComponent<TileBehaviour>();
 								//do damage
-								_hitInfo.collider.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
+					//			_hitInfo.collider.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
 								//get his tile and then spread to the ones near him 
 
 								GameObject[] MudTiles = GameObject.FindGameObjectsWithTag ("MudTile");
@@ -380,7 +380,7 @@ public class PlayerControl : MonoBehaviour {
 							if(firingGrenades){
 								TileBehaviour mainEnemyTile = _hitInfo.collider.gameObject.GetComponent<CharacterMovement>().unitOriginalTile.GetComponent<TileBehaviour>();
 								//do damage
-								_hitInfo.collider.gameObject.GetComponent<EnemyRanged>().DealtDamage(unitAttack);
+						//		_hitInfo.collider.gameObject.GetComponent<EnemyRanged>().DealtDamage(unitAttack);
 								//get his tile and then spread to the ones near him 
 								
 								GameObject[] MudTiles = GameObject.FindGameObjectsWithTag ("MudTile");
@@ -491,7 +491,7 @@ public class PlayerControl : MonoBehaviour {
 								objectHit.collider.gameObject.tag = "MudTile";
 							}
 						}
-						if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
+						if(selectedCharacter.gameObject.tag == "SelectedFootUnit" || selectedCharacter.gameObject.tag == "FootUnit"){
 							source.PlayOneShot(footHitEffect,1.0f);
 							//look at the enemy
 							selectedCharacter.GetComponent<disablinghp>().Appear = false;
@@ -503,7 +503,7 @@ public class PlayerControl : MonoBehaviour {
 							selectedCharacter.gameObject.GetComponent<Footsoldier> ().DecreaseCooldown();
 							selectedCharacter.gameObject.tag = "FootUnit";
 						}
-						if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
+						if(selectedCharacter.gameObject.tag == "SelectedRangedUnit" || selectedCharacter.gameObject.tag == "RangedUnit"){
 							source.PlayOneShot(bowShotEffect,1.0f);
 							selectedCharacter.GetComponent<disablinghp>().Appear = false;
 							selectedCharacter.gameObject.transform.rotation = Quaternion.LookRotation(new Vector3(_hitInfo.collider.gameObject.transform.position.x, selectedCharacter.gameObject.transform.position.y, _hitInfo.collider.gameObject.transform.position.z) - selectedCharacter.gameObject.transform.position);
@@ -512,7 +512,7 @@ public class PlayerControl : MonoBehaviour {
 							selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
 							selectedCharacter.gameObject.tag = "RangedUnit";
 						}
-						if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
+						if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit" || selectedCharacter.gameObject.tag == "SiegeUnit"){
 							source.PlayOneShot(cannonShotEffect,1.0f);
 							selectedCharacter.GetComponent<disablinghp>().Appear = false;
 							selectedCharacter.gameObject.transform.rotation = Quaternion.LookRotation(new Vector3(_hitInfo.collider.gameObject.transform.position.x, selectedCharacter.gameObject.transform.position.y, _hitInfo.collider.gameObject.transform.position.z) - selectedCharacter.gameObject.transform.position);
@@ -642,7 +642,15 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.tag = "SiegeUnit";
 							}
 							_hitInfo.collider.gameObject.tag = "DirtTile";
-							selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
+							if(selectedCharacter.tag == "SelectedFootUnit"){
+								selectedCharacter.gameObject.GetComponent<Footsoldier>().DecreaseCooldown();
+							}
+							if(selectedCharacter.tag == "SelectedRangedUnit"){
+								selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
+							}
+							if(selectedCharacter.tag == "SelectedSiegeUnit"){
+								selectedCharacter.gameObject.GetComponent<Artillery>().DecreaseCooldown();
+							}
 							revertbackEnemies();
 							Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 							highlightingTiles = false;
@@ -767,7 +775,15 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.tag = "SiegeUnit";
 							}
 							_hitInfo.collider.gameObject.tag = "MudTile";
-							selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
+							if(selectedCharacter.tag == "SelectedFootUnit"){
+								selectedCharacter.gameObject.GetComponent<Footsoldier>().DecreaseCooldown();
+							}
+							if(selectedCharacter.tag == "SelectedRangedUnit"){
+								selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
+							}
+							if(selectedCharacter.tag == "SelectedSiegeUnit"){
+								selectedCharacter.gameObject.GetComponent<Artillery>().DecreaseCooldown();
+							}
 							revertbackEnemies();
 							Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 							highlightingTiles = false;
@@ -891,7 +907,15 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.tag = "SiegeUnit";
 							}
 							_hitInfo.collider.gameObject.tag = "StoneTile";
-							selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
+							if(selectedCharacter.tag == "SelectedFootUnit"){
+								selectedCharacter.gameObject.GetComponent<Footsoldier>().DecreaseCooldown();
+							}
+							if(selectedCharacter.tag == "SelectedRangedUnit"){
+								selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
+							}
+							if(selectedCharacter.tag == "SelectedSiegeUnit"){
+								selectedCharacter.gameObject.GetComponent<Artillery>().DecreaseCooldown();
+							}
 							revertbackEnemies();
 
 							Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
@@ -1015,7 +1039,15 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.tag = "SiegeUnit";
 							}
 							_hitInfo.collider.gameObject.tag = "OutpostTile";
-							selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
+							if(selectedCharacter.tag == "SelectedFootUnit"){
+								selectedCharacter.gameObject.GetComponent<Footsoldier>().DecreaseCooldown();
+							}
+							if(selectedCharacter.tag == "SelectedRangedUnit"){
+								selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
+							}
+							if(selectedCharacter.tag == "SelectedSiegeUnit"){
+								selectedCharacter.gameObject.GetComponent<Artillery>().DecreaseCooldown();
+							}
 							revertbackEnemies();
 							
 							Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
@@ -1455,15 +1487,6 @@ public class PlayerControl : MonoBehaviour {
 					objectHit.collider.gameObject.GetComponent<EnemyRanged> ().CheckDeath ();
 				}
 			}
-
-	}
-
-
-	IEnumerator WaitForAnimation(GameObject enemy){
-		enemy.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
-		Debug.Log("Before");
-		yield return new WaitForSeconds (3);
-		Debug.Log ("After");
 
 	}
 }
