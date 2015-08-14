@@ -53,17 +53,10 @@
      <None Include="Assets\AVProWindowsMedia\Shaders\AVProWindowsMedia_YUV_HDYC2RGBA.shader" />
      <None Include="Assets\AVProWindowsMedia\Demos\MaterialMappingDemo\Projector Additive.shader" />
      <None Include="Assets\AVProWindowsMedia\Shaders\AVProWindowsMedia_Copy.shader" />
-     <None Include="Assets\AVProQuickTime\Shaders\AVProQuickTime_Copy.shader" />
-     <None Include="Assets\AVProQuickTime\Shaders\AVProQuickTime_Shared.cginc" />
      <None Include="Assets\AVProWindowsMedia\Shaders\AVProWindowsMedia_YCoCg2RGB.shader" />
      <None Include="Assets\AVProWindowsMedia\Shaders\AVProWindowsMedia_YUV_YUY22RGBA.shader" />
      <None Include="Assets\AVProWindowsMedia\Shaders\AVProWindowsMedia_Shared.cginc" />
-     <None Include="Assets\AVProQuickTime\Demos\MaterialMappingDemo\Projector Additive.shader" />
      <None Include="Assets\AVProWindowsMedia\Shaders\AVProWindowsMedia_YUV_NV12_709.shader" />
-     <None Include="Assets\AVProQuickTime\Shaders\AVProQuickTime_YCoCg2RGB.shader" />
-     <None Include="Assets\AVProQuickTime\Shaders\AVProQuickTime_YUV2RGB.shader" />
-     <None Include="Assets\AVProQuickTime\Shaders\AVProQuickTime_YUV7092RGB.shader" />
-     <None Include="Assets\AVProQuickTime\Shaders\AVProQuickTime_RedBlueSwap.shader" />
      <None Include="Assets\AVProWindowsMedia\Shaders\AVProWindowsMedia_RAW_BGRA2RGBA.shader" />
      <None Include="Assets\AVProWindowsMedia\Shaders\AVProWindowsMedia_YUV_UYVY2RGBA.shader" />
      <None Include="Assets\AVProWindowsMedia\Shaders\AVProWindowsMedia_YUV_YVYU2RGBA .shader" />
