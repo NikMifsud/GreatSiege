@@ -12,19 +12,29 @@ public class HealthPowerUps : MonoBehaviour {
 	public GameMaster gameMaster;
 	public ParticleSystem healingAura;
 	public bool playing;
+	public float timer;
+
+
 	// Use this for initialization
 	void Start () {
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
+		timer = 45;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (timer <= 45) {
+			timer += Time.deltaTime;
+		}
+
 		Ray _ray;
 		RaycastHit _hitInfo;
 
 		// On Left Click
 		if (Input.GetMouseButtonDown (0) && HealthButtonPressed == true) {
+			timer = 0;
 			GameObject[] MudTiles = GameObject.FindGameObjectsWithTag ("MudTile");
 			GameObject[] StoneTiles = GameObject.FindGameObjectsWithTag ("StoneTile");
 			GameObject[] OutpostTiles = GameObject.FindGameObjectsWithTag ("OutpostTile");
@@ -149,9 +159,11 @@ public class HealthPowerUps : MonoBehaviour {
 	}
 
 	public void ButtonClicked () {
-		HealthButtonPressed = true;
-		gameMaster.gameState = 3;
-		playerControl.highlightingTiles = false;
+		if (timer >= 45) {
+			HealthButtonPressed = true;
+			gameMaster.gameState = 3;
+			playerControl.highlightingTiles = false;
+		}
 	}
 
 	

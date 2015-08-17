@@ -17,6 +17,7 @@ public class updatesmiley : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (HappyUnits.HappyUnits);
 		if (HappyUnits.HappyUnits >= 81){
 			happy1.SetActive(false);
 			happy2.SetActive(false);

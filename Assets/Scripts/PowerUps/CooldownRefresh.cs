@@ -6,16 +6,23 @@ public class CooldownRefresh : MonoBehaviour {
 	public bool CooldownButtonPressed;
 	public PlayerControl playerControl;
 	public GameMaster gameMaster;
-	
+	public float timer;
+
 	// Use this for initialization
 	void Start () {
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
+		timer = 45;
 	}
 
 	// Update is called once per frame
 	void Update () {
+		if (timer <= 45) {
+			timer += Time.deltaTime;
+		}
+
 		if (CooldownButtonPressed == true) {
+			timer = 0;
 			GameObject[] footUnits = GameObject.FindGameObjectsWithTag("FootUnit");
 			GameObject[] rangedUnits = GameObject.FindGameObjectsWithTag("RangedUnit");
 			GameObject[] siegeUnits = GameObject.FindGameObjectsWithTag("SiegeUnit");
@@ -55,9 +62,10 @@ public class CooldownRefresh : MonoBehaviour {
 	}
 
 	public void ButtonClicked () {
-		gameMaster.gameState = 3;
-		playerControl.highlightingTiles = false;
-		CooldownButtonPressed = true;
-
+		if (timer >= 45) {
+			gameMaster.gameState = 3;
+			playerControl.highlightingTiles = false;
+			CooldownButtonPressed = true;
+		}
 	}
 }

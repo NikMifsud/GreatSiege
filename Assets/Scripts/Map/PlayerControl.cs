@@ -276,11 +276,9 @@ public class PlayerControl : MonoBehaviour {
 						}
 						
 
-					}else if(_hitInfo.collider.gameObject.tag == "AttackableEnemy" || _hitInfo.collider.gameObject.tag == "AttackableRangedEnemy"){
+					}else if(_hitInfo.collider.gameObject.tag == "AttackableEnemy" || _hitInfo.collider.gameObject.tag == "AttackableRangedEnemy" || _hitInfo.collider.gameObject.tag == "AttackableEnemySiege"){
 						if(_hitInfo.collider.gameObject.tag == "AttackableEnemy" ){
-
 							if(firingGrenades){
-
 								TileBehaviour mainEnemyTile = _hitInfo.collider.gameObject.GetComponent<CharacterMovement>().unitOriginalTile.GetComponent<TileBehaviour>();
 								//do damage
 					//			_hitInfo.collider.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
@@ -474,6 +472,101 @@ public class PlayerControl : MonoBehaviour {
 								_hitInfo.collider.gameObject.GetComponent<EnemyRanged>().CheckDeath();
 							}
 						}
+						if(_hitInfo.collider.gameObject.tag == "AttackableEnemySiege" ){
+							if(firingGrenades){
+								TileBehaviour mainEnemyTile = _hitInfo.collider.gameObject.GetComponent<CharacterMovement>().unitOriginalTile.GetComponent<TileBehaviour>();
+								//do damage
+								//			_hitInfo.collider.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
+								//get his tile and then spread to the ones near him 
+								
+								GameObject[] MudTiles = GameObject.FindGameObjectsWithTag ("MudTile");
+								GameObject[] StoneTiles = GameObject.FindGameObjectsWithTag ("StoneTile");
+								GameObject[] OutpostTiles = GameObject.FindGameObjectsWithTag ("OutpostTile");
+								GameObject[] DirtTiles = GameObject.FindGameObjectsWithTag ("DirtTile");
+								GameObject[] AttackableMudTiles = GameObject.FindGameObjectsWithTag ("AttackableMudTile");
+								GameObject[] AttackableStoneTiles = GameObject.FindGameObjectsWithTag ("AttackableStoneTile");
+								GameObject[] AttackableOutpostTiles = GameObject.FindGameObjectsWithTag ("AttackableOutpostTile");
+								GameObject[] AttackableDirtTiles = GameObject.FindGameObjectsWithTag ("AttackableDirtTile");			
+								
+								foreach (GameObject tile in MudTiles) {
+									Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
+									if (PathFinder.FindPath (mainEnemyTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (2) && tile.gameObject.GetComponent<TileBehaviour>().isEnemy == true) {
+										//do the damage from tile up
+										DoDamageTileUpGrenades(tile.gameObject.GetComponent<TileBehaviour>());
+									}
+								}
+								foreach (GameObject tile in StoneTiles) {
+									Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
+									if (PathFinder.FindPath (mainEnemyTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (2) && tile.gameObject.GetComponent<TileBehaviour>().isEnemy == true) {
+										//do the damage from tile up
+										DoDamageTileUpGrenades(tile.gameObject.GetComponent<TileBehaviour>());
+									}
+								}
+								foreach (GameObject tile in OutpostTiles) {
+									Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
+									if (PathFinder.FindPath (mainEnemyTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (2) && tile.gameObject.GetComponent<TileBehaviour>().isEnemy == true) {
+										//do the damage from tile up
+										DoDamageTileUpGrenades(tile.gameObject.GetComponent<TileBehaviour>());
+									}
+								}
+								foreach (GameObject tile in DirtTiles) {
+									Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
+									if (PathFinder.FindPath (mainEnemyTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (2) && tile.gameObject.GetComponent<TileBehaviour>().isEnemy == true) {
+										//do the damage from tile up
+										DoDamageTileUpGrenades(tile.gameObject.GetComponent<TileBehaviour>());
+									}
+								}
+								
+								foreach (GameObject tile in AttackableMudTiles) {
+									Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
+									if (PathFinder.FindPath (mainEnemyTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (2) && tile.gameObject.GetComponent<TileBehaviour>().isEnemy == true) {
+										//do the damage from tile up
+										DoDamageTileUpGrenades(tile.gameObject.GetComponent<TileBehaviour>());
+									}
+								}
+								foreach (GameObject tile in AttackableStoneTiles) {
+									Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
+									if (PathFinder.FindPath (mainEnemyTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (2) && tile.gameObject.GetComponent<TileBehaviour>().isEnemy == true) {
+										//do the damage from tile up
+										DoDamageTileUpGrenades(tile.gameObject.GetComponent<TileBehaviour>());
+									}
+								}
+								foreach (GameObject tile in AttackableOutpostTiles) {
+									Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
+									if (PathFinder.FindPath (mainEnemyTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (2) && tile.gameObject.GetComponent<TileBehaviour>().isEnemy == true) {
+										//do the damage from tile up
+										DoDamageTileUpGrenades(tile.gameObject.GetComponent<TileBehaviour>());
+									}
+								}
+								foreach (GameObject tile in AttackableDirtTiles) {
+									Vector2 tilePosition = gridManager.calcGridPos (tile.transform.position);
+									if (PathFinder.FindPath (mainEnemyTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile).ToList ().Count <= (2) && tile.gameObject.GetComponent<TileBehaviour>().isEnemy == true) {
+										//do the damage from tile up
+										DoDamageTileUpGrenades(tile.gameObject.GetComponent<TileBehaviour>());
+									}
+								}
+								firingGrenades = false;
+								isGrenades.isGrenades = false;
+								selectedCharacter.GetComponent<disablinghp>().Appear = false;
+								_hitInfo.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+								
+								//revert back
+								_hitInfo.collider.gameObject.tag = "EnemySiege";
+								_hitInfo.collider.gameObject.GetComponent<EnemyCannon>().CheckDeath();
+							}
+							if(!firingGrenades){
+								//do the damage
+								_hitInfo.collider.gameObject.GetComponent<EnemyCannon>().DealtDamage(unitAttack);
+								selectedCharacter.GetComponent<disablinghp>().Appear = false;
+								//StartCoroutine(selectedCharacter.gameObject.GetComponentInChildren<PlayFootAnimation>().WaitForAnimation(_hitInfo.collider.gameObject));
+								_hitInfo.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+								
+								//revert back
+								_hitInfo.collider.gameObject.tag = "EnemySiege";
+								_hitInfo.collider.gameObject.GetComponent<EnemyCannon>().CheckDeath();
+							}
+						}
+
 						RaycastHit objectHit;
 						Vector3 down = Vector3.down;
 						if (Physics.Raycast(_hitInfo.collider.transform.position, down, out objectHit, 50))
@@ -1197,6 +1290,10 @@ public class PlayerControl : MonoBehaviour {
 						objectHit.collider.transform.parent.tag = "AttackableRangedEnemy";
 						objectHit.collider.gameObject.tag = "AttackableRangedEnemy";
 					}
+					if (objectHit.collider.gameObject.tag == "EnemySiege") {
+						objectHit.collider.gameObject.tag = "AttackableEnemySiege";
+					}
+
 				}
 				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
 				mychildtransform.GetComponent<Renderer> ().material = enemyMaterial;
@@ -1225,6 +1322,10 @@ public class PlayerControl : MonoBehaviour {
 						objectHit.collider.transform.parent.tag = "AttackableRangedEnemy";
 						objectHit.collider.gameObject.tag = "AttackableRangedEnemy";
 					}
+					if (objectHit.collider.gameObject.tag == "EnemySiege") {
+						objectHit.collider.gameObject.tag = "AttackableEnemySiege";
+					}
+
 				}
 				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
 				mychildtransform.GetComponent<Renderer> ().material = enemyMaterial;
@@ -1254,6 +1355,10 @@ public class PlayerControl : MonoBehaviour {
 						objectHit.collider.transform.parent.tag = "AttackableRangedEnemy";
 						objectHit.collider.gameObject.tag = "AttackableRangedEnemy";
 					}
+					if (objectHit.collider.gameObject.tag == "EnemySiege") {
+						objectHit.collider.gameObject.tag = "AttackableEnemySiege";
+					}
+
 				}
 				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
 				mychildtransform.GetComponent<Renderer> ().material = enemyMaterial;
@@ -1283,6 +1388,10 @@ public class PlayerControl : MonoBehaviour {
 						objectHit.collider.transform.parent.tag = "AttackableRangedEnemy";
 						objectHit.collider.gameObject.tag = "AttackableRangedEnemy";
 					}
+					if (objectHit.collider.gameObject.tag == "EnemySiege") {
+						objectHit.collider.gameObject.tag = "AttackableEnemySiege";
+					}
+
 				}
 				Transform mychildtransform = tile.transform.FindChild ("Cylinder");
 				mychildtransform.GetComponent<Renderer> ().material = enemyMaterial;
@@ -1293,6 +1402,7 @@ public class PlayerControl : MonoBehaviour {
 	public void revertbackEnemies(){
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag("AttackableEnemy");
 		GameObject[] rangedEnemies = GameObject.FindGameObjectsWithTag("AttackableRangedEnemy");
+		GameObject[] siegeEnemies = GameObject.FindGameObjectsWithTag ("AttackableEnemySiege");
 		if(enemies !=null){
 			foreach(GameObject enemy in enemies){
 				enemy.tag = "Enemy";
@@ -1303,6 +1413,13 @@ public class PlayerControl : MonoBehaviour {
 				enemy.tag = "RangedEnemy";
 			}
 		}
+
+		if (siegeEnemies != null) {
+			foreach(GameObject enemy in siegeEnemies){
+				enemy.tag = "EnemySiege";
+			}
+		}
+
 		GameObject[] mudTiles = GameObject.FindGameObjectsWithTag("AttackableMudTile");
 		if(mudTiles !=null){
 			foreach(GameObject tile in mudTiles){
@@ -1434,6 +1551,13 @@ public class PlayerControl : MonoBehaviour {
 					objectHit.collider.gameObject.GetComponent<EnemyRanged> ().CheckDeath ();
 				}
 
+				if (objectHit.collider.gameObject.tag == "AttackableEnemySiege") {
+					objectHit.collider.gameObject.GetComponent<disablinghp> ().JustHit = true;
+					objectHit.collider.gameObject.GetComponent<EnemyCannon> ().DealtDamage (unitAttack);
+					objectHit.collider.gameObject.tag = "EnemySiege";
+					objectHit.collider.gameObject.GetComponent<EnemyCannon> ().CheckDeath ();
+				}
+
 				if (objectHit.collider.gameObject.tag == "Enemy") {
 					objectHit.collider.gameObject.GetComponent<disablinghp> ().JustHit = true;
 					objectHit.collider.gameObject.GetComponent<Enemy> ().DealtDamage (unitAttack);
@@ -1446,6 +1570,11 @@ public class PlayerControl : MonoBehaviour {
 					objectHit.collider.gameObject.GetComponent<EnemyRanged> ().CheckDeath ();
 				}
 
+				if (objectHit.collider.gameObject.tag == "EnemySiege") {
+					objectHit.collider.gameObject.GetComponent<disablinghp> ().JustHit = true;
+					objectHit.collider.gameObject.GetComponent<EnemyCannon> ().DealtDamage (unitAttack);
+					objectHit.collider.gameObject.GetComponent<EnemyCannon> ().CheckDeath ();
+				}
 			}
 
 	}

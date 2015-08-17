@@ -7,9 +7,12 @@ public class IncreasedAttack : MonoBehaviour {
 	float attackTimer=0;
 	public PlayerControl playerControl;
 	public GameMaster gameMaster;
-	
+	public float timer;
+
+
 	// Use this for initialization
 	void Start () {
+		timer = 90;
 		attackTimer = 0;
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
@@ -20,9 +23,11 @@ public class IncreasedAttack : MonoBehaviour {
 		if (attackTimer >= 1) {
 			attackTimer += Time.deltaTime;
 		}
-		
-		Debug.Log (attackTimer);
-		
+
+		if (timer <= 90) {
+			timer += Time.deltaTime;
+		}
+
 		if (attackTimer >= 45) {
 			attackTimer = 0;
 			
@@ -57,6 +62,7 @@ public class IncreasedAttack : MonoBehaviour {
 		}
 		
 		if (CooldownButtonPressed == true) {
+			timer = 0;
 			attackTimer = 1;
 			GameObject[] footUnits = GameObject.FindGameObjectsWithTag("FootUnit");
 			GameObject[] rangedUnits = GameObject.FindGameObjectsWithTag("RangedUnit");
@@ -92,8 +98,10 @@ public class IncreasedAttack : MonoBehaviour {
 	}
 	
 	public void ButtonClicked () {
-		gameMaster.gameState = 3;
-		playerControl.highlightingTiles = false;
-		CooldownButtonPressed = true;
+		if (timer >=90) {
+			gameMaster.gameState = 3;
+			playerControl.highlightingTiles = false;
+			CooldownButtonPressed = true;
+		}
 	}
 }

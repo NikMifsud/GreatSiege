@@ -62,7 +62,7 @@ public class EnemySpawner : MonoBehaviour
 			Vector3 position = new Vector3(0,0,0);
 			// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
 
-			GameObject enemy = enemies[Random.Range(0,2)];
+			GameObject enemy = enemies[Random.Range(0,3)];
 			Transform myUnitTransform = null;
 			if(enemy.gameObject.tag == "RangedEnemy"){
 				myUnitTransform = enemy.transform.FindChild ("EnemyRanged");
@@ -79,10 +79,20 @@ public class EnemySpawner : MonoBehaviour
 					position = new Vector3 (spawnTile.transform.position.x, 0.12f, spawnTile.transform.position.z);
 				}
 			}
-
+			if(enemy.gameObject.tag == "EnemySiege"){
+				position = new Vector3 (spawnTile.transform.position.x, 0.11f, spawnTile.transform.position.z);
+				if(spawnTile.gameObject.tag == "StoneTile"){
+					position = new Vector3 (spawnTile.transform.position.x, 0.12f, spawnTile.transform.position.z);
+				}
+			}
 			spawnTile.gameObject.GetComponent<TileBehaviour> ().isEnemy = true;
 			spawnTile.gameObject.GetComponent<TileBehaviour> ().isPassable = false;
-			myUnitTransform.GetComponent<CharacterMovement> ().unitOriginalTile = spawnTile.gameObject.GetComponent<TileBehaviour> ();
+			if(enemy.tag == "RangedEnemy" || enemy.tag == "Enemy"){
+				myUnitTransform.GetComponent<CharacterMovement> ().unitOriginalTile = spawnTile.gameObject.GetComponent<TileBehaviour> ();
+			}
+			if(enemy.tag == "EnemySiege"){
+				enemy.gameObject.GetComponent<CharacterMovement>().unitOriginalTile = spawnTile.gameObject.GetComponent<TileBehaviour> ();
+			}
 			Instantiate (enemy, position, Quaternion.identity);
 			enemyCount += 1;
 			SpawnDone ();

@@ -7,15 +7,24 @@ public class FlameThrower : MonoBehaviour {
 	public PlayerControl playerControl;
 	public GameMaster gameMaster;
 
+	public float timer;
+
 	// Use this for initialization
 	void Start () {
+		timer = 45;
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (timer <= 45) {
+			timer += Time.deltaTime;
+		}
+
 		if (buttonPressed && Input.GetMouseButtonDown (0)) {
+			timer = 0;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit = new RaycastHit ();
 			if (Physics.Raycast (ray, out hit)) {
@@ -36,9 +45,11 @@ public class FlameThrower : MonoBehaviour {
 	}
 	
 	public void ButtonPressed(){
-		gameMaster.gameState = 3;
-		playerControl.highlightingTiles = false;
-		buttonPressed = true;
+		if (timer >= 45) {
+			gameMaster.gameState = 3;
+			playerControl.highlightingTiles = false;
+			buttonPressed = true;
+		}
 	}
 	
 }

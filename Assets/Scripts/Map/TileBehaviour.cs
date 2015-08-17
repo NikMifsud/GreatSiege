@@ -226,9 +226,14 @@ public class TileBehaviour: MonoBehaviour
 
 	void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject.tag == "Wall")
-		{
-			Destroy(this.gameObject);
+		if (this.tag != "FortTile") {
+			if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Fort") {
+				Destroy (this.gameObject);
+			}
 		}
+
+	//	if (collision.gameObject.tag == "Fort") {
+	//		this.gameObject.transform.position += new Vector3(0,0.4f,0);
+	//	}
 	}
 }
