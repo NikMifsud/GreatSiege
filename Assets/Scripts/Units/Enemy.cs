@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour {
 	public int Armor;
 	public int Movement;
 	public int AttackRange;
+	public List<Point> attackableFort;
 	public int Attack;
 	public int DamageTaken;
 	public GridManager gridManager;
@@ -46,6 +47,15 @@ public class Enemy : MonoBehaviour {
 		outpostTileClose = false;
 		source = Camera.main.GetComponent<AudioSource> ();
 		statistics = Camera.main.GetComponent<Statistics> ();
+		//list the attackable tiles
+		attackableFort = new List<Point>();
+		attackableFort.Add (new Point(-6,13));
+		attackableFort.Add (new Point(-5,14));
+		attackableFort.Add (new Point(-4,15));
+		attackableFort.Add (new Point(-3,16));
+		attackableFort.Add (new Point(-1,15));
+		attackableFort.Add (new Point(1,14));
+		attackableFort.Add (new Point(3,13));
 	}
 
 	public void DecreaseCooldown(){
@@ -180,6 +190,14 @@ public class Enemy : MonoBehaviour {
 			}
 		}
 
+		if(attackableFort.Contains(this.GetComponent<CharacterMovement>().unitOriginalTile.GetComponent<TileBehaviour>().tile.Location)){
+			source.PlayOneShot(footHitEffect,1.0f);
+			GameObject.FindGameObjectWithTag("Fort").GetComponent<disablinghp>().JustHit = true;
+			GameObject.FindGameObjectWithTag("Fort").GetComponent<StElmo> ().DealtDamage (Attack);
+			enemyHit = true;
+			DecreaseCooldown ();
+		}
+		
 		if (enemyCounter > allyCounter) {
 			MoveBackwards ();
 		}
@@ -350,6 +368,9 @@ public class Enemy : MonoBehaviour {
 			}
 			//move 
 			this.transform.position = movement;
+
+			Debug.Log(this.GetComponent<CharacterMovement>().unitOriginalTile.GetComponent<TileBehaviour>().tile.X);
+			Debug.Log(this.GetComponent<CharacterMovement>().unitOriginalTile.GetComponent<TileBehaviour>().tile.Y);
 		}
 			DecreaseCooldown ();
 			Camera.main.GetComponent<PlayerControl> ().highlightingTiles = false;

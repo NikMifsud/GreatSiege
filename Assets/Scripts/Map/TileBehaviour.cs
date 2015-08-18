@@ -7,6 +7,8 @@ using System;
 public class TileBehaviour: MonoBehaviour
 {
 	public Tile tile;
+	public int pointX;
+	public int pointY;
 	public Material mudTexture;
 	public Material mudTextureHighlighted;
 	public Material dirtTexture;
@@ -30,14 +32,17 @@ public class TileBehaviour: MonoBehaviour
 	public TileBehaviour previousTile;
 	
 	void Start(){
+
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
 		healthPowerUps = GameObject.Find("Medic").GetComponent<HealthPowerUps>();
 		this.isPassable = true;
 		this.isEnemy = false;
 		this.powerUp = false;
+		pointX = this.tile.X;
+		pointY = this.tile.Y;
 	}
-
+	
 	void Update(){
 		if (this.isEnemy == false && this.isPassable == false) {
 			Transform mychildtransform = this.transform.FindChild("Cylinder");
@@ -61,9 +66,15 @@ public class TileBehaviour: MonoBehaviour
 				Transform mychildtransform = this.transform.FindChild("Cylinder");
 				mychildtransform.GetComponent<Renderer> ().material = dirtTexture;
 			}
-		}
-	}
+			if(this.tag == "FortTile"){
+				Transform mychildtransform = this.transform.FindChild("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = stoneTexture;
+			}
 
+		}
+
+	}
+	
 	void OnMouseEnter()
 	{
 //		GridManager.instance.selectedTile = tile;
@@ -174,22 +185,22 @@ public class TileBehaviour: MonoBehaviour
 		GridManager.instance.selectedTile = null;
 	}
 	//called every frame when mouse cursor is on this tile
-	void OnMouseDown()
-	{
+	//void OnMouseDown()
+	//{
 
-			tile.Passable = true;
-
-			TileBehaviour originTileTB = GridManager.instance.originTileTB;
-			//if user clicks on origin tile or origin tile is not assigned yet
-
-			if (this == originTileTB || originTileTB == null)
-				originTileChanged ();
-			else
-				destTileChanged ();
-		
+//			tile.Passable = true;
+	//
+	//		TileBehaviour originTileTB = GridManager.instance.originTileTB;
+	//		//if user clicks on origin tile or origin tile is not assigned yet
+	//
+	//		if (this == originTileTB || originTileTB == null)
+	//			originTileChanged ();
+	//		else
+	//			destTileChanged ();
+	//	
 		//	GridManager.instance.generateAndShowPath ();
 
-	}
+	//}
 
 	void originTileChanged()
 	{

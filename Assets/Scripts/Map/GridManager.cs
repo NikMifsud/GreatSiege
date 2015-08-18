@@ -194,12 +194,14 @@ public class GridManager: MonoBehaviour
 				Board.Add(tb.tile.Location, tb);
 			}
 		}
+
 		//variable to indicate if all rows have the same number of hexes in them
 		//this is checked by comparing width of the first hex row plus half of the hexWidth with groundWidth
 		bool equalLineLengths = (gridSize.x + 0.5) * tileWidth <= groundWidth;
 		//Neighboring tile coordinates of all the tiles are calculated
-		foreach(TileBehaviour tb in Board.Values)
-			tb.tile.FindNeighbours(Board, gridSize, equalLineLengths);
+		foreach (TileBehaviour tb in Board.Values) {
+			tb.tile.FindNeighbours (Board, gridSize, equalLineLengths);
+		}
 	}
 
 	//Distance between destination tile and some other tile in the grid
@@ -261,5 +263,14 @@ public class GridManager: MonoBehaviour
 	{
 		setSizes(); 
 		createGrid();
+
+		//so that u can click through the fort 
+		Destroy (GameObject.FindGameObjectWithTag("Fort").gameObject.GetComponent<Rigidbody>());
+		Destroy (GameObject.FindGameObjectWithTag("Fort").gameObject.GetComponent<Collider>());
+		Destroy (GameObject.Find("pCube1").gameObject.GetComponent<Rigidbody>());
+		Destroy (GameObject.Find("pCube1").gameObject.GetComponent<Collider>());
+		Destroy (GameObject.Find("pCube3").gameObject.GetComponent<Collider>());
+
+
 	}
 }

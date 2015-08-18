@@ -18,6 +18,7 @@ public class EnemyRanged : MonoBehaviour {
 	public bool isSelected;
 	public float Movementtime;
 	public bool canMove;
+	public List<Point> attackableFort;
 	public ArrayList availableMoves;
 	public ArrayList enemies;
 	Collider[] colliders;
@@ -46,6 +47,23 @@ public class EnemyRanged : MonoBehaviour {
 		enemyHit = false;
 		source = Camera.main.GetComponent<AudioSource>();
 		statistics = Camera.main.GetComponent<Statistics> ();
+
+		//list the attackable tiles
+		attackableFort = new List<Point>();
+		attackableFort.Add (new Point(-6,12));
+		attackableFort.Add (new Point(-5,12));
+		attackableFort.Add (new Point(-4,12));
+		attackableFort.Add (new Point(-4,13));
+		attackableFort.Add (new Point(-3,13));
+		attackableFort.Add (new Point(-3,14));
+		attackableFort.Add (new Point(-2,14));
+		attackableFort.Add (new Point(-1,14));
+		attackableFort.Add (new Point(0,13));
+		attackableFort.Add (new Point(1,13));
+		attackableFort.Add (new Point(2,12));
+		attackableFort.Add (new Point(3,12));
+		attackableFort.Add (new Point(4,11));
+		attackableFort.Add (new Point(5,11));
 	}
 
 	public void DecreaseCooldown(){
@@ -180,6 +198,16 @@ public class EnemyRanged : MonoBehaviour {
 				allyCounter++;
 			}
 		}
+
+		if(attackableFort.Contains(this.GetComponent<CharacterMovement>().unitOriginalTile.GetComponent<TileBehaviour>().tile.Location)){
+			source.PlayOneShot(rangedHitEffect,1.0f);
+			GameObject.FindGameObjectWithTag("Fort").GetComponent<disablinghp>().JustHit = true;
+			GameObject.FindGameObjectWithTag("Fort").GetComponent<StElmo> ().DealtDamage (Attack);
+			enemyHit = true;
+			DecreaseCooldown ();
+		}
+
+
 		if (enemyCounter > allyCounter) {
 			MoveBackwards ();
 		}

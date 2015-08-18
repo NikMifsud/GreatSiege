@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+//using System;
+
 
 public class Artillery : MonoBehaviour {
 	public float curr_Health;
@@ -7,22 +11,28 @@ public class Artillery : MonoBehaviour {
 	public int Armor;
 	public int Movement;
 	public int AttackRange;
+	public AudioClip cannonShotEffect;
 	public int Attack;
 	public int DamageTaken;
+	private AudioSource source;
 	public float Movementtime;
 	public bool canMove;
 	public GameObject healthBar;
 	public bool isSelected;
 	public bool isMud;
+	Collider[] colliders;
 	public economy economy;
+	public bool enemyHit;
 	
 	// Use this for initialization
 	void Start () {
+		enemyHit = false;
 		max_Health = 250;
 		curr_Health = 250;
 		Armor = 20;
 		Movement = 1;
 		Attack = 80;
+		source = Camera.main.GetComponent<AudioSource> ();
 		isSelected = false;
 		isMud = false;
 		canMove = true;
@@ -48,6 +58,7 @@ public class Artillery : MonoBehaviour {
 
 		if (Movementtime <= 0) {
 			canMove = true;
+			enemyHit = false;
 			Movementtime = 30;
 		}
 		if (canMove == false) {
@@ -65,6 +76,68 @@ public class Artillery : MonoBehaviour {
 		}
 		float calc_Health = curr_Health / max_Health;
 		SetHealthBar (calc_Health);
+
+		if (canMove) {
+			colliders = Physics.OverlapSphere (this.transform.position, 4f);
+			int randomIndex = UnityEngine.Random.Range (0, colliders.Count());
+			colliders.ToArray();
+		//	int i = Random.Range(0,(colliders.Count));
+				//random selection of enemy 
+				GameObject enemy = colliders[randomIndex].gameObject;
+				if ((enemy.gameObject.tag == "Enemy" || enemy.gameObject.tag == "AttackableEnemy") && enemyHit == false) {
+					source.PlayOneShot (cannonShotEffect, 1.0f);
+					enemy.GetComponent<disablinghp> ().JustHit = true;
+					enemy.GetComponent<Enemy> ().DealtDamage (Attack);
+					enemy.GetComponent<Enemy> ().CheckDeath ();
+					enemyHit = true;
+					DecreaseCooldown ();
+				}
+				if ((enemy.gameObject.tag == "RangedEnemy" || enemy.gameObject.tag == "AttackableRangedEnemy") && enemyHit == false) {
+					source.PlayOneShot (cannonShotEffect, 1.0f);
+					enemy.GetComponent<disablinghp> ().JustHit = true;
+					enemy.GetComponent<EnemyRanged> ().DealtDamage (Attack);
+					enemy.GetComponent<EnemyRanged> ().CheckDeath ();
+					enemyHit = true;
+					DecreaseCooldown ();
+				}
+				if ((enemy.gameObject.tag == "EnemySiege" || enemy.gameObject.tag == "AttackableEnemySiege") && enemyHit == false) {
+					source.PlayOneShot (cannonShotEffect, 1.0f);
+					enemy.GetComponent<disablinghp> ().JustHit = true;
+					enemy.GetComponent<EnemyCannon> ().DealtDamage (Attack);
+					enemy.GetComponent<EnemyCannon> ().CheckDeath ();
+					enemyHit = true;
+					DecreaseCooldown ();
+				}
+
+		/*	foreach (Collider colliderObject in colliders) {
+				if ((colliderObject.gameObject.tag == "Enemy" || colliderObject.gameObject.tag == "AttackableEnemy") && enemyHit == false) {
+					source.PlayOneShot (cannonShotEffect, 1.0f);
+					colliderObject.GetComponent<disablinghp> ().JustHit = true;
+					colliderObject.GetComponent<Enemy> ().DealtDamage (Attack);
+					colliderObject.GetComponent<Enemy> ().CheckDeath ();
+					enemyHit = true;
+					DecreaseCooldown ();
+				}
+				if ((colliderObject.gameObject.tag == "RangedEnemy" || colliderObject.gameObject.tag == "AttackableRangedEnemy") && enemyHit == false) {
+					source.PlayOneShot (cannonShotEffect, 1.0f);
+					colliderObject.GetComponent<disablinghp> ().JustHit = true;
+					colliderObject.GetComponent<EnemyRanged> ().DealtDamage (Attack);
+					colliderObject.GetComponent<EnemyRanged> ().CheckDeath ();
+					enemyHit = true;
+					DecreaseCooldown ();
+				}
+				if ((colliderObject.gameObject.tag == "EnemySiege" || colliderObject.gameObject.tag == "AttackableEnemySiege") && enemyHit == false) {
+					source.PlayOneShot (cannonShotEffect, 1.0f);
+					colliderObject.GetComponent<disablinghp> ().JustHit = true;
+					colliderObject.GetComponent<EnemyCannon> ().DealtDamage (Attack);
+					colliderObject.GetComponent<EnemyCannon> ().CheckDeath ();
+					enemyHit = true;
+					DecreaseCooldown ();
+				}
+			}
+			*/
+		}
+
 	}
 	
 	public void DealtDamage (int DamageTaken){
@@ -133,5 +206,10 @@ public class Artillery : MonoBehaviour {
 			}
 		}
 	}
+
+		private void OnDrawGizmos() {
+			Gizmos.color = Color.red;
+			Gizmos.DrawWireSphere (this.transform.position, 4f);
+		}
 
 }

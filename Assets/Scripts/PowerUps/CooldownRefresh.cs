@@ -51,6 +51,7 @@ public class CooldownRefresh : MonoBehaviour {
 					if(unit.name == "Cannonpivotpoint(Clone)"){
 						Transform myUnitTransform = unit.transform.FindChild ("cannon");
 						myUnitTransform.gameObject.GetComponent<Artillery>().Movementtime = 30f;
+						myUnitTransform.gameObject.GetComponent<Artillery>().enemyHit = false;
 						myUnitTransform.gameObject.GetComponent<Artillery>().canMove = true;
 					}
 				}

@@ -183,17 +183,19 @@ public class EnemyCannon : MonoBehaviour {
 			}
 		}
 			enemies.ToArray ();
-			if (enemies.Count <= 0 && isOnStone == false && movedForward <= 3) {
-				MoveForward ();
-			} else {
+		if (enemies.Count <= 0 && isOnStone == false && movedForward <= 3) {
+			MoveForward ();
+		} else {
+			int bias = UnityEngine.Random.Range (0, 101);
+			if (bias > 25) {
 				foreach (GameObject enemy in enemies) {
 					//if enemy is close then attack him, if not then just move forward
 					if (enemyHit == false && (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit")) {
 						if (enemy.GetComponent<Artillery> ().curr_Health <= curr_Health) {
 							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 								if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
-									source.PlayOneShot(rangedHitEffect,1.0f);
-									enemy.GetComponent<disablinghp>().JustHit = true;
+									source.PlayOneShot (rangedHitEffect, 1.0f);
+									enemy.GetComponent<disablinghp> ().JustHit = true;
 									enemy.GetComponent<Artillery> ().DealtDamage (Attack);
 									enemy.GetComponent<Artillery> ().CheckDeath ();
 									enemyHit = true;
@@ -206,8 +208,8 @@ public class EnemyCannon : MonoBehaviour {
 						if (enemy.GetComponent<Rangedsoldier> ().curr_Health <= curr_Health) {
 							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 								if (enemy.tag == "RangedUnit" || enemy.tag == "SelectedRangedUnit") {
-									source.PlayOneShot(rangedHitEffect,1.0f);
-									enemy.GetComponent<disablinghp>().JustHit = true;
+									source.PlayOneShot (rangedHitEffect, 1.0f);
+									enemy.GetComponent<disablinghp> ().JustHit = true;
 									enemy.GetComponent<Rangedsoldier> ().DealtDamage (Attack);
 									enemy.GetComponent<Rangedsoldier> ().CheckDeath ();
 									enemyHit = true;
@@ -221,8 +223,8 @@ public class EnemyCannon : MonoBehaviour {
 						if (enemy.GetComponent<Footsoldier> ().curr_Health <= curr_Health) {
 							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 								if (enemy.tag == "FootUnit" || enemy.tag == "SelectedFootUnit") {
-									source.PlayOneShot(rangedHitEffect,1.0f);
-									enemy.GetComponent<disablinghp>().JustHit = true;
+									source.PlayOneShot (rangedHitEffect, 1.0f);
+									enemy.GetComponent<disablinghp> ().JustHit = true;
 									enemy.GetComponent<Footsoldier> ().DealtDamage (Attack);
 									enemy.GetComponent<Footsoldier> ().CheckDeath ();
 									enemyHit = true;
@@ -234,6 +236,14 @@ public class EnemyCannon : MonoBehaviour {
 					}
 				}
 			}
+			if(bias <= 25){
+				source.PlayOneShot(rangedHitEffect,1.0f);
+				GameObject.FindGameObjectWithTag("Fort").GetComponent<disablinghp>().JustHit = true;
+				GameObject.FindGameObjectWithTag("Fort").GetComponent<StElmo> ().DealtDamage (Attack);
+				enemyHit = true;
+				DecreaseCooldown ();
+			}
+		}
 	}
 	
 	void MoveForward(){
