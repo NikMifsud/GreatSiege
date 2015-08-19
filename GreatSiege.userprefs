@@ -1,8 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menus\MuteSoundNdPlayButtons.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\FadeTextEncyclo.js">
     <Files>
-      <File FileName="Assets\Scripts\Menus\MuteSoundNdPlayButtons.js" Line="30" Column="19" />
+      <File FileName="Assets\Scripts\FadeTextEncyclo.js" Line="30" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
