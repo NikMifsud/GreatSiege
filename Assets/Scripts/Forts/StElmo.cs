@@ -12,7 +12,9 @@ public class StElmo : MonoBehaviour {
 	public GameMaster gameMaster;
 	public GameObject pauseCover;
 	public int DamageTaken;
-
+	public ParticleEmitter fire;
+	public ParticleEmitter fire2;
+	public ParticleEmitter smoke;
 	public GameObject healthBar;
 
 	
@@ -21,6 +23,9 @@ public class StElmo : MonoBehaviour {
 		max_Health = 1000;
 		curr_Health = 1000;
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
+		fire = GameObject.Find("OuterCore").GetComponent<ParticleEmitter>();
+		fire2 = GameObject.Find("InnerCore").GetComponent<ParticleEmitter>();
+		smoke = GameObject.Find("smoke").GetComponent<ParticleEmitter>();
 	}
 
 	
@@ -32,8 +37,14 @@ public class StElmo : MonoBehaviour {
 		}
 
 		if (curr_Health <= 0) {
-			Destroy (this.gameObject);
-			Time.timeScale = 0;
+		//	Destroy (this.gameObject);
+			fire.minEmission = 40;
+			fire.maxEmission = 40;
+			smoke.minEmission = 40;
+			smoke.maxEmission = 40;
+			fire2.minEmission = 30;
+			fire2.maxEmission = 30;
+		//	Time.timeScale = 0;
 			pauseCover.SetActive(false);
 			gameMaster.gameState = 4;
 			text.SetActive(true);

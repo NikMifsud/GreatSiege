@@ -170,16 +170,16 @@ public class FireWheel : MonoBehaviour {
 				isMud = false;
 				isOnOutpost = false;
 			}else if(destinationTile.tag == "OutpostTile"){
-				movement.y = 0.11f;
+				movement.y = 0.14f;
 				isMud = false;
 				isOnOutpost = true;
 			}else if(destinationTile.tag == "MudTile"){
-				movement.y = 0.11f;
+				movement.y = 0.14f;
 				isMud = true;
 				isOnOutpost = false;
 			}
 			else{
-				movement.y = 0.11f;
+				movement.y = 0.14f;
 				isMud = false;
 				isOnOutpost = false;
 			}

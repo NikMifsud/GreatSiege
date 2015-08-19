@@ -6,6 +6,7 @@ public class FlameThrower : MonoBehaviour {
 	public bool buttonPressed;
 	public PlayerControl playerControl;
 	public GameMaster gameMaster;
+	public ParticleSystem fire;
 
 	public float timer;
 
@@ -35,6 +36,12 @@ public class FlameThrower : MonoBehaviour {
 				if(hit.collider.tag == "FootUnit" && hit.collider.gameObject.GetComponent<Footsoldier>().canMove == true){
 					gameMaster.gameState = 0;
 					hit.collider.gameObject.GetComponent<FlameCone>().isFlame = true;
+				//	fire.transform.position = hit.collider.gameObject.transform.position;
+			//		fire.emissionRate = 100f;
+			//		fire.gameObject.transform.FindChild("Smoke").gameObject.GetComponent<ParticleSystem>().emissionRate = 1f;
+			//		fire.gameObject.transform.FindChild("Sparkles").gameObject.GetComponent<ParticleSystem>().emissionRate = 0f;
+			//		fire.Simulate(0f);
+			//		StartCoroutine(WaitForFlame ());
 					buttonPressed = false;
 				}
 
@@ -50,6 +57,13 @@ public class FlameThrower : MonoBehaviour {
 			playerControl.highlightingTiles = false;
 			buttonPressed = true;
 		}
+	}
+
+	IEnumerator WaitForFlame(){
+		yield return new WaitForSeconds (3);
+		fire.emissionRate = 0f;
+		fire.gameObject.transform.FindChild("Smoke").gameObject.GetComponent<ParticleSystem>().emissionRate = 0f;
+		fire.gameObject.transform.FindChild("Sparkles").gameObject.GetComponent<ParticleSystem>().emissionRate = 0f;
 	}
 	
 }

@@ -43,7 +43,8 @@ public class SpawnFireWheel : MonoBehaviour {
 						cubeTemp.y = 0.1f;
 					}
 					Soldier.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
-					Instantiate (Soldier, cubeTemp, Quaternion.identity);
+					Quaternion rotation = new Quaternion(90f,-90f,0f,0f);
+					Instantiate (Soldier, cubeTemp, rotation);
 					hit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = false;
 					SpawnSoldier = false;
 					RemoveSpawnArea();

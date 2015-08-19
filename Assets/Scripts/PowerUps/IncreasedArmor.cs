@@ -8,6 +8,7 @@ public class IncreasedArmor : MonoBehaviour {
 	public PlayerControl playerControl;
 	public GameMaster gameMaster;
 	public float timer;
+	public Animator anim;
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +31,7 @@ public class IncreasedArmor : MonoBehaviour {
 
 		if (armorTimer >= 45) {
 			armorTimer = 0;
-
+			anim.SetBool("isShield",false);
 			GameObject[] footUnits = GameObject.FindGameObjectsWithTag("FootUnit");
 			GameObject[] rangedUnits = GameObject.FindGameObjectsWithTag("RangedUnit");
 			GameObject[] siegeUnits = GameObject.FindGameObjectsWithTag("SiegeUnit");
@@ -103,6 +104,7 @@ public class IncreasedArmor : MonoBehaviour {
 			gameMaster.gameState = 3;
 			playerControl.highlightingTiles = false;
 			CooldownButtonPressed = true;
+			anim.SetBool ("isShield",true);
 		}
 	}
 }

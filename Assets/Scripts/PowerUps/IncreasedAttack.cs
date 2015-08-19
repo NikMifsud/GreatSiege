@@ -8,7 +8,7 @@ public class IncreasedAttack : MonoBehaviour {
 	public PlayerControl playerControl;
 	public GameMaster gameMaster;
 	public float timer;
-
+	public Animator anim;
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +29,7 @@ public class IncreasedAttack : MonoBehaviour {
 		}
 
 		if (attackTimer >= 45) {
+			anim.SetBool("isSword",false);
 			attackTimer = 0;
 			
 			GameObject[] footUnits = GameObject.FindGameObjectsWithTag("FootUnit");
@@ -102,6 +103,7 @@ public class IncreasedAttack : MonoBehaviour {
 			gameMaster.gameState = 3;
 			playerControl.highlightingTiles = false;
 			CooldownButtonPressed = true;
+			anim.SetBool("isSword",true);
 		}
 	}
 }
