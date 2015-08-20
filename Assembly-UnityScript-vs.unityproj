@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\Menus\MuteSoundNdPlayButtons.js" />
      <Compile Include="Assets\Scripts\Menus\PlayCutscenes.js" />
      <Compile Include="Assets\Scripts\Menus\PlayMenuNav.js" />
+     <Compile Include="Assets\Scripts\loadAfterVideoEnd.js" />
      <None Include="Assets\AVProWindowsMedia\Shaders\AVProWindowsMedia_YUV_HDYC2RGBA.shader" />
      <None Include="Assets\AVProWindowsMedia\Demos\MaterialMappingDemo\Projector Additive.shader" />
      <None Include="Assets\AVProWindowsMedia\Shaders\AVProWindowsMedia_Copy.shader" />
