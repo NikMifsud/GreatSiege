@@ -73,6 +73,7 @@
      <Compile Include="Assets\Scripts\Map\TileBehaviour.cs" />
      <Compile Include="Assets\Scripts\Map\economy.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
+     <Compile Include="Assets\Scripts\TextMapCharUI.cs" />
      <Compile Include="Assets\Scripts\Units\Artillery.cs" />
      <Compile Include="Assets\Scripts\Units\CharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Units\Enemy.cs" />
