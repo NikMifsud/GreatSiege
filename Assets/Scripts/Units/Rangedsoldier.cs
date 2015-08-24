@@ -14,12 +14,16 @@ public class Rangedsoldier : MonoBehaviour {
 	public GameObject healthBar;
 	public bool isSelected;
 	public economy economy;
+	public bool attack;
 	public bool isMud;
+	public bool isDead;
 	// Use this for initialization
 	void Start () {
 		max_Health = 100;
 		curr_Health = 100;
 		Armor = 0;
+		isDead = false;
+		attack = false;
 		Movement = 2;
 		//AttackRange = 4;
 		Attack = 30;
@@ -47,13 +51,14 @@ public class Rangedsoldier : MonoBehaviour {
 
 		if (Movementtime <= 0) {
 			canMove = true;
+			attack = false;
 			Movementtime = 15;
 		}
 		if (canMove == false) {
 			Movementtime -= Time.deltaTime;
 		}
 		if (curr_Health <= 0) {
-			Destroy (this.gameObject);
+			isDead = true;
 		}
 		if (DamageTaken >= 1) {
 			curr_Health = curr_Health - DamageTaken;

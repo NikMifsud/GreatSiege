@@ -270,7 +270,5 @@ public class GridManager: MonoBehaviour
 		Destroy (GameObject.Find("pCube1").gameObject.GetComponent<Rigidbody>());
 		Destroy (GameObject.Find("pCube1").gameObject.GetComponent<Collider>());
 		Destroy (GameObject.Find("pCube3").gameObject.GetComponent<Collider>());
-
-
 	}
 }

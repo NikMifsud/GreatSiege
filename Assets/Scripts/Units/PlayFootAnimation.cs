@@ -7,6 +7,7 @@ public class PlayFootAnimation : MonoBehaviour {
 	public Animation attackAnim;
 	public Footsoldier attack;
 	public bool attacked = false;
+	public bool dead = false;
 	// Use this for initialization
 	void Start () {
 	}
@@ -20,21 +21,34 @@ public class PlayFootAnimation : MonoBehaviour {
 		if (attack.attack == false) {
 			anim.SetBool ("isAttack", false);
 		}
+		if (attack.isDead == true) {
+			anim.SetBool("isDead",true);
+			dead = true;
+			StartCoroutine(WaitForDeathAnimation());
+		}
 	}
 
 
 	public IEnumerator WaitForAnimation(GameObject enemy){
 		while (true) {
 			if (attacked){
-				Debug.Log ("Waiting");
 				yield return new WaitForSeconds (2f);
-				Debug.Log ("Playing");
 				if(enemy.tag == "Enemy"){
-					enemy.gameObject.GetComponent<Enemy> ().DealtDamage (50);
+					enemy.gameObject.GetComponent<Enemy> ().DealtDamage (attack.Attack);
 				}
 				if(enemy.tag == "RangedEnemy"){
-					enemy.gameObject.GetComponent<EnemyRanged> ().DealtDamage (50);
+					enemy.gameObject.GetComponent<EnemyRanged> ().DealtDamage (attack.Attack);
 				}
+			}
+			yield return null;
+		}
+	}
+
+	public IEnumerator WaitForDeathAnimation(){
+		while (true) {
+			if (dead){
+				yield return new WaitForSeconds (5f);
+				Destroy(attack.gameObject);
 			}
 			yield return null;
 		}

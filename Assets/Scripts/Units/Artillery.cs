@@ -85,6 +85,7 @@ public class Artillery : MonoBehaviour {
 				//random selection of enemy 
 				GameObject enemy = colliders[randomIndex].gameObject;
 				if ((enemy.gameObject.tag == "Enemy" || enemy.gameObject.tag == "AttackableEnemy") && enemyHit == false) {
+				gameObject.transform.GetComponentInParent<ThrowSimulation>().Target = enemy.gameObject.transform;
 					source.PlayOneShot (cannonShotEffect, 1.0f);
 					enemy.GetComponent<disablinghp> ().JustHit = true;
 					enemy.GetComponent<Enemy> ().DealtDamage (Attack);
@@ -93,6 +94,7 @@ public class Artillery : MonoBehaviour {
 					DecreaseCooldown ();
 				}
 				if ((enemy.gameObject.tag == "RangedEnemy" || enemy.gameObject.tag == "AttackableRangedEnemy") && enemyHit == false) {
+					gameObject.transform.GetComponentInParent<ThrowSimulation>().Target = enemy.gameObject.transform;
 					source.PlayOneShot (cannonShotEffect, 1.0f);
 					enemy.GetComponent<disablinghp> ().JustHit = true;
 					enemy.GetComponent<EnemyRanged> ().DealtDamage (Attack);
@@ -101,6 +103,7 @@ public class Artillery : MonoBehaviour {
 					DecreaseCooldown ();
 				}
 				if ((enemy.gameObject.tag == "EnemySiege" || enemy.gameObject.tag == "AttackableEnemySiege") && enemyHit == false) {
+				gameObject.transform.GetComponentInParent<ThrowSimulation>().Target = enemy.gameObject.transform;
 					source.PlayOneShot (cannonShotEffect, 1.0f);
 					enemy.GetComponent<disablinghp> ().JustHit = true;
 					enemy.GetComponent<EnemyCannon> ().DealtDamage (Attack);
@@ -108,34 +111,6 @@ public class Artillery : MonoBehaviour {
 					enemyHit = true;
 					DecreaseCooldown ();
 				}
-
-		/*	foreach (Collider colliderObject in colliders) {
-				if ((colliderObject.gameObject.tag == "Enemy" || colliderObject.gameObject.tag == "AttackableEnemy") && enemyHit == false) {
-					source.PlayOneShot (cannonShotEffect, 1.0f);
-					colliderObject.GetComponent<disablinghp> ().JustHit = true;
-					colliderObject.GetComponent<Enemy> ().DealtDamage (Attack);
-					colliderObject.GetComponent<Enemy> ().CheckDeath ();
-					enemyHit = true;
-					DecreaseCooldown ();
-				}
-				if ((colliderObject.gameObject.tag == "RangedEnemy" || colliderObject.gameObject.tag == "AttackableRangedEnemy") && enemyHit == false) {
-					source.PlayOneShot (cannonShotEffect, 1.0f);
-					colliderObject.GetComponent<disablinghp> ().JustHit = true;
-					colliderObject.GetComponent<EnemyRanged> ().DealtDamage (Attack);
-					colliderObject.GetComponent<EnemyRanged> ().CheckDeath ();
-					enemyHit = true;
-					DecreaseCooldown ();
-				}
-				if ((colliderObject.gameObject.tag == "EnemySiege" || colliderObject.gameObject.tag == "AttackableEnemySiege") && enemyHit == false) {
-					source.PlayOneShot (cannonShotEffect, 1.0f);
-					colliderObject.GetComponent<disablinghp> ().JustHit = true;
-					colliderObject.GetComponent<EnemyCannon> ().DealtDamage (Attack);
-					colliderObject.GetComponent<EnemyCannon> ().CheckDeath ();
-					enemyHit = true;
-					DecreaseCooldown ();
-				}
-			}
-			*/
 		}
 
 	}

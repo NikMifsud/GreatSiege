@@ -1,0 +1,54 @@
+Initialize engine version: 5.1.1f1 (2046fc06d4d8)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 850M (ID=0x1391)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.122 seconds
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data\Managed\System.dll (this message is harmless)
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1715)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1715)
+
+[AVProWindowsMedia] version 2.80 initialised
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+[AVProWindowsMedia] File not found C:\Users\Nik\Documents\MITA\Game Folders\GreatSiege - End Week 2\GreatSiege\CutScene_Data/AV05Vs3H264.mp4
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+[AVProWindowsMedia] Couldn't load movie AV05Vs3H264.mp4
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 31f0 -> priority: 1 
+  Thread -> id: db4 -> priority: 1 

@@ -26,10 +26,10 @@ public class CooldownRefresh : MonoBehaviour {
 			GameObject[] footUnits = GameObject.FindGameObjectsWithTag("FootUnit");
 			GameObject[] rangedUnits = GameObject.FindGameObjectsWithTag("RangedUnit");
 			GameObject[] siegeUnits = GameObject.FindGameObjectsWithTag("SiegeUnit");
-
+			GameObject[] pikeUnits = GameObject.FindGameObjectsWithTag("PikeUnit");
 			if(footUnits != null){
 				foreach(GameObject unit in footUnits){
-					Debug.Log (unit.name);
+				
 					if(unit.name == "Foot(Clone)"){
 						unit.gameObject.GetComponent<Footsoldier>().Movementtime = 10f;
 						unit.gameObject.GetComponent<Footsoldier>().canMove = true;
@@ -39,20 +39,25 @@ public class CooldownRefresh : MonoBehaviour {
 			}
 			if(rangedUnits != null){
 				foreach(GameObject unit in rangedUnits){
-					if(unit.name == "rangedsoldierpivot 1 1(Clone)"){
-						Transform myUnitTransform = unit.transform.FindChild ("ranged");
-						myUnitTransform.gameObject.GetComponent<Rangedsoldier>().Movementtime = 15f;
-						myUnitTransform.gameObject.GetComponent<Rangedsoldier>().canMove = true;
+					if(unit.name == "Ranged(Clone)"){
+						unit.gameObject.GetComponent<Rangedsoldier>().Movementtime = 15f;
+						unit.gameObject.GetComponent<Rangedsoldier>().canMove = true;
+					}
+				}
+			}
+			if(pikeUnits != null){
+				foreach(GameObject unit in pikeUnits){
+					if(unit.name == "Pike(Clone)"){
+						unit.gameObject.GetComponent<Pike>().Movementtime = 15f;
+						unit.gameObject.GetComponent<Pike>().canMove = true;
 					}
 				}
 			}
 			if(siegeUnits != null){
 				foreach(GameObject unit in siegeUnits){
-					if(unit.name == "Cannonpivotpoint(Clone)"){
-						Transform myUnitTransform = unit.transform.FindChild ("cannon");
-						myUnitTransform.gameObject.GetComponent<Artillery>().Movementtime = 30f;
-						myUnitTransform.gameObject.GetComponent<Artillery>().enemyHit = false;
-						myUnitTransform.gameObject.GetComponent<Artillery>().canMove = true;
+					if(unit.name == "Musketeer(Clone)"){
+						unit.gameObject.GetComponent<Musket>().Movementtime = 15f;
+						unit.gameObject.GetComponent<Musket>().canMove = true;
 					}
 				}
 			}

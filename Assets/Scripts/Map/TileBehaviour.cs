@@ -44,6 +44,42 @@ public class TileBehaviour: MonoBehaviour
 	}
 	
 	void Update(){
+		if (this.pointX == 2 && this.pointY == 14) {
+			Destroy(this.gameObject);
+		}
+		if (this.pointX == 0 && this.pointY == 16) {
+			Destroy(this.gameObject);
+		}
+		if (this.pointX == 2 && this.pointY == 16) {
+			Destroy(this.gameObject);
+		}
+		if (this.pointX == -7 && this.pointY == 16) {
+			Destroy(this.gameObject);
+		}
+		if (this.pointX == 3 && this.pointY == 14) {
+			Destroy(this.gameObject);
+		}
+		if (this.pointX == -6 && this.pointY == 15) {
+			Destroy(this.gameObject);
+		}
+		if (this.pointX == -8 && this.pointY == 16) {
+			Destroy(this.gameObject);
+		}
+		if (this.pointX == 5 && this.pointY == 15) {
+			Destroy(this.gameObject);
+		}
+		if (this.pointX == -1 && this.pointY == 16) {
+			Destroy(this.gameObject);
+		}
+		if (this.pointX == -7 && this.pointY == 15) {
+			Destroy(this.gameObject);
+		}
+		if (this.pointX == 4 && this.pointY == 13) {
+			Destroy(this.gameObject);
+		}
+		if (this.pointX == -7 && this.pointY == 14) {
+			Destroy(this.gameObject);
+		}
 		if (this.isEnemy == false && this.isPassable == false) {
 			Transform mychildtransform = this.transform.FindChild("Cylinder");
 			mychildtransform.GetComponent<Renderer> ().material = allyMaterial;
@@ -70,7 +106,29 @@ public class TileBehaviour: MonoBehaviour
 				Transform mychildtransform = this.transform.FindChild("Cylinder");
 				mychildtransform.GetComponent<Renderer> ().material = stoneTexture;
 			}
+		}
 
+		if (healthPowerUps.HealthButtonPressed == false && playerControl.highlightingTiles == false) {
+			if(this.tag == "MudTile"){
+				Transform mychildtransform = this.transform.FindChild("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = mudTexture;
+			}
+			if(this.tag == "StoneTile"){
+				Transform mychildtransform = this.transform.FindChild("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = stoneTexture;
+			}
+			if(this.tag == "OutpostTile"){
+				Transform mychildtransform = this.transform.FindChild("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = outpostTexture;
+			}
+			if(this.tag == "DirtTile"){
+				Transform mychildtransform = this.transform.FindChild("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = dirtTexture;
+			}
+			if(this.tag == "FortTile"){
+				Transform mychildtransform = this.transform.FindChild("Cylinder");
+				mychildtransform.GetComponent<Renderer> ().material = stoneTexture;
+			}
 		}
 
 	}

@@ -23,7 +23,7 @@ public class SpawnSiege : MonoBehaviour {
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hit = new RaycastHit ();
 				if (Physics.Raycast (ray, out hit)) {
-					if (hit.collider.tag == "RangedUnit" || hit.collider.tag == "SiegeUnit" || hit.collider.tag == "FootUnit") {
+					if (hit.collider.tag == "RangedUnit" || hit.collider.tag == "SiegeUnit" || hit.collider.tag == "FootUnit" || hit.collider.tag == "PikeUnit") {
 						SpawnSoldier = false;
 						RemoveSpawnArea();
 						playerControl.highlightingTiles = false;

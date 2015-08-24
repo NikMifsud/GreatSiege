@@ -102,12 +102,9 @@ public class FireWheel : MonoBehaviour {
 							DecreaseCooldown ();
 						}
 					} 
-				}
+				} 
 			}
 		}
-
-
-
 
 		availableMoves = new ArrayList ();
 		outpostTileClose = false;

@@ -35,6 +35,7 @@ public class IncreasedArmor : MonoBehaviour {
 			GameObject[] footUnits = GameObject.FindGameObjectsWithTag("FootUnit");
 			GameObject[] rangedUnits = GameObject.FindGameObjectsWithTag("RangedUnit");
 			GameObject[] siegeUnits = GameObject.FindGameObjectsWithTag("SiegeUnit");
+			GameObject[] pikeUnits = GameObject.FindGameObjectsWithTag("PikeUnit");
 
 			if(footUnits != null){
 				foreach(GameObject unit in footUnits){
@@ -46,17 +47,22 @@ public class IncreasedArmor : MonoBehaviour {
 			}
 			if(rangedUnits != null){
 				foreach(GameObject unit in rangedUnits){
-					if(unit.name == "rangedsoldierpivot 1 1(Clone)"){
-						Transform myUnitTransform = unit.transform.FindChild ("ranged");
-						myUnitTransform.gameObject.GetComponent<Rangedsoldier>().Armor = 0;
+					if(unit.name == "Ranged(Clone)"){
+						unit.gameObject.GetComponent<Rangedsoldier>().Armor = 0;
 					}
 				}
 			}
 			if(siegeUnits != null){
 				foreach(GameObject unit in siegeUnits){
-					if(unit.name == "Cannonpivotpoint(Clone)"){
-						Transform myUnitTransform = unit.transform.FindChild ("cannon");
-						myUnitTransform.gameObject.GetComponent<Artillery>().Armor = 20;
+					if(unit.name == "Musketeer(Clone)"){
+						unit.gameObject.GetComponent<Musket>().Armor = 0;
+					}
+				}
+			}
+			if(pikeUnits != null){
+				foreach(GameObject unit in pikeUnits){
+					if(unit.name == "Pike(Clone)"){
+						unit.gameObject.GetComponent<Pike>().Armor = 20;
 					}
 				}
 			}
@@ -68,7 +74,7 @@ public class IncreasedArmor : MonoBehaviour {
 			GameObject[] footUnits = GameObject.FindGameObjectsWithTag("FootUnit");
 			GameObject[] rangedUnits = GameObject.FindGameObjectsWithTag("RangedUnit");
 			GameObject[] siegeUnits = GameObject.FindGameObjectsWithTag("SiegeUnit");
-
+			GameObject[] pikeUnits = GameObject.FindGameObjectsWithTag("PikeUnit");
 			if(footUnits != null){
 				foreach(GameObject unit in footUnits){
 					Debug.Log (unit.name);
@@ -79,17 +85,22 @@ public class IncreasedArmor : MonoBehaviour {
 			}
 			if(rangedUnits != null){
 				foreach(GameObject unit in rangedUnits){
-					if(unit.name == "rangedsoldierpivot 1 1(Clone)"){
-						Transform myUnitTransform = unit.transform.FindChild ("ranged");
-						myUnitTransform.gameObject.GetComponent<Rangedsoldier>().Armor = 10;
+					if(unit.name == "Ranged(Clone)"){
+						unit.gameObject.GetComponent<Rangedsoldier>().Armor = 10;
 					}
 				}
 			}
 			if(siegeUnits != null){
 				foreach(GameObject unit in siegeUnits){
-					if(unit.name == "Cannonpivotpoint(Clone)"){
-						Transform myUnitTransform = unit.transform.FindChild ("cannon");
-						myUnitTransform.gameObject.GetComponent<Artillery>().Armor = 30;
+					if(unit.name == "Musketeer(Clone)"){
+						unit.gameObject.GetComponent<Musket>().Armor = 10;
+					}
+				}
+			}
+			if(pikeUnits != null){
+				foreach(GameObject unit in pikeUnits){
+					if(unit.name == "Pike(Clone)"){
+						unit.gameObject.GetComponent<Pike>().Armor = 10;
 					}
 				}
 			}

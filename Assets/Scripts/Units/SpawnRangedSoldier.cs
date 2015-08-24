@@ -23,26 +23,26 @@ public class SpawnRangedSoldier : MonoBehaviour {
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hit = new RaycastHit ();
 				if (Physics.Raycast (ray, out hit)) {
-					if (hit.collider.tag == "RangedUnit" || hit.collider.tag == "SiegeUnit" || hit.collider.tag == "FootUnit") {
+					if (hit.collider.tag == "RangedUnit" || hit.collider.tag == "SiegeUnit" || hit.collider.tag == "FootUnit" || hit.collider.tag == "PikeUnit") {
 						SpawnSoldier = false;
 						gameMaster.gameState = 0;
 					} else if (hit.collider.GetComponent<TileBehaviour> ().isPassable == true && (hit.collider.tag == "SpawnStoneTile" || hit.collider.tag == "SpawnDirtTile" || hit.collider.tag == "SpawnOutpostTile" || hit.collider.tag == "SpawnMudTile")) {
 						var cubeTemp = hit.collider.transform.position;
 						if (hit.collider.gameObject.tag == "SpawnStoneTile") {
-							Soldier.transform.FindChild ("ranged").GetComponent<Rangedsoldier> ().AttackRange = 5;
-							Soldier.transform.FindChild ("ranged").GetComponent<Rangedsoldier> ().Armor = 5;
+							Soldier.GetComponent<Rangedsoldier> ().AttackRange = 5;
+							Soldier.GetComponent<Rangedsoldier> ().Armor = 5;
 							cubeTemp.y = 0.2f;
 						} if(hit.collider.gameObject.tag == "SpawnOutpostTile"){
-							Soldier.transform.FindChild ("ranged").GetComponent<Rangedsoldier> ().AttackRange = 4;
+							Soldier.GetComponent<Rangedsoldier> ().AttackRange = 4;
 							cubeTemp.y = 0.1f;
 							economy.outpost += 1;
 						}
 						if(hit.collider.gameObject.tag == "SpawnMudTile" || hit.collider.gameObject.tag == "SpawnDirtTile"){
-							Soldier.transform.FindChild ("ranged").GetComponent<Rangedsoldier> ().AttackRange = 4;
+							Soldier.GetComponent<Rangedsoldier> ().AttackRange = 4;
 							cubeTemp.y = 0.1f;
 						}
-						Transform myUnitTransform = Soldier.transform.FindChild ("ranged");
-						myUnitTransform.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
+						
+						Soldier.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
 						Instantiate (Soldier, cubeTemp, Quaternion.identity);
 						food.Food -= 50;
 						hit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = false;

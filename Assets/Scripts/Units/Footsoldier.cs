@@ -11,6 +11,7 @@ public class Footsoldier : MonoBehaviour {
 	public int DamageTaken;
 	public float Movementtime;
 	public bool canMove;
+	public bool isDead;
 	public GameObject healthBar;
 	public GameObject pivotPoint;
 	public bool isSelected;
@@ -25,6 +26,7 @@ public class Footsoldier : MonoBehaviour {
 		max_Health = 100;
 		curr_Health = 100;
 		Armor = 10;
+		isDead = false;
 		Movement = 2;
 		AttackRange = 1;
 		Attack = 50;
@@ -62,8 +64,7 @@ public class Footsoldier : MonoBehaviour {
 			DamageTaken = 0;
 		}
 		if (curr_Health <= 0) {
-			anim.SetBool("isDead",true);
-			Destroy (this.gameObject);
+			isDead = true;
 		}
 		if (DamageTaken >= 1) {
 			curr_Health = curr_Health + (Armor - DamageTaken);

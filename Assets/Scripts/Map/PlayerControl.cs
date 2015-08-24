@@ -28,7 +28,7 @@ public class PlayerControl : MonoBehaviour {
 	private AudioSource source;
 	public bool canMove,firingGrenades,firingFire;
 	public Grenades isGrenades;
-
+	public HoverGUI hover;
 	public PlayFootAnimation animation;
 
 	// Use this for initialization
@@ -68,6 +68,11 @@ public class PlayerControl : MonoBehaviour {
 				RaycastHit hit = new RaycastHit ();
 				if (Physics.Raycast (ray, out hit)) {
 					if (hit.collider.gameObject.tag == "FootUnit") {
+						hover.isOnFootUnit = false;
+						hover.isOnRangedUnit = false;
+						hover.isOnSiegeUnit = false;
+						hover.isOnPike = false;
+						hover.isOnMusket = false;
 						canMove = hit.collider.gameObject.GetComponent<Footsoldier>().canMove;
 						if(canMove){
 							unitAttack = hit.collider.gameObject.GetComponent<Footsoldier>().Attack;
@@ -84,6 +89,11 @@ public class PlayerControl : MonoBehaviour {
 							calculateAttackIndicator(unitAttackRange);
 						}
 					} if (hit.collider.gameObject.tag == "RangedUnit") {
+						hover.isOnFootUnit = false;
+						hover.isOnRangedUnit = false;
+						hover.isOnSiegeUnit = false;
+						hover.isOnPike = false;
+						hover.isOnMusket = false;
 						canMove = hit.collider.gameObject.GetComponent<Rangedsoldier>().canMove;
 						if(canMove){
 							unitAttack = hit.collider.gameObject.GetComponent<Rangedsoldier>().Attack;
@@ -105,17 +115,43 @@ public class PlayerControl : MonoBehaviour {
 							calculateAttackIndicator(unitAttackRange);
 						}
 					} if (hit.collider.gameObject.tag == "SiegeUnit") {
-						canMove = hit.collider.gameObject.GetComponent<Artillery>().canMove;
+						hover.isOnFootUnit = false;
+						hover.isOnRangedUnit = false;
+						hover.isOnPike = false;
+						hover.isOnMusket = false;
+						hover.isOnSiegeUnit = false;
+						canMove = hit.collider.gameObject.GetComponent<Musket>().canMove;
 						if(canMove){
 							selectedCharacter = hit.collider.gameObject;
 							gridManager.selectedCharacter = hit.collider.gameObject;
 							gameManager.gameState = 1;
 							selectedCharacter.gameObject.tag = "SelectedSiegeUnit";
 							selectedCharacter.GetComponent<disablinghp>().Appear = true;
-							unitMovement = hit.collider.gameObject.GetComponent<Artillery>().Movement;
-							unitAttackRange = hit.collider.gameObject.GetComponent<Artillery>().AttackRange;
-							unitAttack = hit.collider.gameObject.GetComponent<Artillery>().Attack;
-							hit.collider.gameObject.GetComponent<Artillery>().isSelected = true;
+							unitMovement = hit.collider.gameObject.GetComponent<Musket>().Movement;
+							unitAttackRange = hit.collider.gameObject.GetComponent<Musket>().AttackRange;
+							unitAttack = hit.collider.gameObject.GetComponent<Musket>().Attack;
+							hit.collider.gameObject.GetComponent<Musket>().isSelected = true;
+							highlightAvailableTiles (unitMovement, selectedCharacter.gameObject.GetComponent<CharacterMovement> ().unitOriginalTile.tile);
+							Vector3 rangeIndicatorPosition = new Vector3(selectedCharacter.transform.position.x,0.078f,selectedCharacter.transform.position.z);
+							calculateAttackIndicator(unitAttackRange);
+						}
+					} if(hit.collider.gameObject.tag == "PikeUnit"){
+						hover.isOnFootUnit = false;
+						hover.isOnRangedUnit = false;
+						hover.isOnPike = false;
+						hover.isOnMusket = false;
+						hover.isOnSiegeUnit = false;
+						canMove = hit.collider.gameObject.GetComponent<Pike>().canMove;
+						if(canMove){
+							selectedCharacter = hit.collider.gameObject;
+							gridManager.selectedCharacter = hit.collider.gameObject;
+							gameManager.gameState = 1;
+							selectedCharacter.gameObject.tag = "SelectedPikeUnit";
+							selectedCharacter.GetComponent<disablinghp>().Appear = true;
+							unitMovement = hit.collider.gameObject.GetComponent<Pike>().Movement;
+							unitAttackRange = hit.collider.gameObject.GetComponent<Pike>().AttackRange;
+							unitAttack = hit.collider.gameObject.GetComponent<Pike>().Attack;
+							hit.collider.gameObject.GetComponent<Pike>().isSelected = true;
 							highlightAvailableTiles (unitMovement, selectedCharacter.gameObject.GetComponent<CharacterMovement> ().unitOriginalTile.tile);
 							Vector3 rangeIndicatorPosition = new Vector3(selectedCharacter.transform.position.x,0.078f,selectedCharacter.transform.position.z);
 							calculateAttackIndicator(unitAttackRange);
@@ -152,8 +188,12 @@ public class PlayerControl : MonoBehaviour {
 								}
 							    if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
 									
-									selectedCharacter.GetComponent<Artillery> ().AttackRange = (7);
+									selectedCharacter.GetComponent<Musket> ().AttackRange = (5);
 
+									movement.y = 0.2f;
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedPikeUnit"){
+								
 									movement.y = 0.2f;
 								}
 							}
@@ -173,8 +213,12 @@ public class PlayerControl : MonoBehaviour {
 								}
 								if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
 									
-								selectedCharacter.GetComponent<Artillery> ().AttackRange = (6);
+								selectedCharacter.GetComponent<Musket> ().AttackRange = (4);
 									
+									movement.y = 0.1f;
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedPikeUnit"){
+									selectedCharacter.GetComponent<Pike> ().AttackRange = 2;
 									movement.y = 0.1f;
 								}
 							}
@@ -195,11 +239,17 @@ public class PlayerControl : MonoBehaviour {
 								}
 								if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
 									
-									selectedCharacter.GetComponent<Artillery> ().AttackRange = 6;
+									selectedCharacter.GetComponent<Musket> ().AttackRange = 4;
 									
-									selectedCharacter.GetComponent<Artillery> ().isMud = true;
+									selectedCharacter.GetComponent<Musket> ().isMud = true;
 									movement.y = 0.1f;
 								}
+								if(selectedCharacter.gameObject.tag == "SelectedPikeUnit"){
+									selectedCharacter.GetComponent<Pike> ().AttackRange = 2;
+									selectedCharacter.GetComponent<Pike> ().isMud = true;
+									movement.y = 0.1f;
+								}
+
 							}
 							if (_hitInfo.collider.gameObject.tag == "DirtTile") {
 								if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
@@ -213,8 +263,12 @@ public class PlayerControl : MonoBehaviour {
 									movement.y = 0.1f;
 								}
 								if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-									selectedCharacter.GetComponent<Artillery> ().AttackRange = 6;
+									selectedCharacter.GetComponent<Musket> ().AttackRange = 4;
 
+									movement.y = 0.1f;
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedPikeUnit"){
+									selectedCharacter.GetComponent<Pike> ().AttackRange = 2;
 									movement.y = 0.1f;
 								}
 
@@ -246,9 +300,14 @@ public class PlayerControl : MonoBehaviour {
 									selectedCharacter.gameObject.tag = "RangedUnit";
 								}
 								if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-									selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
-									selectedCharacter.gameObject.GetComponent<Artillery> ().DecreaseCooldown();
+									selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
+									selectedCharacter.gameObject.GetComponent<Musket> ().DecreaseCooldown();
 									selectedCharacter.gameObject.tag = "SiegeUnit";
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedPikeUnit"){
+									selectedCharacter.gameObject.GetComponent<Pike>().isSelected = false;
+									selectedCharacter.gameObject.GetComponent<Pike> ().DecreaseCooldown();
+									selectedCharacter.gameObject.tag = "PikeUnit";
 								}
 								revertbackEnemies();
 								Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
@@ -268,8 +327,12 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.tag = "RangedUnit";
 							}
 							if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-								selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
+								selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
 								selectedCharacter.gameObject.tag = "SiegeUnit";
+							}
+							if(selectedCharacter.gameObject.tag == "SelectedPikeUnit"){
+								selectedCharacter.gameObject.GetComponent<Pike>().isSelected = false;
+								selectedCharacter.gameObject.tag = "PikeUnit";
 							}
 							Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 							gameManager.gameState = 0;
@@ -364,7 +427,14 @@ public class PlayerControl : MonoBehaviour {
 								//do the damage
 								_hitInfo.collider.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
 								selectedCharacter.GetComponent<disablinghp>().Appear = false;
-								//StartCoroutine(selectedCharacter.gameObject.GetComponentInChildren<PlayFootAnimation>().WaitForAnimation(_hitInfo.collider.gameObject));
+								if(selectedCharacter.tag == "SelectedRangedUnit"){
+									selectedCharacter.gameObject.GetComponent<ThrowSimulation>().Target = _hitInfo.collider.transform;
+								//	StartCoroutine(selectedCharacter.gameObject.GetComponent<ThrowSimulation>().SimulateProjectile());
+									StartCoroutine(selectedCharacter.gameObject.GetComponentInChildren<PlayRangedAnimation>().WaitForAnimation(_hitInfo.collider.gameObject));
+								}
+								if(selectedCharacter.tag == "SelectedSiegeUnit"){
+									StartCoroutine(selectedCharacter.gameObject.GetComponentInChildren<PlayMusketAnimation>().WaitForAnimation(_hitInfo.collider.gameObject));
+								}
 								_hitInfo.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 
 								//revert back
@@ -462,7 +532,7 @@ public class PlayerControl : MonoBehaviour {
 							if(!firingGrenades){
 								//do the damage
 								_hitInfo.collider.gameObject.GetComponent<EnemyRanged>().DealtDamage(unitAttack);
-//								StartCoroutine(selectedCharacter.gameObject.GetComponentInChildren<PlayFootAnimation>().WaitForAnimation(_hitInfo.collider.gameObject));
+							
 								selectedCharacter.GetComponent<disablinghp>().Appear = false;
 								_hitInfo.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 
@@ -558,7 +628,7 @@ public class PlayerControl : MonoBehaviour {
 								//do the damage
 								_hitInfo.collider.gameObject.GetComponent<EnemyCannon>().DealtDamage(unitAttack);
 								selectedCharacter.GetComponent<disablinghp>().Appear = false;
-								//StartCoroutine(selectedCharacter.gameObject.GetComponentInChildren<PlayFootAnimation>().WaitForAnimation(_hitInfo.collider.gameObject));
+						
 								_hitInfo.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 								
 								//revert back
@@ -600,7 +670,7 @@ public class PlayerControl : MonoBehaviour {
 							source.PlayOneShot(bowShotEffect,1.0f);
 							selectedCharacter.GetComponent<disablinghp>().Appear = false;
 							selectedCharacter.gameObject.transform.rotation = Quaternion.LookRotation(new Vector3(_hitInfo.collider.gameObject.transform.position.x, selectedCharacter.gameObject.transform.position.y, _hitInfo.collider.gameObject.transform.position.z) - selectedCharacter.gameObject.transform.position);
-
+							selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().attack = true;
 							selectedCharacter.gameObject.GetComponent<Rangedsoldier>().isSelected = false;
 							selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
 							selectedCharacter.gameObject.tag = "RangedUnit";
@@ -609,18 +679,28 @@ public class PlayerControl : MonoBehaviour {
 							source.PlayOneShot(cannonShotEffect,1.0f);
 							selectedCharacter.GetComponent<disablinghp>().Appear = false;
 							selectedCharacter.gameObject.transform.rotation = Quaternion.LookRotation(new Vector3(_hitInfo.collider.gameObject.transform.position.x, selectedCharacter.gameObject.transform.position.y, _hitInfo.collider.gameObject.transform.position.z) - selectedCharacter.gameObject.transform.position);
-
-							selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
-							selectedCharacter.gameObject.GetComponent<Artillery> ().DecreaseCooldown();
+							selectedCharacter.gameObject.GetComponent<Musket> ().attack = true;
+							selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
+							selectedCharacter.gameObject.GetComponent<Musket> ().DecreaseCooldown();
 							selectedCharacter.gameObject.tag = "SiegeUnit";
 						}
+						if(selectedCharacter.gameObject.tag == "SelectedPikeUnit" || selectedCharacter.gameObject.tag == "PikeUnit"){
+						//	source.PlayOneShot(cannonShotEffect,1.0f);
+							selectedCharacter.GetComponent<disablinghp>().Appear = false;
+							selectedCharacter.gameObject.transform.rotation = Quaternion.LookRotation(new Vector3(_hitInfo.collider.gameObject.transform.position.x, selectedCharacter.gameObject.transform.position.y, _hitInfo.collider.gameObject.transform.position.z) - selectedCharacter.gameObject.transform.position);
+							selectedCharacter.gameObject.GetComponent<Pike> ().attack = true;
+							selectedCharacter.gameObject.GetComponent<Pike>().isSelected = false;
+							selectedCharacter.gameObject.GetComponent<Pike> ().DecreaseCooldown();
+							selectedCharacter.gameObject.tag = "PikeUnit";
+						}
+
 
 						revertbackEnemies();
 						Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 						highlightingTiles = false;
 						gameManager.gameState = 0;
 					}
-					else if(_hitInfo.collider.gameObject.tag == "AttackableDirtTile"){
+				/*	else if(_hitInfo.collider.gameObject.tag == "AttackableDirtTile"){
 						selectedCharacter.GetComponent<disablinghp>().Appear = false;
 						if(firingGrenades){
 							TileBehaviour mainEnemyTile = _hitInfo.collider.gameObject.GetComponent<TileBehaviour>();
@@ -705,7 +785,7 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.tag = "RangedUnit";
 							}
 							if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-								selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
+								selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
 								selectedCharacter.gameObject.tag = "SiegeUnit";
 							}
 							firingGrenades = false;
@@ -731,7 +811,7 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.tag = "RangedUnit";
 							}
 							if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-								selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
+								selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
 								selectedCharacter.gameObject.tag = "SiegeUnit";
 							}
 							_hitInfo.collider.gameObject.tag = "DirtTile";
@@ -742,7 +822,7 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
 							}
 							if(selectedCharacter.tag == "SelectedSiegeUnit"){
-								selectedCharacter.gameObject.GetComponent<Artillery>().DecreaseCooldown();
+								selectedCharacter.gameObject.GetComponent<Musket>().DecreaseCooldown();
 							}
 							revertbackEnemies();
 							Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
@@ -836,7 +916,7 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.tag = "RangedUnit";
 							}
 							if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-								selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
+								selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
 								selectedCharacter.gameObject.tag = "SiegeUnit";
 							}
 
@@ -864,7 +944,7 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.tag = "RangedUnit";
 							}
 							if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-								selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
+								selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
 								selectedCharacter.gameObject.tag = "SiegeUnit";
 							}
 							_hitInfo.collider.gameObject.tag = "MudTile";
@@ -875,7 +955,7 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
 							}
 							if(selectedCharacter.tag == "SelectedSiegeUnit"){
-								selectedCharacter.gameObject.GetComponent<Artillery>().DecreaseCooldown();
+								selectedCharacter.gameObject.GetComponent<Musket>().DecreaseCooldown();
 							}
 							revertbackEnemies();
 							Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
@@ -969,7 +1049,7 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.tag = "RangedUnit";
 							}
 							if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-								selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
+								selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
 								selectedCharacter.gameObject.tag = "SiegeUnit";
 							}
 
@@ -996,7 +1076,7 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.tag = "RangedUnit";
 							}
 							if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-								selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
+								selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
 								selectedCharacter.gameObject.tag = "SiegeUnit";
 							}
 							_hitInfo.collider.gameObject.tag = "StoneTile";
@@ -1007,7 +1087,7 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
 							}
 							if(selectedCharacter.tag == "SelectedSiegeUnit"){
-								selectedCharacter.gameObject.GetComponent<Artillery>().DecreaseCooldown();
+								selectedCharacter.gameObject.GetComponent<Musket>().DecreaseCooldown();
 							}
 							revertbackEnemies();
 
@@ -1101,7 +1181,7 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.tag = "RangedUnit";
 							}
 							if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-								selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
+								selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
 								selectedCharacter.gameObject.tag = "SiegeUnit";
 							}
 
@@ -1128,7 +1208,7 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.tag = "RangedUnit";
 							}
 							if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-								selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
+								selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
 								selectedCharacter.gameObject.tag = "SiegeUnit";
 							}
 							_hitInfo.collider.gameObject.tag = "OutpostTile";
@@ -1139,7 +1219,7 @@ public class PlayerControl : MonoBehaviour {
 								selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().DecreaseCooldown();
 							}
 							if(selectedCharacter.tag == "SelectedSiegeUnit"){
-								selectedCharacter.gameObject.GetComponent<Artillery>().DecreaseCooldown();
+								selectedCharacter.gameObject.GetComponent<Musket>().DecreaseCooldown();
 							}
 							revertbackEnemies();
 							
@@ -1147,8 +1227,8 @@ public class PlayerControl : MonoBehaviour {
 							highlightingTiles = false;
 							gameManager.gameState = 0;
 						}
-					}
-					else if (_hitInfo.collider.gameObject.tag == "FootUnit" || _hitInfo.collider.gameObject.tag == "RangedUnit" || _hitInfo.collider.gameObject.tag == "SiegeUnit"){
+					}*/
+					else if (_hitInfo.collider.gameObject.tag == "FootUnit" || _hitInfo.collider.gameObject.tag == "RangedUnit" || _hitInfo.collider.gameObject.tag == "SiegeUnit" || _hitInfo.collider.gameObject.tag == "PikeUnit"){
 						selectedCharacter.GetComponent<disablinghp>().Appear = false;
 						revertbackEnemies();
 						Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
@@ -1160,8 +1240,11 @@ public class PlayerControl : MonoBehaviour {
 							selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().isSelected = false;
 							selectedCharacter.gameObject.tag = "RangedUnit";
 						}if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-							selectedCharacter.gameObject.GetComponent<Artillery> ().isSelected = false;
+							selectedCharacter.gameObject.GetComponent<Musket> ().isSelected = false;
 							selectedCharacter.gameObject.tag = "SiegeUnit";
+						}if(selectedCharacter.gameObject.tag == "SelectedPikeUnit"){
+							selectedCharacter.gameObject.GetComponent<Pike> ().isSelected = false;
+							selectedCharacter.gameObject.tag = "PikeUnit";
 						}if (_hitInfo.collider.gameObject.tag == "FootUnit") {
 							canMove = _hitInfo.collider.gameObject.GetComponent<Footsoldier>().canMove;
 							if(canMove){
@@ -1177,6 +1260,30 @@ public class PlayerControl : MonoBehaviour {
 								highlightAvailableTiles (unitMovement, selectedCharacter.gameObject.GetComponent<CharacterMovement> ().unitOriginalTile.tile);
 								Vector3 rangeIndicatorPosition = new Vector3(selectedCharacter.transform.position.x,0.078f,selectedCharacter.transform.position.z);
 								calculateAttackIndicator(unitAttackRange);
+							}
+							else{
+								selectedCharacter.GetComponent<disablinghp>().Appear = false;
+								revertbackEnemies();
+								
+								highlightingTiles = false;
+								if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
+									selectedCharacter.gameObject.GetComponent<Footsoldier> ().isSelected = false;
+									selectedCharacter.gameObject.tag = "FootUnit";
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
+									selectedCharacter.gameObject.GetComponent<Rangedsoldier>().isSelected = false;
+									selectedCharacter.gameObject.tag = "RangedUnit";
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
+									selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
+									selectedCharacter.gameObject.tag = "SiegeUnit";
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedPikeUnit"){
+									selectedCharacter.gameObject.GetComponent<Pike> ().isSelected = false;
+									selectedCharacter.gameObject.tag = "PikeUnit";
+								}
+								Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
+								gameManager.gameState = 0;
 							}
 						} if (_hitInfo.collider.gameObject.tag == "RangedUnit") {
 							canMove = _hitInfo.collider.gameObject.GetComponent<Rangedsoldier>().canMove;
@@ -1194,21 +1301,109 @@ public class PlayerControl : MonoBehaviour {
 								Vector3 rangeIndicatorPosition = new Vector3(selectedCharacter.transform.position.x,0.078f,selectedCharacter.transform.position.z);
 								calculateAttackIndicator(unitAttackRange);
 							}
+							else{
+								selectedCharacter.GetComponent<disablinghp>().Appear = false;
+								revertbackEnemies();
+								
+								highlightingTiles = false;
+								if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
+									selectedCharacter.gameObject.GetComponent<Footsoldier> ().isSelected = false;
+									selectedCharacter.gameObject.tag = "FootUnit";
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
+									selectedCharacter.gameObject.GetComponent<Rangedsoldier>().isSelected = false;
+									selectedCharacter.gameObject.tag = "RangedUnit";
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
+									selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
+									selectedCharacter.gameObject.tag = "SiegeUnit";
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedPikeUnit"){
+									selectedCharacter.gameObject.GetComponent<Pike> ().isSelected = false;
+									selectedCharacter.gameObject.tag = "PikeUnit";
+								}
+								Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
+								gameManager.gameState = 0;
+							}
 						} if (_hitInfo.collider.gameObject.tag == "SiegeUnit") {
-							canMove = _hitInfo.collider.gameObject.GetComponent<Artillery>().canMove;
+							canMove = _hitInfo.collider.gameObject.GetComponent<Musket>().canMove;
 							if(canMove){
 								selectedCharacter = _hitInfo.collider.gameObject;
 								gridManager.selectedCharacter = _hitInfo.collider.gameObject;
 								gameManager.gameState = 1;
 								selectedCharacter.gameObject.tag = "SelectedSiegeUnit";
 								selectedCharacter.GetComponent<disablinghp>().Appear = true;
-								unitMovement = _hitInfo.collider.gameObject.GetComponent<Artillery>().Movement;
-								unitAttackRange = _hitInfo.collider.gameObject.GetComponent<Artillery>().AttackRange;
-								unitAttack = _hitInfo.collider.gameObject.GetComponent<Artillery>().Attack;
-								_hitInfo.collider.gameObject.GetComponent<Artillery>().isSelected = true;
+								unitMovement = _hitInfo.collider.gameObject.GetComponent<Musket>().Movement;
+								unitAttackRange = _hitInfo.collider.gameObject.GetComponent<Musket>().AttackRange;
+								unitAttack = _hitInfo.collider.gameObject.GetComponent<Musket>().Attack;
+								_hitInfo.collider.gameObject.GetComponent<Musket>().isSelected = true;
 								highlightAvailableTiles (unitMovement, selectedCharacter.gameObject.GetComponent<CharacterMovement> ().unitOriginalTile.tile);
 								Vector3 rangeIndicatorPosition = new Vector3(selectedCharacter.transform.position.x,0.078f,selectedCharacter.transform.position.z);
 								calculateAttackIndicator(unitAttackRange);
+							}
+							else{
+								selectedCharacter.GetComponent<disablinghp>().Appear = false;
+								revertbackEnemies();
+								
+								highlightingTiles = false;
+								if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
+									selectedCharacter.gameObject.GetComponent<Footsoldier> ().isSelected = false;
+									selectedCharacter.gameObject.tag = "FootUnit";
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
+									selectedCharacter.gameObject.GetComponent<Rangedsoldier>().isSelected = false;
+									selectedCharacter.gameObject.tag = "RangedUnit";
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
+									selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
+									selectedCharacter.gameObject.tag = "SiegeUnit";
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedPikeUnit"){
+									selectedCharacter.gameObject.GetComponent<Pike> ().isSelected = false;
+									selectedCharacter.gameObject.tag = "PikeUnit";
+								}
+								Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
+								gameManager.gameState = 0;
+							}
+						}if (_hitInfo.collider.gameObject.tag == "PikeUnit") {
+							canMove = _hitInfo.collider.gameObject.GetComponent<Pike>().canMove;
+							if(canMove){
+								selectedCharacter = _hitInfo.collider.gameObject;
+								gridManager.selectedCharacter = _hitInfo.collider.gameObject;
+								gameManager.gameState = 1;
+								selectedCharacter.gameObject.tag = "SelectedPikeUnit";
+								selectedCharacter.GetComponent<disablinghp>().Appear = true;
+								unitMovement = _hitInfo.collider.gameObject.GetComponent<Pike>().Movement;
+								unitAttackRange = _hitInfo.collider.gameObject.GetComponent<Pike>().AttackRange;
+								unitAttack = _hitInfo.collider.gameObject.GetComponent<Pike>().Attack;
+								_hitInfo.collider.gameObject.GetComponent<Pike>().isSelected = true;
+								highlightAvailableTiles (unitMovement, selectedCharacter.gameObject.GetComponent<CharacterMovement> ().unitOriginalTile.tile);
+								Vector3 rangeIndicatorPosition = new Vector3(selectedCharacter.transform.position.x,0.078f,selectedCharacter.transform.position.z);
+								calculateAttackIndicator(unitAttackRange);
+							}
+							else{
+								selectedCharacter.GetComponent<disablinghp>().Appear = false;
+								revertbackEnemies();
+								
+								highlightingTiles = false;
+								if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
+									selectedCharacter.gameObject.GetComponent<Footsoldier> ().isSelected = false;
+									selectedCharacter.gameObject.tag = "FootUnit";
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
+									selectedCharacter.gameObject.GetComponent<Rangedsoldier>().isSelected = false;
+									selectedCharacter.gameObject.tag = "RangedUnit";
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
+									selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
+									selectedCharacter.gameObject.tag = "SiegeUnit";
+								}
+								if(selectedCharacter.gameObject.tag == "SelectedPikeUnit"){
+									selectedCharacter.gameObject.GetComponent<Pike> ().isSelected = false;
+									selectedCharacter.gameObject.tag = "PikeUnit";
+								}
+								Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
+								gameManager.gameState = 0;
 							}
 						}
 						else {
@@ -1216,7 +1411,7 @@ public class PlayerControl : MonoBehaviour {
 						}
 					}
 
-					else if (_hitInfo.collider.gameObject.tag == "SelectedFootUnit" || _hitInfo.collider.gameObject.tag == "SelectedRangedUnit" || _hitInfo.collider.gameObject.tag == "SelectedSiegeUnit" ||  _hitInfo.collider.gameObject.tag == "DirtTile" ||  _hitInfo.collider.gameObject.tag == "MudTile" ||  _hitInfo.collider.gameObject.tag == "OutpostTile" ||  _hitInfo.collider.gameObject.tag == "StoneTile" ||  _hitInfo.collider.gameObject.tag == "Enemy" ||  _hitInfo.collider.gameObject.tag == "RangedEnemy"){
+					else if (_hitInfo.collider.gameObject.tag == "SelectedFootUnit" || _hitInfo.collider.gameObject.tag == "SelectedRangedUnit" || _hitInfo.collider.gameObject.tag == "SelectedSiegeUnit" || _hitInfo.collider.gameObject.tag == "SelectedPikeUnit" || _hitInfo.collider.gameObject.tag == "DirtTile" ||  _hitInfo.collider.gameObject.tag == "MudTile" ||  _hitInfo.collider.gameObject.tag == "OutpostTile" ||  _hitInfo.collider.gameObject.tag == "StoneTile" ||  _hitInfo.collider.gameObject.tag == "Enemy" ||  _hitInfo.collider.gameObject.tag == "RangedEnemy"){
 						selectedCharacter.GetComponent<disablinghp>().Appear = false;
 						revertbackEnemies();
 
@@ -1230,9 +1425,15 @@ public class PlayerControl : MonoBehaviour {
 							selectedCharacter.gameObject.tag = "RangedUnit";
 						}
 						if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
-							selectedCharacter.gameObject.GetComponent<Artillery>().isSelected = false;
+							selectedCharacter.gameObject.GetComponent<Musket>().isSelected = false;
 							selectedCharacter.gameObject.tag = "SiegeUnit";
 						}
+						if(selectedCharacter.gameObject.tag == "SelectedPikeUnit"){
+							selectedCharacter.gameObject.GetComponent<Pike>().isSelected = false;
+							selectedCharacter.gameObject.tag = "PikeUnit";
+						}
+
+
 						Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 						gameManager.gameState = 0;
 					}
@@ -1242,6 +1443,7 @@ public class PlayerControl : MonoBehaviour {
 			GameObject selectedFoot = GameObject.FindGameObjectWithTag("SelectedFootUnit");
 			GameObject selectedRanged = GameObject.FindGameObjectWithTag("SelectedRangedUnit");
 			GameObject selectedSiege = GameObject.FindGameObjectWithTag("SelectedSiegeUnit");
+			GameObject selectedPike = GameObject.FindGameObjectWithTag("SelectedPikeUnit");
 			if(selectedFoot != null){
 				selectedFoot.gameObject.tag = "FootUnit";
 				selectedFoot.GetComponent<disablinghp>().Appear = false;
@@ -1257,6 +1459,12 @@ public class PlayerControl : MonoBehaviour {
 				selectedSiege.GetComponent<disablinghp>().Appear = false;
 				Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
 			}
+			if(selectedPike!= null){
+				selectedSiege.gameObject.tag = "PikeUnit";
+				selectedSiege.GetComponent<disablinghp>().Appear = false;
+				Destroy (GameObject.FindGameObjectWithTag("AttackRangeIndicator").gameObject);
+			}
+
 		}
 	}
 	

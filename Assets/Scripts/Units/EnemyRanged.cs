@@ -181,20 +181,11 @@ public class EnemyRanged : MonoBehaviour {
 		siegeCounter = 0;
 		allyCounter = 0;
 		foreach(Collider colliderObject in colliders){
-			if(colliderObject.gameObject.tag == "FootUnit" || colliderObject.gameObject.tag == "RangedUnit" || colliderObject.gameObject.tag == "SiegeUnit" || colliderObject.gameObject.tag == "SelectedFootUnit" || colliderObject.gameObject.tag == "SelectedRangedUnit" || colliderObject.gameObject.tag == "SelectedSiegeUnit"){
+			if(colliderObject.gameObject.tag == "FootUnit" || colliderObject.gameObject.tag == "RangedUnit" || colliderObject.gameObject.tag == "SiegeUnit" || colliderObject.gameObject.tag == "SelectedFootUnit" || colliderObject.gameObject.tag == "SelectedRangedUnit" || colliderObject.gameObject.tag == "SelectedSiegeUnit" || colliderObject.gameObject.tag == "SelectedPikeUnit" || colliderObject.gameObject.tag == "PikeUnit"){
 				enemies.Add(colliderObject.gameObject);
 				enemyCounter++;
 			}
-			if(colliderObject.gameObject.tag == "FootUnit" || colliderObject.gameObject.tag == "SelectedFootUnit"){
-				footCounter++;
-			}
-			if(colliderObject.gameObject.tag == "RangedUnit" || colliderObject.gameObject.tag == "SelectedRangedUnit"){
-				rangedCounter++;
-			}
-			if(colliderObject.gameObject.tag == "SiegeUnit" || colliderObject.gameObject.tag == "SelectedSiegeUnit"){
-				siegeCounter++;
-			}
-			if(colliderObject.gameObject.tag == "Enemy" || colliderObject.gameObject.tag == "AttackableEnemy" || colliderObject.gameObject.tag == "RangedEnemy" || colliderObject.gameObject.tag == "AttackableRangedEnemy"){
+			if(colliderObject.gameObject.tag == "Enemy" || colliderObject.gameObject.tag == "AttackableEnemy" || colliderObject.gameObject.tag == "RangedEnemy" || colliderObject.gameObject.tag == "AttackableRangedEnemy" || colliderObject.gameObject.tag == "EnemySiege" || colliderObject.gameObject.tag == "AttackableEnemySiege"){
 				allyCounter++;
 			}
 		}
@@ -225,8 +216,8 @@ public class EnemyRanged : MonoBehaviour {
 									if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
 										source.PlayOneShot(rangedHitEffect,1.0f);
 										enemy.GetComponent<disablinghp>().JustHit = true;
-										enemy.GetComponent<Artillery> ().DealtDamage (Attack);
-										enemy.GetComponent<Artillery> ().CheckDeath ();
+										enemy.GetComponent<Musket> ().DealtDamage (Attack);
+										enemy.GetComponent<Musket> ().CheckDeath ();
 										enemyHit = true;
 										DecreaseCooldown ();
 									}
@@ -276,6 +267,26 @@ public class EnemyRanged : MonoBehaviour {
 								MoveBackwards ();
 							}
 						}
+					if (enemyHit == false && (enemy.tag == "Pike" || enemy.tag == "SelectedPikeUnit")) {
+						if (enemy.GetComponent<Footsoldier> ().curr_Health <= curr_Health) {
+							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
+								if (enemy.tag == "Pike" || enemy.tag == "SelectedPikeUnit") {
+									source.PlayOneShot(rangedHitEffect,1.0f);
+									enemy.GetComponent<disablinghp>().JustHit = true;
+									enemy.GetComponent<Pike> ().DealtDamage (Attack);
+									enemy.GetComponent<Pike> ().CheckDeath ();
+									enemyHit = true;
+									DecreaseCooldown ();
+								}
+							} else {
+								MoveForward ();
+							}
+						}
+						else {
+							MoveBackwards ();
+						}
+					}
+
 					}
 				}
 			}

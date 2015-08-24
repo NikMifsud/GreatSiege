@@ -25,7 +25,6 @@ public class FlameThrower : MonoBehaviour {
 		}
 
 		if (buttonPressed && Input.GetMouseButtonDown (0)) {
-			timer = 0;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit = new RaycastHit ();
 			if (Physics.Raycast (ray, out hit)) {
@@ -34,6 +33,7 @@ public class FlameThrower : MonoBehaviour {
 					gameMaster.gameState = 0;
 				}	
 				if(hit.collider.tag == "FootUnit" && hit.collider.gameObject.GetComponent<Footsoldier>().canMove == true){
+					timer = 0;
 					gameMaster.gameState = 0;
 					hit.collider.gameObject.GetComponent<FlameCone>().isFlame = true;
 				//	fire.transform.position = hit.collider.gameObject.transform.position;

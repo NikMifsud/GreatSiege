@@ -35,7 +35,8 @@ public class IncreasedAttack : MonoBehaviour {
 			GameObject[] footUnits = GameObject.FindGameObjectsWithTag("FootUnit");
 			GameObject[] rangedUnits = GameObject.FindGameObjectsWithTag("RangedUnit");
 			GameObject[] siegeUnits = GameObject.FindGameObjectsWithTag("SiegeUnit");
-			
+			GameObject[] pikeUnits = GameObject.FindGameObjectsWithTag("PikeUnit");
+
 			if(footUnits != null){
 				foreach(GameObject unit in footUnits){
 					Debug.Log (unit.name);
@@ -46,20 +47,26 @@ public class IncreasedAttack : MonoBehaviour {
 			}
 			if(rangedUnits != null){
 				foreach(GameObject unit in rangedUnits){
-					if(unit.name == "rangedsoldierpivot 1 1(Clone)"){
-						Transform myUnitTransform = unit.transform.FindChild ("ranged");
-						myUnitTransform.gameObject.GetComponent<Rangedsoldier>().Attack = 30;
+					if(unit.name == "Ranged(Clone)"){
+						unit.gameObject.GetComponent<Rangedsoldier>().Attack = 30;
 					}
 				}
 			}
 			if(siegeUnits != null){
 				foreach(GameObject unit in siegeUnits){
-					if(unit.name == "Cannonpivotpoint(Clone)"){
-						Transform myUnitTransform = unit.transform.FindChild ("cannon");
-						myUnitTransform.gameObject.GetComponent<Artillery>().Attack = 80;
+					if(unit.name == "Musketeer(Clone)"){
+						unit.gameObject.GetComponent<Musket>().Attack = 40;
 					}
 				}
 			}
+			if(pikeUnits != null){
+				foreach(GameObject unit in pikeUnits){
+					if(unit.name == "Pike(Clone)"){
+						unit.gameObject.GetComponent<Pike>().Attack = 45;
+					}
+				}
+			}
+
 		}
 		
 		if (CooldownButtonPressed == true) {
@@ -68,7 +75,8 @@ public class IncreasedAttack : MonoBehaviour {
 			GameObject[] footUnits = GameObject.FindGameObjectsWithTag("FootUnit");
 			GameObject[] rangedUnits = GameObject.FindGameObjectsWithTag("RangedUnit");
 			GameObject[] siegeUnits = GameObject.FindGameObjectsWithTag("SiegeUnit");
-			
+			GameObject[] pikeUnits = GameObject.FindGameObjectsWithTag("PikeUnit");
+
 			if(footUnits != null){
 				foreach(GameObject unit in footUnits){
 					Debug.Log (unit.name);
@@ -79,20 +87,26 @@ public class IncreasedAttack : MonoBehaviour {
 			}
 			if(rangedUnits != null){
 				foreach(GameObject unit in rangedUnits){
-					if(unit.name == "rangedsoldierpivot 1 1(Clone)"){
-						Transform myUnitTransform = unit.transform.FindChild ("ranged");
-						myUnitTransform.gameObject.GetComponent<Rangedsoldier>().Attack = 40;
+					if(unit.name == "Ranged(Clone)"){
+						unit.gameObject.GetComponent<Rangedsoldier>().Attack = 40;
 					}
 				}
 			}
 			if(siegeUnits != null){
 				foreach(GameObject unit in siegeUnits){
-					if(unit.name == "Cannonpivotpoint(Clone)"){
-						Transform myUnitTransform = unit.transform.FindChild ("cannon");
-						myUnitTransform.gameObject.GetComponent<Artillery>().Attack = 90;
+					if(unit.name == "Musketeer(Clone)"){
+						unit.gameObject.GetComponent<Musket>().Attack = 50;
 					}
 				}
 			}
+			if(pikeUnits != null){
+				foreach(GameObject unit in pikeUnits){
+					if(unit.name == "Pike(Clone)"){
+						unit.gameObject.GetComponent<Pike>().Attack = 55;
+					}
+				}
+			}
+
 			gameMaster.gameState = 0;
 			CooldownButtonPressed = false;
 		}
