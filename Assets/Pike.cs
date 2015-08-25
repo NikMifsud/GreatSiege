@@ -10,6 +10,7 @@ public class Pike : MonoBehaviour {
 	public int Attack;
 	public int DamageTaken;
 	public float Movementtime;
+	public Statistics stats;
 	public bool canMove;
 	public GameObject healthBar;
 	public bool isSelected;
@@ -19,6 +20,7 @@ public class Pike : MonoBehaviour {
 	// Use this for initialization
 	
 	void Start () {
+		stats = Camera.main.GetComponent<Statistics> ();
 		max_Health = 100;
 		curr_Health = 100;
 		Armor = 10;
@@ -59,7 +61,10 @@ public class Pike : MonoBehaviour {
 			DamageTaken = 0;
 		}
 		if (curr_Health <= 0) {
-			isDead = true;
+			if(isDead == false){
+				stats.pikeDead +=1;
+				isDead = true;
+			}
 		}
 		if (DamageTaken >= 1) {
 			curr_Health = curr_Health + (Armor - DamageTaken);

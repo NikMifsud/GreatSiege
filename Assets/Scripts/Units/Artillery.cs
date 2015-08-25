@@ -85,7 +85,8 @@ public class Artillery : MonoBehaviour {
 				//random selection of enemy 
 				GameObject enemy = colliders[randomIndex].gameObject;
 				if ((enemy.gameObject.tag == "Enemy" || enemy.gameObject.tag == "AttackableEnemy") && enemyHit == false) {
-				gameObject.transform.GetComponentInParent<ThrowSimulation>().Target = enemy.gameObject.transform;
+					gameObject.transform.GetComponentInParent<ThrowSimulation>().Target = enemy.gameObject.transform;
+					StartCoroutine(gameObject.GetComponentInParent<ThrowSimulation>().SimulateProjectile());
 					source.PlayOneShot (cannonShotEffect, 1.0f);
 					enemy.GetComponent<disablinghp> ().JustHit = true;
 					enemy.GetComponent<Enemy> ().DealtDamage (Attack);
@@ -95,6 +96,7 @@ public class Artillery : MonoBehaviour {
 				}
 				if ((enemy.gameObject.tag == "RangedEnemy" || enemy.gameObject.tag == "AttackableRangedEnemy") && enemyHit == false) {
 					gameObject.transform.GetComponentInParent<ThrowSimulation>().Target = enemy.gameObject.transform;
+					StartCoroutine(gameObject.GetComponentInParent<ThrowSimulation>().SimulateProjectile());
 					source.PlayOneShot (cannonShotEffect, 1.0f);
 					enemy.GetComponent<disablinghp> ().JustHit = true;
 					enemy.GetComponent<EnemyRanged> ().DealtDamage (Attack);
@@ -103,7 +105,8 @@ public class Artillery : MonoBehaviour {
 					DecreaseCooldown ();
 				}
 				if ((enemy.gameObject.tag == "EnemySiege" || enemy.gameObject.tag == "AttackableEnemySiege") && enemyHit == false) {
-				gameObject.transform.GetComponentInParent<ThrowSimulation>().Target = enemy.gameObject.transform;
+					gameObject.transform.GetComponentInParent<ThrowSimulation>().Target = enemy.gameObject.transform;
+					StartCoroutine(gameObject.GetComponentInParent<ThrowSimulation>().SimulateProjectile());
 					source.PlayOneShot (cannonShotEffect, 1.0f);
 					enemy.GetComponent<disablinghp> ().JustHit = true;
 					enemy.GetComponent<EnemyCannon> ().DealtDamage (Attack);

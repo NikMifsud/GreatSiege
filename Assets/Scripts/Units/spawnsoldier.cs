@@ -12,11 +12,14 @@ public class spawnsoldier : MonoBehaviour {
 	public Material highlightedTexture,mudTexture,dirtTexture,outpostTexture,stoneTexture;
 	public List<Transform> tiles;
 	public economy food;
+	public Statistics stats;
 	// Use this for initialization
 	void Start () {
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
+		stats = Camera.main.GetComponent<Statistics> ();
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -44,6 +47,7 @@ public class spawnsoldier : MonoBehaviour {
 						Soldier.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
 						Instantiate (Soldier, cubeTemp, Quaternion.identity);
 						food.Food = food.Food - 30;
+						stats.foodSpent += 30;
 						HappyUnits.HappyUnits = HappyUnits.HappyUnits - 10;
 						hit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = false;
 						RemoveSpawnArea ();

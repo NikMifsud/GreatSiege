@@ -116,6 +116,7 @@ public class EnemyRanged : MonoBehaviour {
 					objectHit.collider.gameObject.tag = "OutpostTile";
 				}
 			}
+			statistics.enemyRangedDead += 1;
 			statistics.enemiesKilled += 1;
 			Destroy (this.gameObject);
 		}
@@ -211,7 +212,7 @@ public class EnemyRanged : MonoBehaviour {
 					foreach (GameObject enemy in enemies) {
 						//if enemy is close then attack him, if not then just move forward
 					if (enemyHit == false && (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit")) {
-							if (enemy.GetComponent<Artillery> ().curr_Health <= curr_Health) {
+						if (enemy.GetComponent<Musket> ().curr_Health <= curr_Health) {
 								if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 									if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
 										source.PlayOneShot(rangedHitEffect,1.0f);
@@ -268,7 +269,7 @@ public class EnemyRanged : MonoBehaviour {
 							}
 						}
 					if (enemyHit == false && (enemy.tag == "Pike" || enemy.tag == "SelectedPikeUnit")) {
-						if (enemy.GetComponent<Footsoldier> ().curr_Health <= curr_Health) {
+						if (enemy.GetComponent<Pike> ().curr_Health <= curr_Health) {
 							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 								if (enemy.tag == "Pike" || enemy.tag == "SelectedPikeUnit") {
 									source.PlayOneShot(rangedHitEffect,1.0f);

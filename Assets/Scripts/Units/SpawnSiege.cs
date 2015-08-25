@@ -10,11 +10,14 @@ public class SpawnSiege : MonoBehaviour {
 	public Material highlightedTexture,mudTexture,dirtTexture,outpostTexture,stoneTexture;
 	public List<Transform> tiles;
 	public economy food;
+	public Statistics stats;
 	// Use this for initialization
 	void Start () {
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
+		stats = Camera.main.GetComponent<Statistics> ();
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -34,6 +37,7 @@ public class SpawnSiege : MonoBehaviour {
 						myUnitTransform.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
 						Instantiate (Soldier, cubeTemp, Quaternion.identity);
 						food.Food -= 80;
+						stats.foodSpent += 80;
 						hit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = false;
 						RemoveSpawnArea ();
 						playerControl.highlightingTiles = false;

@@ -14,6 +14,7 @@ public class Footsoldier : MonoBehaviour {
 	public bool isDead;
 	public GameObject healthBar;
 	public GameObject pivotPoint;
+	public Statistics stats;
 	public bool isSelected;
 	public economy economy;
 	public bool attack;
@@ -23,6 +24,7 @@ public class Footsoldier : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
+		stats = Camera.main.GetComponent<Statistics> ();
 		max_Health = 100;
 		curr_Health = 100;
 		Armor = 10;
@@ -64,7 +66,10 @@ public class Footsoldier : MonoBehaviour {
 			DamageTaken = 0;
 		}
 		if (curr_Health <= 0) {
-			isDead = true;
+			if(isDead == false){
+				stats.footSoldierDead +=1;
+				isDead = true;
+			}
 		}
 		if (DamageTaken >= 1) {
 			curr_Health = curr_Health + (Armor - DamageTaken);

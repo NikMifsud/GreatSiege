@@ -8,6 +8,7 @@ public class Rangedsoldier : MonoBehaviour {
 	public int Movement;
 	public int AttackRange;
 	public int Attack;
+	public Statistics stats;
 	public int DamageTaken;
 	public float Movementtime;
 	public bool canMove;
@@ -19,6 +20,7 @@ public class Rangedsoldier : MonoBehaviour {
 	public bool isDead;
 	// Use this for initialization
 	void Start () {
+		stats = Camera.main.GetComponent<Statistics> ();
 		max_Health = 100;
 		curr_Health = 100;
 		Armor = 0;
@@ -58,7 +60,10 @@ public class Rangedsoldier : MonoBehaviour {
 			Movementtime -= Time.deltaTime;
 		}
 		if (curr_Health <= 0) {
-			isDead = true;
+			if(isDead == false){
+				stats.rangedDead += 1;
+				isDead = true;
+			}
 		}
 		if (DamageTaken >= 1) {
 			curr_Health = curr_Health - DamageTaken;

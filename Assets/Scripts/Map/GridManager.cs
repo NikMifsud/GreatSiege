@@ -266,9 +266,11 @@ public class GridManager: MonoBehaviour
 
 		//so that u can click through the fort 
 		Destroy (GameObject.FindGameObjectWithTag("Fort").gameObject.GetComponent<Rigidbody>());
-		Destroy (GameObject.FindGameObjectWithTag("Fort").gameObject.GetComponent<Collider>());
+		Destroy (GameObject.FindGameObjectWithTag("Fort").gameObject.GetComponent<MeshCollider>());
+		Destroy (GameObject.FindGameObjectWithTag("Fort1").gameObject.GetComponent<Rigidbody>());
+		Destroy (GameObject.FindGameObjectWithTag("Fort1").gameObject.GetComponent<MeshCollider>());
+		Destroy (GameObject.Find("pCube3").gameObject.GetComponent<MeshCollider>());
 		Destroy (GameObject.Find("pCube1").gameObject.GetComponent<Rigidbody>());
-		Destroy (GameObject.Find("pCube1").gameObject.GetComponent<Collider>());
-		Destroy (GameObject.Find("pCube3").gameObject.GetComponent<Collider>());
+		Destroy (GameObject.Find("pCube1").gameObject.GetComponent<MeshCollider>());
 	}
 }

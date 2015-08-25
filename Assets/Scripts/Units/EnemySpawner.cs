@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -11,15 +12,18 @@ public class EnemySpawner : MonoBehaviour
 	bool spawn;
 	public GameObject tile;
 	public GameObject[] enemies;
-
+	public Text waves;
+	public int waveNumber;
+	string wave;
 	void Start ()
 	{
 		// Call the Spawn function after a delay of the spawnTime and then continue to call after the same amount of time.
-	//	InvokeRepeating ("Spawn", spawnTime, 0);
+		//	InvokeRepeating ("Spawn", spawnTime, 0);
+		waveNumber = 0;
 		enemyCount = 0;
 		spawn = true;
 	}
-
+	
 	public void Movementcheck(){
 		spawnTime = 15;
 	}
@@ -30,12 +34,17 @@ public class EnemySpawner : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+		wave = waveNumber.ToString();
+		waves.text = "Survive 5 waves: " + wave + "/5";
+
 		if (spawnTime <= 0) {
 			spawn = true;
 			spawnTime = 0;
-			if(enemyCount >= 15){
-				spawnTime = 15;
-			}
+			if(enemyCount == 15 || enemyCount == 30){
+				spawnTime = 120;
+				waveNumber += 1;
+			}else
+				spawnTime = 0;
 		}
 		if (spawn == false) {
 			spawnTime -= Time.deltaTime;
@@ -47,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
 	
 	void Spawn ()
 	{
-		if (enemyCount <= 30) {
+		if (enemyCount <= 75) {
 			tiles = new List<Transform> ();
 			Transform transform = GameObject.Find ("HexagonGrid").transform;
 			foreach (Transform child in transform) {
@@ -56,12 +65,12 @@ public class EnemySpawner : MonoBehaviour
 			}
 			tiles.RemoveRange (22, (tiles.Count - 22));
 			tiles.ToArray ();
-		
+			
 			int randomTileIndex = UnityEngine.Random.Range (0, 22);
 			GameObject spawnTile = tiles [randomTileIndex].gameObject;
 			Vector3 position = new Vector3(0,0,0);
 			// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-
+			
 			GameObject enemy = enemies[Random.Range(0,3)];
 			Transform myUnitTransform = null;
 			if(enemy.gameObject.tag == "RangedEnemy"){
@@ -96,7 +105,7 @@ public class EnemySpawner : MonoBehaviour
 			Instantiate (enemy, position, Quaternion.identity);
 			enemyCount += 1;
 			SpawnDone ();
-
+			
 		}
 	}
 }

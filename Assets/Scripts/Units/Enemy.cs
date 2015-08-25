@@ -108,6 +108,7 @@ public class Enemy : MonoBehaviour {
 				}
 			}
 			statistics.enemiesKilled += 1;
+			statistics.enemyFootDead += 1;
 			Destroy (this.gameObject);
 		}
 
@@ -201,7 +202,7 @@ public class Enemy : MonoBehaviour {
 				foreach (GameObject enemy in enemies) {
 					//if enemy is close then attack him, if not then just move forward
 					if (enemyHit == false && (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit")){
-						if (enemy.GetComponent<Artillery> ().curr_Health <= curr_Health) {
+						if (enemy.GetComponent<Musket> ().curr_Health <= curr_Health) {
 							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 								if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
 									source.PlayOneShot(footHitEffect,1.0f);
@@ -220,7 +221,7 @@ public class Enemy : MonoBehaviour {
 						}
 					}
 					if (enemyHit == false && (enemy.tag == "PikeUnit" || enemy.tag == "SelectedPikeUnit")){
-						if (enemy.GetComponent<Artillery> ().curr_Health <= curr_Health) {
+						if (enemy.GetComponent<Pike> ().curr_Health <= curr_Health) {
 							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 								if (enemy.tag == "PikeUnit" || enemy.tag == "SelectedPikeUnit") {
 									source.PlayOneShot(footHitEffect,1.0f);

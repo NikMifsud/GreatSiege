@@ -10,7 +10,8 @@ public class ThrowSimulation : MonoBehaviour
 	public Transform Projectile;      
 	private Transform myTransform;
 	public float timer;
-	
+	public bool isFire = false;
+
 	void Awake()
 	{
 		myTransform = transform;      
@@ -22,18 +23,21 @@ public class ThrowSimulation : MonoBehaviour
 	}
 	
 	void Update(){
-		if (timer >= 0) {
+		if (timer >= 0 && isFire == true) {
 			timer+=Time.deltaTime;
 		}
-		if (timer > 3) {
-			StartCoroutine (SimulateProjectile ());
+		if (timer > 2) {
+			isFire = false;
+			Projectile.position = new Vector3(100,100,100);
 			timer = 0;
 		}
 	}
 	
 	
-	IEnumerator SimulateProjectile()
+	public IEnumerator SimulateProjectile()
 	{
+		timer = 0;
+		isFire = true;
 		// Short delay added before Projectile is thrown
 		//yield return new WaitForSeconds(1.5f);
 		

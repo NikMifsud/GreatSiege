@@ -10,11 +10,14 @@ public class SpawnRangedSoldier : MonoBehaviour {
 	public List<Transform> tiles;
 	public Material highlightedTexture,mudTexture,dirtTexture,outpostTexture,stoneTexture;
 	public economy food;
+	public Statistics stats;
 	// Use this for initialization
 	void Start () {
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
+		stats = Camera.main.GetComponent<Statistics> ();
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -45,6 +48,7 @@ public class SpawnRangedSoldier : MonoBehaviour {
 						Soldier.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
 						Instantiate (Soldier, cubeTemp, Quaternion.identity);
 						food.Food -= 50;
+						stats.foodSpent += 50;
 						hit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = false;
 						RemoveSpawnArea ();
 						SpawnSoldier = false;

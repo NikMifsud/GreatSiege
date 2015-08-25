@@ -1,22 +1,33 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
-public class movingcamera : MonoBehaviour {
+public class movingcamera : MonoBehaviour 
+{
+	public float currentRotation;
 	public GameObject target;
 	private Vector3 point;
-	public float speedMod;
-
-	public void fuckingshit(){
-		speedMod = 0;
+	public Slider Sliders;
+	
+	void Start() {
+		Sliders = Sliders.GetComponent<Slider>();
+		currentRotation = 0;
+		point = target.transform.position;
+		transform.LookAt(point);
 	}
-	// Use this for initialization
-	void Start () {
-		point = target.transform.position;//get target's coords
-		transform.LookAt(point);//makes the camera look to it
+	void Update(){
+		transform.LookAt(point);
+		transform.RotateAround (target.transform.position,Vector3.up,currentRotation/8);
+		if (Input.GetMouseButtonUp(0)){
+			Sliders.value = 0;
+		}
+	}
+	//void OnGUI() 
+	//{
+	//	transform.localEulerAngles = new Vector3(0.0f, currentRotation, 0.0f);
+	//}
+	public void Slider(float newCurrentRotation){
+		currentRotation = newCurrentRotation;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		transform.RotateAround (point,new Vector3(0.0f,1.0f,0.0f),20 * Time.deltaTime * speedMod);
-	}
 }

@@ -101,6 +101,7 @@ public class EnemyCannon : MonoBehaviour {
 				}
 			}
 			statistics.enemiesKilled += 1;
+			statistics.enemySiegeDead += 1;
 			Destroy (this.gameObject);
 		}
 		
@@ -182,7 +183,7 @@ public class EnemyCannon : MonoBehaviour {
 				foreach (GameObject enemy in enemies) {
 					//if enemy is close then attack him, if not then just move forward
 					if (enemyHit == false && (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit")) {
-						if (enemy.GetComponent<Pike> ().curr_Health <= curr_Health) {
+						if (enemy.GetComponent<Musket> ().curr_Health <= curr_Health) {
 							if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 								if (enemy.tag == "SiegeUnit" || enemy.tag == "SelectedSiegeUnit") {
 									source.PlayOneShot (rangedHitEffect, 1.0f);

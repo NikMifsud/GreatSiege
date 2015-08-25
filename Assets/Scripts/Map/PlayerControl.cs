@@ -24,8 +24,6 @@ public class PlayerControl : MonoBehaviour {
 	public GameObject attackRangeIndicatorFive;
 	public GameObject attackRangeIndicatorSix;
 	public GameObject attackRangeIndicatorSeven;
-	public AudioClip cannonShotEffect, footHitEffect, bowShotEffect;
-	private AudioSource source;
 	public bool canMove,firingGrenades,firingFire;
 	public Grenades isGrenades;
 	public HoverGUI hover;
@@ -35,7 +33,6 @@ public class PlayerControl : MonoBehaviour {
 	void Start ()
 	{
 		PlayerCam = Camera.main.GetComponent<Camera>(); // Find the Camera's GameObject from its tag
-		source = Camera.main.GetComponent<AudioSource> ();
 		gameManager = Camera.main.GetComponent<GameMaster> ();
 		gridManager = Camera.main.GetComponent<GridManager> ();
 		isGrenades = GameObject.Find ("Grenades").GetComponent<Grenades> ();
@@ -344,7 +341,7 @@ public class PlayerControl : MonoBehaviour {
 							if(firingGrenades){
 								TileBehaviour mainEnemyTile = _hitInfo.collider.gameObject.GetComponent<CharacterMovement>().unitOriginalTile.GetComponent<TileBehaviour>();
 								//do damage
-					//			_hitInfo.collider.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
+								//_hitInfo.collider.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
 								//get his tile and then spread to the ones near him 
 
 								GameObject[] MudTiles = GameObject.FindGameObjectsWithTag ("MudTile");
@@ -425,14 +422,17 @@ public class PlayerControl : MonoBehaviour {
 							}
 							if(!firingGrenades){
 								//do the damage
-								_hitInfo.collider.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
+							//	_hitInfo.collider.gameObject.GetComponent<Enemy>().DealtDamage(unitAttack);
 								selectedCharacter.GetComponent<disablinghp>().Appear = false;
 								if(selectedCharacter.tag == "SelectedRangedUnit"){
-									selectedCharacter.gameObject.GetComponent<ThrowSimulation>().Target = _hitInfo.collider.transform;
-								//	StartCoroutine(selectedCharacter.gameObject.GetComponent<ThrowSimulation>().SimulateProjectile());
+									selectedCharacter.gameObject.GetComponent<ThrowSimulationArrows>().Target = _hitInfo.collider.transform;
+									StartCoroutine(selectedCharacter.gameObject.GetComponent<ThrowSimulationArrows>().SimulateProjectile());
 									StartCoroutine(selectedCharacter.gameObject.GetComponentInChildren<PlayRangedAnimation>().WaitForAnimation(_hitInfo.collider.gameObject));
 								}
 								if(selectedCharacter.tag == "SelectedSiegeUnit"){
+									selectedCharacter.gameObject.GetComponent<ThrowSimulationBullets>().Target = _hitInfo.collider.transform;
+									StartCoroutine(selectedCharacter.gameObject.GetComponent<ThrowSimulationBullets>().SimulateProjectile());
+
 									StartCoroutine(selectedCharacter.gameObject.GetComponentInChildren<PlayMusketAnimation>().WaitForAnimation(_hitInfo.collider.gameObject));
 								}
 								_hitInfo.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
@@ -531,9 +531,20 @@ public class PlayerControl : MonoBehaviour {
 
 							if(!firingGrenades){
 								//do the damage
-								_hitInfo.collider.gameObject.GetComponent<EnemyRanged>().DealtDamage(unitAttack);
+							//	_hitInfo.collider.gameObject.GetComponent<EnemyRanged>().DealtDamage(unitAttack);
 							
 								selectedCharacter.GetComponent<disablinghp>().Appear = false;
+								if(selectedCharacter.tag == "SelectedRangedUnit"){
+									selectedCharacter.gameObject.GetComponent<ThrowSimulationArrows>().Target = _hitInfo.collider.transform;
+									StartCoroutine(selectedCharacter.gameObject.GetComponent<ThrowSimulationArrows>().SimulateProjectile());
+									StartCoroutine(selectedCharacter.gameObject.GetComponentInChildren<PlayRangedAnimation>().WaitForAnimation(_hitInfo.collider.gameObject));
+								}
+								if(selectedCharacter.tag == "SelectedSiegeUnit"){
+									selectedCharacter.gameObject.GetComponent<ThrowSimulationBullets>().Target = _hitInfo.collider.transform;
+									StartCoroutine(selectedCharacter.gameObject.GetComponent<ThrowSimulationBullets>().SimulateProjectile());
+
+									StartCoroutine(selectedCharacter.gameObject.GetComponentInChildren<PlayMusketAnimation>().WaitForAnimation(_hitInfo.collider.gameObject));
+								}
 								_hitInfo.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 
 								//revert back
@@ -626,9 +637,19 @@ public class PlayerControl : MonoBehaviour {
 							}
 							if(!firingGrenades){
 								//do the damage
-								_hitInfo.collider.gameObject.GetComponent<EnemyCannon>().DealtDamage(unitAttack);
+							//	_hitInfo.collider.gameObject.GetComponent<EnemyCannon>().DealtDamage(unitAttack);
 								selectedCharacter.GetComponent<disablinghp>().Appear = false;
-						
+								if(selectedCharacter.tag == "SelectedRangedUnit"){
+									selectedCharacter.gameObject.GetComponent<ThrowSimulationArrows>().Target = _hitInfo.collider.transform;
+									StartCoroutine(selectedCharacter.gameObject.GetComponent<ThrowSimulationArrows>().SimulateProjectile());
+									StartCoroutine(selectedCharacter.gameObject.GetComponentInChildren<PlayRangedAnimation>().WaitForAnimation(_hitInfo.collider.gameObject));
+								}
+								if(selectedCharacter.tag == "SelectedSiegeUnit"){
+									selectedCharacter.gameObject.GetComponent<ThrowSimulationBullets>().Target = _hitInfo.collider.transform;
+									StartCoroutine(selectedCharacter.gameObject.GetComponent<ThrowSimulationBullets>().SimulateProjectile());
+
+									StartCoroutine(selectedCharacter.gameObject.GetComponentInChildren<PlayMusketAnimation>().WaitForAnimation(_hitInfo.collider.gameObject));
+								}
 								_hitInfo.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
 								
 								//revert back
@@ -655,7 +676,7 @@ public class PlayerControl : MonoBehaviour {
 							}
 						}
 						if(selectedCharacter.gameObject.tag == "SelectedFootUnit" || selectedCharacter.gameObject.tag == "FootUnit"){
-							source.PlayOneShot(footHitEffect,1.0f);
+						
 							//look at the enemy
 							selectedCharacter.GetComponent<disablinghp>().Appear = false;
 
@@ -667,7 +688,7 @@ public class PlayerControl : MonoBehaviour {
 							selectedCharacter.gameObject.tag = "FootUnit";
 						}
 						if(selectedCharacter.gameObject.tag == "SelectedRangedUnit" || selectedCharacter.gameObject.tag == "RangedUnit"){
-							source.PlayOneShot(bowShotEffect,1.0f);
+					
 							selectedCharacter.GetComponent<disablinghp>().Appear = false;
 							selectedCharacter.gameObject.transform.rotation = Quaternion.LookRotation(new Vector3(_hitInfo.collider.gameObject.transform.position.x, selectedCharacter.gameObject.transform.position.y, _hitInfo.collider.gameObject.transform.position.z) - selectedCharacter.gameObject.transform.position);
 							selectedCharacter.gameObject.GetComponent<Rangedsoldier> ().attack = true;
@@ -676,7 +697,7 @@ public class PlayerControl : MonoBehaviour {
 							selectedCharacter.gameObject.tag = "RangedUnit";
 						}
 						if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit" || selectedCharacter.gameObject.tag == "SiegeUnit"){
-							source.PlayOneShot(cannonShotEffect,1.0f);
+						
 							selectedCharacter.GetComponent<disablinghp>().Appear = false;
 							selectedCharacter.gameObject.transform.rotation = Quaternion.LookRotation(new Vector3(_hitInfo.collider.gameObject.transform.position.x, selectedCharacter.gameObject.transform.position.y, _hitInfo.collider.gameObject.transform.position.z) - selectedCharacter.gameObject.transform.position);
 							selectedCharacter.gameObject.GetComponent<Musket> ().attack = true;
@@ -685,7 +706,7 @@ public class PlayerControl : MonoBehaviour {
 							selectedCharacter.gameObject.tag = "SiegeUnit";
 						}
 						if(selectedCharacter.gameObject.tag == "SelectedPikeUnit" || selectedCharacter.gameObject.tag == "PikeUnit"){
-						//	source.PlayOneShot(cannonShotEffect,1.0f);
+						
 							selectedCharacter.GetComponent<disablinghp>().Appear = false;
 							selectedCharacter.gameObject.transform.rotation = Quaternion.LookRotation(new Vector3(_hitInfo.collider.gameObject.transform.position.x, selectedCharacter.gameObject.transform.position.y, _hitInfo.collider.gameObject.transform.position.z) - selectedCharacter.gameObject.transform.position);
 							selectedCharacter.gameObject.GetComponent<Pike> ().attack = true;

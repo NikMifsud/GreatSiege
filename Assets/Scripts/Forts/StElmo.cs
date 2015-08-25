@@ -16,10 +16,11 @@ public class StElmo : MonoBehaviour {
 	public ParticleEmitter fire2;
 	public ParticleEmitter smoke;
 	public GameObject healthBar;
-
-	
+	public Canvas statScreen;
+	bool Leveldone;
 	// Use this for initialization
 	void Start () {
+		Leveldone = false;
 		max_Health = 1000;
 		curr_Health = 1000;
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
@@ -36,7 +37,7 @@ public class StElmo : MonoBehaviour {
 			curr_Health = 1000;
 		}
 
-		if (curr_Health <= 0) {
+		if (curr_Health <= 0 && Leveldone == false) {
 		//	Destroy (this.gameObject);
 			fire.minEmission = 40;
 			fire.maxEmission = 40;
@@ -44,10 +45,13 @@ public class StElmo : MonoBehaviour {
 			smoke.maxEmission = 40;
 			fire2.minEmission = 30;
 			fire2.maxEmission = 30;
-		//	Time.timeScale = 0;
-			pauseCover.SetActive(false);
+			statScreen.gameObject.SetActive(true);
+			statScreen.gameObject.GetComponent<UpdateStatistics>().UpdateStatisticScreen();
+
 			gameMaster.gameState = 4;
-			text.SetActive(true);
+			Time.timeScale = 0;
+			Leveldone = true;
+			//text.SetActive(true);
 		}
 
 		if (DamageTaken >= 1) {

@@ -11,10 +11,12 @@ public class SpawnPikeUnit : MonoBehaviour {
 	public Material highlightedTexture,mudTexture,dirtTexture,outpostTexture,stoneTexture;
 	public List<Transform> tiles;
 	public economy food;
+	public Statistics stats;
 	// Use this for initialization
 	void Start () {
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
+		stats = Camera.main.GetComponent<Statistics> ();
 	}
 	
 	// Update is called once per frame
@@ -43,6 +45,7 @@ public class SpawnPikeUnit : MonoBehaviour {
 					Soldier.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
 					Instantiate (Soldier, cubeTemp, Quaternion.identity);
 					food.Food = food.Food - 45;
+					stats.foodSpent += 45;
 					hit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = false;
 					RemoveSpawnArea ();
 					SpawnSoldier = false;
