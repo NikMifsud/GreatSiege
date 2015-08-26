@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\FadeTextEncyclo.js" />
      <Compile Include="Assets\Scripts\Menus\ButtonColor.js" />
      <Compile Include="Assets\Scripts\Menus\ChangeToScene.js" />
+     <Compile Include="Assets\Scripts\Menus\GLOWshow.js" />
      <Compile Include="Assets\Scripts\Menus\MuteSoundNdPlayButtons.js" />
      <Compile Include="Assets\Scripts\Menus\PlayCutscenes.js" />
      <Compile Include="Assets\Scripts\Menus\PlayMenuNav.js" />
