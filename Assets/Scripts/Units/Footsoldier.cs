@@ -19,7 +19,6 @@ public class Footsoldier : MonoBehaviour {
 	public economy economy;
 	public bool attack;
 	public Animator anim;
-	public RuntimeAnimatorController runtimeAnimatorController;
 	public bool isMud;
 	// Use this for initialization
 
@@ -38,7 +37,6 @@ public class Footsoldier : MonoBehaviour {
 		attack = false;
 		isMud = false;
 		economy = GameObject.FindGameObjectWithTag ("Economy").GetComponent<economy>();
-		runtimeAnimatorController = anim.runtimeAnimatorController;
 	}
 	
 	public void DecreaseCooldown(){

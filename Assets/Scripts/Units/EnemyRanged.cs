@@ -5,7 +5,8 @@ using System.Linq;
 using System;
 
 public class EnemyRanged : MonoBehaviour {
-	
+
+	public bool isBeingAttacked;
 	public float curr_Health;
 	public float max_Health;
 	public int Armor;
@@ -33,6 +34,7 @@ public class EnemyRanged : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		isBeingAttacked = false;
 		gridManager = Camera.main.GetComponent<GridManager> ();
 		max_Health = 100;
 		curr_Health = 100;
@@ -86,7 +88,7 @@ public class EnemyRanged : MonoBehaviour {
 			Movementtime -= Time.deltaTime;
 
 		}
-		if (canMove == true) {
+		if (canMove == true && isBeingAttacked == false) {
 			getNextMove ();
 		}
 		if (curr_Health <= 0) {

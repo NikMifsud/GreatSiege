@@ -35,10 +35,11 @@ public class PlayRangedAnimation : MonoBehaviour {
 	public IEnumerator WaitForAnimation(GameObject enemy){
 		while (true) {
 			if (attacked){
-				yield return new WaitForSeconds (3f);
+				yield return new WaitForSeconds (2f);
 				if(enemy.tag == "Enemy" || enemy.tag == "AttackableEnemy"){
 					source.PlayOneShot(bowShotEffect,1.0f);
 					enemy.gameObject.GetComponent<disablinghp> ().JustHit = true;
+					enemy.gameObject.GetComponent<Enemy> ().isBeingAttacked = false;
 					enemy.gameObject.GetComponent<Enemy> ().DealtDamage (attack.Attack);
 					attacked = false;
 					attack.attack = false;
@@ -46,6 +47,7 @@ public class PlayRangedAnimation : MonoBehaviour {
 				if(enemy.tag == "RangedEnemy"|| enemy.tag == "AttackableRangedEnemy"){
 					source.PlayOneShot(bowShotEffect,1.0f);
 					enemy.gameObject.GetComponent<disablinghp> ().JustHit = true;
+					enemy.gameObject.GetComponent<EnemyRanged> ().isBeingAttacked = false;
 					enemy.gameObject.GetComponent<EnemyRanged> ().DealtDamage (attack.Attack);
 					attacked = false;
 					attack.attack = false;
@@ -53,6 +55,7 @@ public class PlayRangedAnimation : MonoBehaviour {
 				if(enemy.tag == "EnemySiege"|| enemy.tag == "AttackableEnemySiege"){
 					source.PlayOneShot(bowShotEffect,1.0f);
 					enemy.gameObject.GetComponent<disablinghp> ().JustHit = true;
+					enemy.gameObject.GetComponent<EnemyCannon> ().isBeingAttacked = false;
 					enemy.gameObject.GetComponent<EnemyCannon> ().DealtDamage (attack.Attack);
 					attacked = false;
 					attack.attack = false;
@@ -67,7 +70,7 @@ public class PlayRangedAnimation : MonoBehaviour {
 		while (true) {
 			if (dead){
 				attack.gameObject.GetComponent<disablinghp>().JustHit = true;
-				yield return new WaitForSeconds (5f);
+				yield return new WaitForSeconds (4f);
 				Destroy(attack.gameObject);
 			}
 			yield return null;

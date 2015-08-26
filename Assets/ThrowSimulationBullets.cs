@@ -26,7 +26,7 @@ public class ThrowSimulationBullets : MonoBehaviour
 		if (timer >= 0 && isFire == true) {
 			timer+=Time.deltaTime;
 		}
-		if (timer > 2) {
+		if (timer > 0.5f) {
 			isFire = false;
 			Projectile.position = new Vector3(100,100,100);
 			timer = 0;
@@ -36,14 +36,14 @@ public class ThrowSimulationBullets : MonoBehaviour
 	
 	public IEnumerator SimulateProjectile()
 	{
-		yield return new WaitForSeconds (2);
+		yield return new WaitForSeconds (1f);
 		timer = 0;
 		isFire = true;
 		// Short delay added before Projectile is thrown
 		//yield return new WaitForSeconds(1.5f);
 		
 		// Move projectile to the position of throwing object + add some offset if needed.
-		Projectile.position = myTransform.position + new Vector3(0, 0.0f, 0);
+		Projectile.position = myTransform.position + new Vector3(0, -0.00001f, 0);
 		
 		// Calculate distance to target
 		float target_Distance = Vector3.Distance(Projectile.position, Target.position);

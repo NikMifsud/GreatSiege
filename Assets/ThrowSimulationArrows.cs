@@ -26,7 +26,7 @@ public class ThrowSimulationArrows : MonoBehaviour
 		if (timer >= 0 && isFire == true) {
 			timer+=Time.deltaTime;
 		}
-		if (timer > 2) {
+		if (timer > 0.2) {
 			isFire = false;
 			Projectile.position = new Vector3(100,100,100);
 			timer = 0;
@@ -36,7 +36,7 @@ public class ThrowSimulationArrows : MonoBehaviour
 	
 	public IEnumerator SimulateProjectile()
 	{
-		yield return new WaitForSeconds (2);
+		yield return new WaitForSeconds (1.7f);
 		timer = 0;
 		isFire = true;
 		// Short delay added before Projectile is thrown

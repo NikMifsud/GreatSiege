@@ -7,9 +7,12 @@ public class CooldownRefresh : MonoBehaviour {
 	public PlayerControl playerControl;
 	public GameMaster gameMaster;
 	public float timer;
+	public AudioClip  clip;
+	private AudioSource source;
 
 	// Use this for initialization
 	void Start () {
+		source = Camera.main.GetComponent<AudioSource> ();
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 		timer = 45;
@@ -22,6 +25,7 @@ public class CooldownRefresh : MonoBehaviour {
 		}
 
 		if (CooldownButtonPressed == true) {
+			source.PlayOneShot(clip,1.0f);
 			timer = 0;
 			GameObject[] footUnits = GameObject.FindGameObjectsWithTag("FootUnit");
 			GameObject[] rangedUnits = GameObject.FindGameObjectsWithTag("RangedUnit");

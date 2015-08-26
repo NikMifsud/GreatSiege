@@ -14,6 +14,8 @@ public class EnemySpawner : MonoBehaviour
 	public GameObject[] enemies;
 	public Text waves;
 	public int waveNumber;
+	public int siegeCount;
+	GameObject enemy;
 	string wave;
 	void Start ()
 	{
@@ -21,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
 		//	InvokeRepeating ("Spawn", spawnTime, 0);
 		waveNumber = 0;
 		enemyCount = 0;
+		siegeCount = 0;
 		spawn = true;
 	}
 	
@@ -42,6 +45,7 @@ public class EnemySpawner : MonoBehaviour
 			spawnTime = 0;
 			if(enemyCount == 15 || enemyCount == 30){
 				spawnTime = 120;
+				siegeCount = 0;
 				waveNumber += 1;
 			}else
 				spawnTime = 0;
@@ -70,8 +74,11 @@ public class EnemySpawner : MonoBehaviour
 			GameObject spawnTile = tiles [randomTileIndex].gameObject;
 			Vector3 position = new Vector3(0,0,0);
 			// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-			
-			GameObject enemy = enemies[Random.Range(0,3)];
+			if(siegeCount < 2){
+				enemy = enemies[Random.Range(0,3)];
+			}else {
+				enemy = enemies[Random.Range(0,2)];
+			}
 			Transform myUnitTransform = null;
 			if(enemy.gameObject.tag == "RangedEnemy"){
 				myUnitTransform = enemy.transform.FindChild ("EnemyRanged");
@@ -89,6 +96,7 @@ public class EnemySpawner : MonoBehaviour
 				}
 			}
 			if(enemy.gameObject.tag == "EnemySiege"){
+				siegeCount += 1;
 				position = new Vector3 (spawnTile.transform.position.x, 0.11f, spawnTile.transform.position.z);
 				if(spawnTile.gameObject.tag == "StoneTile"){
 					position = new Vector3 (spawnTile.transform.position.x, 0.12f, spawnTile.transform.position.z);

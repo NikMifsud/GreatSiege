@@ -6,6 +6,7 @@ using System;
 
 public class Enemy : MonoBehaviour {
 
+	public bool isBeingAttacked;
 	public float curr_Health;
 	public float max_Health;
 	public int Armor;
@@ -33,6 +34,7 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		isBeingAttacked = false;
 		gridManager = Camera.main.GetComponent<GridManager> ();
 		max_Health = 100;
 		curr_Health = 100;
@@ -77,7 +79,7 @@ public class Enemy : MonoBehaviour {
 		if (canMove == false) {
 			Movementtime -= Time.deltaTime;
 		}
-		if (canMove == true) {
+		if (canMove == true && isBeingAttacked == false) {
 			getNextMove ();
 		}
 		if (curr_Health <= 0) {

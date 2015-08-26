@@ -13,11 +13,14 @@ public class HealthPowerUps : MonoBehaviour {
 	public ParticleSystem healingAura;
 	public bool playing;
 	public float timer;
+	private AudioSource source;
+	public AudioClip clip;
 
 
 	// Use this for initialization
 	void Start () {
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
+		source = Camera.main.GetComponent<AudioSource> ();
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 		timer = 45;
 	}
@@ -47,6 +50,7 @@ public class HealthPowerUps : MonoBehaviour {
 			if (Physics.Raycast (_ray, out _hitInfo)) {
 				if(_hitInfo.collider.gameObject.tag == "StoneTile" || _hitInfo.collider.gameObject.tag == "OutpostTile" || _hitInfo.collider.gameObject.tag == "DirtTile" || _hitInfo.collider.gameObject.tag == "MudTile" || _hitInfo.collider.gameObject.tag == "FootUnit" || _hitInfo.collider.gameObject.tag == "RangedUnit"){
 				timer = 0;
+				source.PlayOneShot(clip,1.0f);
 				healingAura.transform.position = _hitInfo.collider.gameObject.transform.position;
 				//healingAura.transform.position.y += 0.1;
 				playing = true;

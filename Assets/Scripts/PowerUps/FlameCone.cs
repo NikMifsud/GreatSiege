@@ -7,8 +7,11 @@ public class FlameCone : MonoBehaviour {
 	public float timer;
 	public bool timerStarted;
 	public bool isFlame;
+	public AudioClip  clip;
+	private AudioSource source;
 	// Use this for initialization
 	void Start () {
+		source = Camera.main.GetComponent<AudioSource> ();
 		timer = 0;
 		timerStarted = false;
 		flameThrower = GameObject.Find("Flamethrower").GetComponent<FlameThrower>();
@@ -28,6 +31,7 @@ public class FlameCone : MonoBehaviour {
 		}
 
 		if (this.isFlame && this.gameObject.GetComponent<Footsoldier>().canMove) {
+			source.PlayOneShot(clip,1.0f);
 			this.transform.FindChild("Flamethrower").gameObject.SetActive (true);
 			this.gameObject.GetComponent<Footsoldier>().DecreaseCooldown();
 			timerStarted = true;
