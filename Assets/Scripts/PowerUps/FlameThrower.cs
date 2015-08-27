@@ -28,7 +28,7 @@ public class FlameThrower : MonoBehaviour {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit = new RaycastHit ();
 			if (Physics.Raycast (ray, out hit)) {
-				if (hit.collider.tag == "RangedUnit" || hit.collider.tag == "SiegeUnit") {
+				if (hit.collider.tag == "RangedUnit" || hit.collider.tag == "SiegeUnit" || hit.collider.tag == "PikeUnit") {
 					buttonPressed = false;
 					gameMaster.gameState = 0;
 				}	

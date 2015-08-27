@@ -8,7 +8,7 @@ public class PlayPikeAnimation : MonoBehaviour {
 	public Pike attack;
 	public bool attacked = false;
 	public bool dead = false;
-	public AudioClip  footHitEffect;
+	public AudioClip  footHitEffect,deathEffect;
 	private AudioSource source;
 
 	// Use this for initialization
@@ -72,6 +72,7 @@ public class PlayPikeAnimation : MonoBehaviour {
 
 		while (true) {
 			if (dead){
+				source.PlayOneShot(deathEffect,1.0f);
 				attack.gameObject.GetComponent<disablinghp>().JustHit = true;
 				yield return new WaitForSeconds (4f);
 				Destroy(attack.gameObject);

@@ -33,7 +33,7 @@ public class Fader : MonoBehaviour {
 			color.a -= 0.5f;
 			this.transform.GetComponentInChildren<Renderer>().material.color = color;
 			GameObject.Find("pCube4").GetComponent<Renderer>().material.color = color;
-			color.a -= 0.7f;
+			color.a -= 0.5f;
 			GameObject.Find("pCube3").GetComponent<Renderer>().material.color = color;
 			isTransparent = true;
 			isSolid = false;
@@ -48,7 +48,7 @@ public class Fader : MonoBehaviour {
 
 			this.transform.GetComponentInChildren<Renderer>().material.color = color;
 			GameObject.Find("pCube4").GetComponent<Renderer>().material.color = color;
-			color.a += 0.7f;
+			color.a += 0.5f;
 			GameObject.Find("pCube3").GetComponent<Renderer>().material.color = color;
 
 			isSolid = true;

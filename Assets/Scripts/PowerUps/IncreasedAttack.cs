@@ -9,13 +9,15 @@ public class IncreasedAttack : MonoBehaviour {
 	public GameMaster gameMaster;
 	public float timer;
 	public Animator anim;
-
+	private AudioSource source;
+	public AudioClip clip;
 	// Use this for initialization
 	void Start () {
 		timer = 90;
 		attackTimer = 0;
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
+		source = Camera.main.GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -72,6 +74,7 @@ public class IncreasedAttack : MonoBehaviour {
 		if (CooldownButtonPressed == true) {
 			timer = 0;
 			attackTimer = 1;
+			source.PlayOneShot(clip,1f);
 			GameObject[] footUnits = GameObject.FindGameObjectsWithTag("FootUnit");
 			GameObject[] rangedUnits = GameObject.FindGameObjectsWithTag("RangedUnit");
 			GameObject[] siegeUnits = GameObject.FindGameObjectsWithTag("SiegeUnit");

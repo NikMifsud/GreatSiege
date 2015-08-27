@@ -9,10 +9,12 @@ public class IncreasedArmor : MonoBehaviour {
 	public GameMaster gameMaster;
 	public float timer;
 	public Animator anim;
-
+	public AudioClip clip;
+	private AudioSource source;
 	// Use this for initialization
 	void Start () {
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
+		source = Camera.main.GetComponent<AudioSource> ();
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
 		armorTimer = 0;
 		timer = 90;
@@ -71,6 +73,7 @@ public class IncreasedArmor : MonoBehaviour {
 		if (CooldownButtonPressed == true) {
 			timer = 0;
 			armorTimer = 1;
+			source.PlayOneShot(clip,1f);
 			GameObject[] footUnits = GameObject.FindGameObjectsWithTag("FootUnit");
 			GameObject[] rangedUnits = GameObject.FindGameObjectsWithTag("RangedUnit");
 			GameObject[] siegeUnits = GameObject.FindGameObjectsWithTag("SiegeUnit");

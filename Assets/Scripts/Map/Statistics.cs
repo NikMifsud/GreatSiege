@@ -35,6 +35,7 @@ public class Statistics : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log ("outposts: " + outpostCaptured);
 		gametimer += Time.deltaTime;
 		if (gametimer >= 60) {
 			minutes += 1;

@@ -28,10 +28,12 @@ public class PlayerControl : MonoBehaviour {
 	public Grenades isGrenades;
 	public HoverGUI hover;
 	public PlayFootAnimation animation;
-
+	public AudioClip selection1,selection2;
+	private AudioSource source;
 	// Use this for initialization
 	void Start ()
 	{
+		source = Camera.main.GetComponent<AudioSource> ();
 		PlayerCam = Camera.main.GetComponent<Camera>(); // Find the Camera's GameObject from its tag
 		gameManager = Camera.main.GetComponent<GameMaster> ();
 		gridManager = Camera.main.GetComponent<GridManager> ();
@@ -108,6 +110,7 @@ public class PlayerControl : MonoBehaviour {
 						hover.isOnMusket = false;
 						canMove = hit.collider.gameObject.GetComponent<Footsoldier>().canMove;
 						if(canMove){
+							source.PlayOneShot(selection1,1f);
 							unitAttack = hit.collider.gameObject.GetComponent<Footsoldier>().Attack;
 							selectedCharacter = hit.collider.gameObject;
 							gridManager.selectedCharacter = hit.collider.gameObject;
@@ -129,6 +132,7 @@ public class PlayerControl : MonoBehaviour {
 						hover.isOnMusket = false;
 						canMove = hit.collider.gameObject.GetComponent<Rangedsoldier>().canMove;
 						if(canMove){
+							source.PlayOneShot(selection2,1f);
 							unitAttack = hit.collider.gameObject.GetComponent<Rangedsoldier>().Attack;
 							if(isGrenades.isGrenades == true)
 							{
@@ -155,6 +159,7 @@ public class PlayerControl : MonoBehaviour {
 						hover.isOnSiegeUnit = false;
 						canMove = hit.collider.gameObject.GetComponent<Musket>().canMove;
 						if(canMove){
+							source.PlayOneShot(selection2,1f);
 							selectedCharacter = hit.collider.gameObject;
 							gridManager.selectedCharacter = hit.collider.gameObject;
 							gameManager.gameState = 1;
@@ -176,6 +181,7 @@ public class PlayerControl : MonoBehaviour {
 						hover.isOnSiegeUnit = false;
 						canMove = hit.collider.gameObject.GetComponent<Pike>().canMove;
 						if(canMove){
+							source.PlayOneShot(selection1,1f);
 							selectedCharacter = hit.collider.gameObject;
 							gridManager.selectedCharacter = hit.collider.gameObject;
 							gameManager.gameState = 1;
@@ -211,23 +217,23 @@ public class PlayerControl : MonoBehaviour {
 							if (_hitInfo.collider.gameObject.tag == "StoneTile") {
 								if(selectedCharacter.gameObject.tag == "SelectedFootUnit"){
 									
-									movement.y = 0.2f;
+									movement.y = 0.15f;
 								}
 							    if(selectedCharacter.gameObject.tag == "SelectedRangedUnit"){
 
 									selectedCharacter.GetComponent<Rangedsoldier> ().AttackRange = (5);
 									
-									movement.y = 0.2f;
+									movement.y = 0.15f;
 								}
 							    if(selectedCharacter.gameObject.tag == "SelectedSiegeUnit"){
 									
 									selectedCharacter.GetComponent<Musket> ().AttackRange = (5);
 
-									movement.y = 0.2f;
+									movement.y = 0.15f;
 								}
 								if(selectedCharacter.gameObject.tag == "SelectedPikeUnit"){
 								
-									movement.y = 0.2f;
+									movement.y = 0.15f;
 								}
 							}
 							if(_hitInfo.collider.gameObject.tag == "OutpostTile"){

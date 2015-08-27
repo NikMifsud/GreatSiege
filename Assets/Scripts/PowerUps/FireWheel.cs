@@ -12,6 +12,7 @@ public class FireWheel : MonoBehaviour {
 	public GridManager gridManager;
 	public float Movementtime;
 	public bool canMove;
+	public AudioClip clip,clipdeath;
 	public ArrayList availableMoves;
 	public ArrayList enemies;
 	Collider[] colliders;
@@ -35,6 +36,7 @@ public class FireWheel : MonoBehaviour {
 		Movementtime = 0.5f;
 		enemyHit = false;
 		source = Camera.main.GetComponent<AudioSource> ();
+		source.PlayOneShot (clip, 0.5f);
 	}
 	
 	public void DecreaseCooldown(){
@@ -63,6 +65,7 @@ public class FireWheel : MonoBehaviour {
 
 		if (tileCount > 7 || enemyHit) {
 			this.GetComponent<CharacterMovement>().unitOriginalTile.GetComponent<TileBehaviour>().isPassable = true;
+			source.Stop();
 			Destroy(this.gameObject);
 
 		}
@@ -83,7 +86,8 @@ public class FireWheel : MonoBehaviour {
 				//if enemy is close then attack him, if not then just move forward
 				if (enemy.tag == "Enemy" || enemy.tag == "AttackableEnemy") {
 					if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
-						if (enemy.tag == "Enemy" || enemy.tag == "RangedEnemy") {
+						if (enemy.tag == "Enemy" || enemy.tag == "AttackableEnemy") {
+							source.PlayOneShot(clipdeath,1f);
 							enemy.GetComponent<disablinghp> ().JustHit = true;
 							enemy.GetComponent<Enemy> ().DealtDamage (Attack);
 							enemy.GetComponent<Enemy> ().CheckDeath ();
@@ -95,9 +99,21 @@ public class FireWheel : MonoBehaviour {
 				if (enemy.tag == "RangedEnemy" || enemy.tag == "AttackableRangedEnemy") {
 					if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
 						if (enemy.tag == "RangedEnemy" || enemy.tag == "AttackableRangedEnemy") {
+							source.PlayOneShot(clipdeath,1f);
 							enemy.GetComponent<disablinghp> ().JustHit = true;
 							enemy.GetComponent<EnemyRanged> ().DealtDamage (Attack);
 							enemy.GetComponent<EnemyRanged> ().CheckDeath ();
+							enemyHit = true;
+							DecreaseCooldown ();
+						}
+					} 
+				} 
+				if (enemy.tag == "EnemySiege" || enemy.tag == "AttackableEnemySiege") {
+					if (PathFinder.FindPath (this.GetComponent<CharacterMovement> ().unitOriginalTile.tile, enemy.GetComponent<CharacterMovement> ().unitOriginalTile.tile).ToList ().Count <= (AttackRange + 1)) {
+						if (enemy.tag == "EnemySiege" || enemy.tag == "AttackableEnemySiege") {
+							enemy.GetComponent<disablinghp> ().JustHit = true;
+							enemy.GetComponent<EnemyCannon> ().DealtDamage (Attack);
+							enemy.GetComponent<EnemyCannon> ().CheckDeath ();
 							enemyHit = true;
 							DecreaseCooldown ();
 						}

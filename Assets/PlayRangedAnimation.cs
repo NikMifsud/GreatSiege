@@ -8,7 +8,7 @@ public class PlayRangedAnimation : MonoBehaviour {
 	public Rangedsoldier attack;
 	public bool attacked = false;
 	public bool dead = false;
-	public AudioClip bowShotEffect;
+	public AudioClip bowShotEffect,deathEffect;
 	private AudioSource source;
 	// Use this for initialization
 	void Start () {
@@ -69,6 +69,7 @@ public class PlayRangedAnimation : MonoBehaviour {
 
 		while (true) {
 			if (dead){
+				source.PlayOneShot(deathEffect,1.0f);
 				attack.gameObject.GetComponent<disablinghp>().JustHit = true;
 				yield return new WaitForSeconds (4f);
 				Destroy(attack.gameObject);

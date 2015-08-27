@@ -11,13 +11,15 @@ public class SpawnMusketUnit : MonoBehaviour {
 	public Material highlightedTexture,mudTexture,dirtTexture,outpostTexture,stoneTexture;
 	public economy food;
 	public Statistics stats;
+	public AudioClip clip;
+	private AudioSource source;
 	// Use this for initialization
 	void Start () {
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
 		stats = Camera.main.GetComponent<Statistics> ();
+		source = Camera.main.GetComponent<AudioSource> ();
 	}
-
 	
 	// Update is called once per frame
 	void Update () {
@@ -34,7 +36,7 @@ public class SpawnMusketUnit : MonoBehaviour {
 					if (hit.collider.gameObject.tag == "SpawnStoneTile") {
 						Soldier.GetComponent<Musket> ().AttackRange = 5;
 						Soldier.GetComponent<Musket> ().Armor = 5;
-						cubeTemp.y = 0.2f;
+						cubeTemp.y = 0.15f;
 					} if(hit.collider.gameObject.tag == "SpawnOutpostTile"){
 						Soldier.GetComponent<Musket> ().AttackRange = 4;
 						cubeTemp.y = 0.1f;
@@ -71,6 +73,7 @@ public class SpawnMusketUnit : MonoBehaviour {
 	public void ButtonClicked () {
 		playerControl.highlightingTiles = false;
 		if (food.Food >= 60) {
+			source.PlayOneShot(clip,1f);
 			SpawnSoldier = true;
 			GenerateSpawnArea ();
 			gameMaster.gameState = 3;

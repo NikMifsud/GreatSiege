@@ -13,11 +13,14 @@ public class spawnsoldier : MonoBehaviour {
 	public List<Transform> tiles;
 	public economy food;
 	public Statistics stats;
+	public AudioClip clip;
+	private AudioSource source;
 	// Use this for initialization
 	void Start () {
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
 		stats = Camera.main.GetComponent<Statistics> ();
+		source = Camera.main.GetComponent<AudioSource> ();
 	}
 
 	
@@ -35,7 +38,7 @@ public class spawnsoldier : MonoBehaviour {
 					} else if (hit.collider.GetComponent<TileBehaviour> ().isPassable == true && (hit.collider.tag == "SpawnStoneTile" || hit.collider.tag == "SpawnDirtTile" || hit.collider.tag == "SpawnOutpostTile" || hit.collider.tag == "SpawnMudTile")) {
 						var cubeTemp = hit.collider.transform.position;
 						if (hit.collider.gameObject.tag == "SpawnStoneTile") {
-							cubeTemp.y = 0.2f;
+							cubeTemp.y = 0.15f;
 						} if(hit.collider.gameObject.tag == "SpawnOutpostTile"){
 							cubeTemp.y = 0.1f;
 							economy.outpost += 1;
@@ -70,6 +73,7 @@ public class spawnsoldier : MonoBehaviour {
 	public void ButtonClicked () {
 		playerControl.highlightingTiles = false;
 		if (food.Food >= 30) {
+			source.PlayOneShot(clip,1f);
 			SpawnSoldier = true;
 			GenerateSpawnArea ();
 			gameMaster.gameState = 3;

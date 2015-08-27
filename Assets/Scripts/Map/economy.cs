@@ -18,6 +18,7 @@ public class economy : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (outpost);
 		stats.outpostCaptured = outpost;
 		number += Time.deltaTime;
 		if (number >= 5){
