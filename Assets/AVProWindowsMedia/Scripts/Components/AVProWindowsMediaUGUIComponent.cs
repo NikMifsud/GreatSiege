@@ -155,8 +155,8 @@ public class AVProWindowsMediaUGUIComponent : UnityEngine.UI.MaskableGraphic
 
 		Vector4 v = Vector4.zero;
 
-		int w = Mathf.RoundToInt(tex.width * uvRect.width);
-		int h = Mathf.RoundToInt(tex.height * uvRect.height);
+		int w = Mathf.RoundToInt(texWidth * uvRect.width);
+		int h = Mathf.RoundToInt(texHeight * uvRect.height);
 
 		float paddedW = ((w & 1) == 0) ? w : w + 1;
 		float paddedH = ((h & 1) == 0) ? h : h + 1;
