@@ -17,9 +17,12 @@ public class Pike : MonoBehaviour {
 	public economy economy;
 	public bool attack;
 	public bool isMud,isDead;
+	private AudioSource source;
+	public AudioClip clip;
 	// Use this for initialization
 	
 	void Start () {
+		source = Camera.main.GetComponent<AudioSource> ();
 		stats = Camera.main.GetComponent<Statistics> ();
 		max_Health = 100;
 		curr_Health = 100;
@@ -62,6 +65,7 @@ public class Pike : MonoBehaviour {
 		}
 		if (curr_Health <= 0) {
 			if(isDead == false){
+				source.PlayOneShot(clip,1f);
 				stats.pikeDead +=1;
 				isDead = true;
 			}

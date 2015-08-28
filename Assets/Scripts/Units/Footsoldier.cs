@@ -20,9 +20,12 @@ public class Footsoldier : MonoBehaviour {
 	public bool attack;
 	public Animator anim;
 	public bool isMud;
+	private AudioSource source;
+	public AudioClip clip;
 	// Use this for initialization
-
+	
 	void Start () {
+		source = Camera.main.GetComponent<AudioSource> ();
 		stats = Camera.main.GetComponent<Statistics> ();
 		max_Health = 100;
 		curr_Health = 100;
@@ -65,6 +68,7 @@ public class Footsoldier : MonoBehaviour {
 		}
 		if (curr_Health <= 0) {
 			if(isDead == false){
+				source.PlayOneShot(clip,1f);
 				stats.footSoldierDead +=1;
 				isDead = true;
 			}

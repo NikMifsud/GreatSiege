@@ -8,7 +8,7 @@ public class PlayMusketAnimation : MonoBehaviour {
 	public Musket attack;
 	public bool attacked = false;
 	public bool dead = false;
-	public AudioClip musketShotEffect,deathEffect;
+	public AudioClip musketShotEffect;
 	private AudioSource source;
 	// Use this for initialization
 	void Start () {
@@ -70,7 +70,6 @@ public class PlayMusketAnimation : MonoBehaviour {
 
 		while (true) {
 			if (dead){
-				source.PlayOneShot(deathEffect,1.0f);
 				attack.gameObject.GetComponent<disablinghp>().JustHit = true;
 				yield return new WaitForSeconds (4f);
 				Destroy(attack.gameObject);

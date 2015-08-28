@@ -8,7 +8,7 @@ public class PlayFootAnimation : MonoBehaviour {
 	public Footsoldier attack;
 	public bool attacked = false;
 	public bool dead = false;
-	public AudioClip  footHitEffect, deathEffect;
+	public AudioClip  footHitEffect;
 	private AudioSource source;
 	// Use this for initialization
 	void Start () {
@@ -69,7 +69,6 @@ public class PlayFootAnimation : MonoBehaviour {
 	public IEnumerator WaitForDeathAnimation(){
 		while (true) {
 			if (dead){
-				source.PlayOneShot(deathEffect,1.0f);
 				attack.gameObject.GetComponent<disablinghp>().JustHit = true;
 				yield return new WaitForSeconds (4f);
 				Destroy(attack.gameObject);

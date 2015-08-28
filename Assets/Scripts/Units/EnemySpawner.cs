@@ -23,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
 		//	InvokeRepeating ("Spawn", spawnTime, 0);
 		waveNumber = 0;
 		enemyCount = 0;
+		spawnTime = 0;
 		siegeCount = 0;
 		spawn = true;
 	}

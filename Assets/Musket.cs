@@ -18,6 +18,8 @@ public class Musket : MonoBehaviour {
 	public bool attack;
 	public bool isMud;
 	public bool isDead;
+	public AudioClip  clip;
+	private AudioSource source;
 	// Use this for initialization
 	void Start () {
 		stats = Camera.main.GetComponent<Statistics> ();
@@ -34,6 +36,7 @@ public class Musket : MonoBehaviour {
 		Movementtime = 15;
 		isMud = false;
 		economy = GameObject.FindGameObjectWithTag ("Economy").GetComponent<economy>();
+		source = Camera.main.GetComponent<AudioSource> ();
 	}
 	
 	public void DecreaseCooldown(){
@@ -61,6 +64,7 @@ public class Musket : MonoBehaviour {
 		}
 		if (curr_Health <= 0) {
 			if(isDead == false){
+				source.PlayOneShot(clip,1f);
 				stats.musketDead +=1;
 				isDead = true;
 			}

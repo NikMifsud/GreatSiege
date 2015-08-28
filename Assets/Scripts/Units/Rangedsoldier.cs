@@ -18,8 +18,12 @@ public class Rangedsoldier : MonoBehaviour {
 	public bool attack;
 	public bool isMud;
 	public bool isDead;
+	private AudioSource source;
+	public AudioClip clip;
 	// Use this for initialization
+	
 	void Start () {
+		source = Camera.main.GetComponent<AudioSource> ();
 		stats = Camera.main.GetComponent<Statistics> ();
 		max_Health = 100;
 		curr_Health = 100;
@@ -61,6 +65,7 @@ public class Rangedsoldier : MonoBehaviour {
 		}
 		if (curr_Health <= 0) {
 			if(isDead == false){
+				source.PlayOneShot(clip,1f);
 				stats.rangedDead += 1;
 				isDead = true;
 			}

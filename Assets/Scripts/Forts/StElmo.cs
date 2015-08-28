@@ -21,8 +21,8 @@ public class StElmo : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Leveldone = false;
-		max_Health = 1000;
-		curr_Health = 1000;
+		max_Health = 3000;
+		curr_Health = 3000;
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 		fire = GameObject.Find("OuterCore").GetComponent<ParticleEmitter>();
 		fire2 = GameObject.Find("InnerCore").GetComponent<ParticleEmitter>();
@@ -33,8 +33,8 @@ public class StElmo : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if (curr_Health > 1000) {
-			curr_Health = 1000;
+		if (curr_Health > 3000) {
+			curr_Health = 3000;
 		}
 
 		if (curr_Health <= 0 && Leveldone == false) {

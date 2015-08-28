@@ -6,28 +6,26 @@ public class economy : MonoBehaviour {
 	public int Food;
 	public Text thetext;
 	public float number;
-	public int lostfood;
 	public int outpost;
 	public Statistics stats;
+	public int lostfood;
+	public int waittime;
+	public updatesmiley Growth;
 	// Use this for initialization
 	void Start () {
-		Food = 500;
 		outpost = 0;
-		stats = Camera.main.GetComponent<Statistics> ();
+		Food = 500;
+		
 	}
-
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (outpost);
 		stats.outpostCaptured = outpost;
+		waittime = 2 + Growth.Growth;
 		number += Time.deltaTime;
-		if (number >= 5){
-			Food += (10+ (5*outpost));
-			stats.foodGenerated += (10+ (5*outpost));
+		if (number >= waittime){
+			Food += (2+(2*outpost));
 			number = 0;
 		}
 		thetext.text = "" + Food;
-
-
 	}
 }
