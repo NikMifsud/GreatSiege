@@ -10,7 +10,7 @@ public class dontkillme : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	if (Application.loadedLevelName == "Cutscene1") {
+	if (Application.loadedLevelName == "Map") {
 			Destroy (this.gameObject);
 		}
 	}

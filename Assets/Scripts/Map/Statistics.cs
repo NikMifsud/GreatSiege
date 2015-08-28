@@ -41,7 +41,7 @@ public class Statistics : MonoBehaviour {
 			minutes += 1;
 			gametimer = 0;
 		}
-		if (enemiesKilled >= 121 && Leveldone == false) {
+		if (enemiesKilled >= 75 && Leveldone == false) {
 			objectiveComplete = true;
 			statScreen.gameObject.SetActive(true);
 			statScreen.gameObject.GetComponent<UpdateStatistics>().UpdateStatisticScreen();
