@@ -68,6 +68,7 @@ public class spawnsoldier : MonoBehaviour {
 				gameMaster.gameState = 0;
 			}
 		}
+
 	}
 
 	public void ButtonClicked () {

@@ -16,7 +16,6 @@ public class happiness : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		number += Time.deltaTime;
-		DisplayHappy.text = HappyUnits + "%";
 		if (number >= 5){
 			HappyUnits += 1;
 			number = 0;

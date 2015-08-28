@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FlameCone : MonoBehaviour {
 
-	public FlameThrower flameThrower;
+	//public FlameThrower flameThrower;
 	public float timer;
 	public bool timerStarted;
 	public bool isFlame;
@@ -14,7 +14,7 @@ public class FlameCone : MonoBehaviour {
 		source = Camera.main.GetComponent<AudioSource> ();
 		timer = 0;
 		timerStarted = false;
-		flameThrower = GameObject.Find("Flamethrower").GetComponent<FlameThrower>();
+	//	flameThrower = GameObject.Find("Flamethrower").GetComponent<FlameThrower>();
 	}
 	
 	// Update is called once per frame

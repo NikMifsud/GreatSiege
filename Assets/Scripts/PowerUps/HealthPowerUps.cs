@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ public class HealthPowerUps : MonoBehaviour {
 	public float timer;
 	private AudioSource source;
 	public AudioClip clip;
-
+	public float radialwipe;
 
 	// Use this for initialization
 	void Start () {
@@ -28,8 +29,16 @@ public class HealthPowerUps : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		radialwipe = (timer / 45);
+		Image myImage = GameObject.Find("Power2").GetComponent<Image> ();
+		Button myButton = GameObject.Find("Power2").GetComponent<Button> ();
+		myImage.fillAmount = radialwipe;
 		if (timer <= 45) {
+			myButton.enabled = false;
 			timer += Time.deltaTime;
+		}
+		if (timer >= 45) {
+			myButton.enabled = true;
 		}
 
 		Ray _ray;
