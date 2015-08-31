@@ -19,6 +19,9 @@ public class economy : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		if (Food < 0) {
+			Food = 0;
+		}
 		stats.outpostCaptured = outpost;
 		waittime = 2 + Growth.Growth;
 		number += Time.deltaTime;

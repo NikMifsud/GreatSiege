@@ -1530,6 +1530,11 @@ public class PlayerControl : MonoBehaviour {
 			GameObject selectedRanged = GameObject.FindGameObjectWithTag("SelectedRangedUnit");
 			GameObject selectedSiege = GameObject.FindGameObjectWithTag("SelectedSiegeUnit");
 			GameObject selectedPike = GameObject.FindGameObjectWithTag("SelectedPikeUnit");
+			GameObject attackIndicator = GameObject.FindGameObjectWithTag("AttackRangeIndicator");
+
+			if(attackIndicator != null){
+				Destroy(attackIndicator.gameObject);
+			}
 			if(selectedFoot != null){
 				selectedFoot.gameObject.tag = "FootUnit";
 				selectedFoot.GetComponent<disablinghp>().Appear = false;
