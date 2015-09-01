@@ -30,7 +30,6 @@ public class Pause : MonoBehaviour {
 	}
 
 	public void ButtonClicked(){
-		Debug.Log (pauseButtonPressed);
 			pauseButtonPressed = true;
 		
 	}

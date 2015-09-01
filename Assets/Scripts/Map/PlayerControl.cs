@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
+//Handles all the clicks of the game
+//state 0 allows for selection of character, xeba if statements for all the units, but generally all the same procedure - instantiates a lot of information and populates the SelectedCharacter gameobject to be used throughout the script, change the selected gameobject's tag to "Selected(UnitTag)"
+//state 1 is when they select a unit, can either click on a highlighted tile to move or on an enemy unit which is close to attack, another moveable unit to select that unit and anthing else to deselect the unit, can click yourself to deselect too
+//highlighting works by setting a bool to true, if it is not set to true there will be no highlighting due to Update() in TileBehaviour script
+//if adding a new unit, just have to add it in every single location of if statements 
+
 public class PlayerControl : MonoBehaviour {
 	
 	private Camera PlayerCam; // Camera used by the player

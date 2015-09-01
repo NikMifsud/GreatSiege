@@ -57,7 +57,7 @@ public class HealthPowerUps : MonoBehaviour {
 
 			// Raycast and verify that it collided
 			if (Physics.Raycast (_ray, out _hitInfo)) {
-				if(_hitInfo.collider.gameObject.tag == "StoneTile" || _hitInfo.collider.gameObject.tag == "OutpostTile" || _hitInfo.collider.gameObject.tag == "DirtTile" || _hitInfo.collider.gameObject.tag == "MudTile" || _hitInfo.collider.gameObject.tag == "FootUnit" || _hitInfo.collider.gameObject.tag == "RangedUnit"){
+				if(_hitInfo.collider.gameObject.tag == "StoneTile" || _hitInfo.collider.gameObject.tag == "OutpostTile" || _hitInfo.collider.gameObject.tag == "DirtTile" || _hitInfo.collider.gameObject.tag == "MudTile"){
 				timer = 0;
 				source.PlayOneShot(clip,1.0f);
 				healingAura.transform.position = _hitInfo.collider.gameObject.transform.position;
@@ -74,19 +74,19 @@ public class HealthPowerUps : MonoBehaviour {
 						if (Physics.Raycast (tile.gameObject.transform.position, up, out objectHit, 50)) {
 							if (objectHit.collider.gameObject.tag == "FootUnit") {
 								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-								objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 60;
+								objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 100;
 							}
 							if (objectHit.collider.gameObject.tag == "RangedUnit") {
 								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-								objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 60;
+								objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 100;
 							} 
 							if (objectHit.collider.gameObject.tag == "PikeUnit") {
 								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-								objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 60;
+								objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 100;
 							}
 							if (objectHit.collider.gameObject.tag == "SiegeUnit") {
 								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-								objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 60;
+								objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 100;
 							}
 						}
 
@@ -104,19 +104,19 @@ public class HealthPowerUps : MonoBehaviour {
 						if (Physics.Raycast (tile.gameObject.transform.position, up, out objectHit, 50)) {
 							if (objectHit.collider.gameObject.tag == "FootUnit") {
 								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-								objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 60;
+								objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 100;
 							}
 							if (objectHit.collider.gameObject.tag == "RangedUnit") {
 								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-								objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 60;
+								objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 100;
 							} 
 								if (objectHit.collider.gameObject.tag == "SiegeUnit") {
 									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 60;
+									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 100;
 								}
 								if (objectHit.collider.gameObject.tag == "PikeUnit") {
 									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 60;
+									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 100;
 								}
 						}
 					}
@@ -133,19 +133,19 @@ public class HealthPowerUps : MonoBehaviour {
 						if (Physics.Raycast (tile.gameObject.transform.position, up, out objectHit, 50)) {
 							if (objectHit.collider.gameObject.tag == "FootUnit") {
 								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-								objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 60;
+								objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 100;
 							}
 							if (objectHit.collider.gameObject.tag == "RangedUnit") {
 								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-								objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 60;
+								objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 100;
 							} 
 								if (objectHit.collider.gameObject.tag == "SiegeUnit") {
 									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 60;
+									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 100;
 								}
 								if (objectHit.collider.gameObject.tag == "PikeUnit") {
 									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 60;
+									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 100;
 								}
 						}
 					}
@@ -162,19 +162,19 @@ public class HealthPowerUps : MonoBehaviour {
 						if (Physics.Raycast (tile.gameObject.transform.position, up, out objectHit, 50)) {
 							if (objectHit.collider.gameObject.tag == "FootUnit") {
 								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-								objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 60;
+								objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 100;
 							}
 							if (objectHit.collider.gameObject.tag == "RangedUnit") {
 								objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-								objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 60;
+								objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 100;
 							} 
 								if (objectHit.collider.gameObject.tag == "SiegeUnit") {
 									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 60;
+									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 100;
 								}
 								if (objectHit.collider.gameObject.tag == "PikeUnit") {
 									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
-									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 60;
+									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 100;
 								}
 						}
 					}
@@ -182,6 +182,136 @@ public class HealthPowerUps : MonoBehaviour {
 						tile.gameObject.GetComponent<TileBehaviour>().powerUp = false;
 					}
 				}
+				}else{
+					playing = false;
+					HealthButtonPressed = false;
+					gameMaster.gameState = 0;
+				}
+				if(_hitInfo.collider.gameObject.tag == "FootUnit" || _hitInfo.collider.gameObject.tag == "RangedUnit"|| _hitInfo.collider.gameObject.tag == "SiegeUnit"|| _hitInfo.collider.gameObject.tag == "PikeUnit"){
+					timer = 0;
+					source.PlayOneShot(clip,1.0f);
+					healingAura.transform.position = _hitInfo.collider.gameObject.transform.position;
+					//healingAura.transform.position.y += 0.1;
+					playing = true;
+					healingAura.emissionRate = 200f;
+					healingAura.gameObject.transform.FindChild("Sparkles").gameObject.GetComponent<ParticleSystem>().emissionRate = 10f;
+					StartCoroutine(WaitForAnimation());
+					foreach(GameObject tile in MudTiles){
+						var path = PathFinder.FindPath (_hitInfo.collider.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile);
+						if (path.ToList ().Count <= 3 && tile.gameObject.GetComponent<TileBehaviour> ().isPassable == false) {
+							RaycastHit objectHit;
+							Vector3 up = Vector3.up;
+							if (Physics.Raycast (tile.gameObject.transform.position, up, out objectHit, 50)) {
+								if (objectHit.collider.gameObject.tag == "FootUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 100;
+								}
+								if (objectHit.collider.gameObject.tag == "RangedUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 100;
+								} 
+								if (objectHit.collider.gameObject.tag == "PikeUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 100;
+								}
+								if (objectHit.collider.gameObject.tag == "SiegeUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 100;
+								}
+							}
+							
+						}
+						if (path.ToList ().Count <= 3){
+							tile.gameObject.GetComponent<TileBehaviour>().powerUp = false;
+						}
+					}
+					
+					foreach(GameObject tile in DirtTiles){
+						var path = PathFinder.FindPath (_hitInfo.collider.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile);
+						if (path.ToList ().Count <= 3 && tile.gameObject.GetComponent<TileBehaviour> ().isPassable == false) {
+							RaycastHit objectHit;
+							Vector3 up = Vector3.up;
+							if (Physics.Raycast (tile.gameObject.transform.position, up, out objectHit, 50)) {
+								if (objectHit.collider.gameObject.tag == "FootUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 100;
+								}
+								if (objectHit.collider.gameObject.tag == "RangedUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 100;
+								} 
+								if (objectHit.collider.gameObject.tag == "SiegeUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 100;
+								}
+								if (objectHit.collider.gameObject.tag == "PikeUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 100;
+								}
+							}
+						}
+						if (path.ToList ().Count <= 3){
+							tile.gameObject.GetComponent<TileBehaviour>().powerUp = false;
+						}
+					}
+					
+					foreach(GameObject tile in StoneTiles){
+						var path = PathFinder.FindPath (_hitInfo.collider.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile);
+						if (path.ToList ().Count <= 3 && tile.gameObject.GetComponent<TileBehaviour> ().isPassable == false) {
+							RaycastHit objectHit;
+							Vector3 up = Vector3.up;
+							if (Physics.Raycast (tile.gameObject.transform.position, up, out objectHit, 50)) {
+								if (objectHit.collider.gameObject.tag == "FootUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 100;
+								}
+								if (objectHit.collider.gameObject.tag == "RangedUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 100;
+								} 
+								if (objectHit.collider.gameObject.tag == "SiegeUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 100;
+								}
+								if (objectHit.collider.gameObject.tag == "PikeUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 100;
+								}
+							}
+						}
+						if (path.ToList ().Count <= 3){
+							tile.gameObject.GetComponent<TileBehaviour>().powerUp = false;
+						}
+					}
+					
+					foreach(GameObject tile in OutpostTiles){
+						var path = PathFinder.FindPath (_hitInfo.collider.GetComponent<CharacterMovement> ().unitOriginalTile.tile, tile.gameObject.GetComponent<TileBehaviour> ().tile);
+						if (path.ToList ().Count <= 3 && tile.gameObject.GetComponent<TileBehaviour> ().isPassable == false) {
+							RaycastHit objectHit;
+							Vector3 up = Vector3.up;
+							if (Physics.Raycast (tile.gameObject.transform.position, up, out objectHit, 50)) {
+								if (objectHit.collider.gameObject.tag == "FootUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 100;
+								}
+								if (objectHit.collider.gameObject.tag == "RangedUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 100;
+								} 
+								if (objectHit.collider.gameObject.tag == "SiegeUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 100;
+								}
+								if (objectHit.collider.gameObject.tag == "PikeUnit") {
+									objectHit.collider.gameObject.GetComponent<disablinghp>().JustHit = true;
+									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 100;
+								}
+							}
+						}
+						if (path.ToList ().Count <= 3){
+							tile.gameObject.GetComponent<TileBehaviour>().powerUp = false;
+						}
+					}
 				}else{
 					playing = false;
 					HealthButtonPressed = false;

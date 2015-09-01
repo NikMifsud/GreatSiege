@@ -2,9 +2,14 @@
 using System.Collections;
 
 public class GameMaster : MonoBehaviour {
-	
-	public int gameState; // In this state, the code is waiting for : 0 = Piece selection, 1 = Piece animation, 2 = Player2/AI movement, 3 = Spawning Unit
-	//private int activePlayer = 0; // 0 = Player1, 1 = Player2, 2 = AI, to be used later
+
+	//This script changes the state of the game, used mostly in the PlayerControl Script, the Spawning Scripts and the PowerUp scripts
+	//gameState 0 = can select anything
+	//gamestate 1 = moving a unit
+	//game state 3 = spawning a unit/powerups
+
+
+	public int gameState; 
 
 	void Start(){
 

@@ -2,6 +2,11 @@
 using UnityEngine.UI;
 using System.Collections;
 
+
+/*	This script is attached to the Fort
+Economy managment to increase economy
+*/
+
 public class economy : MonoBehaviour {
 	public int Food;
 	public Text thetext;
@@ -15,6 +20,7 @@ public class economy : MonoBehaviour {
 	void Start () {
 		outpost = 0;
 		Food = 500;
+		stats = Camera.main.GetComponent<Statistics> ();
 		
 	}
 	// Update is called once per frame

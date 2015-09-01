@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
+//Script used to create the board of tiles
+// Uses SelectTileType to get the next tile... numbers in that method are the checks/biases to place only 2/3 outpost and cluster the stone tiles
+//CreateGrid() creates the actual grid and puts all the tiles in a board object
+//Other methods are used as mathematicl functions to place everything near eachother etc (dont really need to change anyhting in here except biases if u want to change board size)
+
 public class GridManager: MonoBehaviour
 {
 
@@ -217,7 +222,7 @@ public class GridManager: MonoBehaviour
 		
 		return Mathf.Max(deltaX, deltaY, deltaZ);
 	}
-
+	/*
 	private void DrawPath(IEnumerable<Tile> path)
 	{
 		if (this.path == null)
@@ -240,13 +245,13 @@ public class GridManager: MonoBehaviour
 			line.transform.parent = lines.transform;
 		}
 	}
-
+*/
 	public void generateAndShowPath()
 	{
 		//Don't do anything if origin or destination is not defined yet
 		if (originTileTB == null || destTileTB == null)
 		{
-			DrawPath(new List<Tile>());
+//			DrawPath(new List<Tile>());
 			return;
 		}
 		//We assume that the distance between any two adjacent tiles is 1
@@ -254,7 +259,7 @@ public class GridManager: MonoBehaviour
 		//Func<Tile, Tile, double> distance = (node1, node2) => 1;
 		
 		var path = PathFinder.FindPath(selectedCharacter.gameObject.GetComponent<CharacterMovement>().unitOriginalTile.tile, destTileTB.tile);
-		DrawPath(path);
+		//DrawPath(path);
 		CharacterMovement cm = selectedCharacter.gameObject.GetComponent<CharacterMovement>();
 		cm.StartMoving(path.ToList());
 	}

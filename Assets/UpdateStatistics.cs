@@ -53,7 +53,7 @@ public class UpdateStatistics : MonoBehaviour {
 			knightsGold.SetActive(true);
 			starCount += 1;
 		}
-		if ((stats.enemyFootDead + stats.enemyRangedDead + stats.enemySiegeDead) >= 120) {
+		if ((stats.enemyFootDead + stats.enemyRangedDead + stats.enemySiegeDead) >= 40) {
 			OttomanGold.SetActive(true);
 			starCount += 1;
 		}

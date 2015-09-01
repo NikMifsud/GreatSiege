@@ -17,6 +17,15 @@ function Awake(){
 	DontDestroyOnLoad(this.gameObject);
 }
 
+function Update () {
+	if (Input.GetKeyDown (KeyCode.Escape)) {
+		Time.timeScale = 0;	
+		PauseButton.SetActive(false);
+		PlayButton.SetActive(true);
+		PauseMenu.SetActive(true);
+	}
+}
+
 function Mute(){	
 	AudioListener.volume = 0.0;
 	MuteButton.SetActive(false);

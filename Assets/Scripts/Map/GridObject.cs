@@ -1,5 +1,6 @@
 ﻿using System;
 //abstract class implemented by Tile class
+//not to be modified
 public abstract class GridObject
 {
 	public Point Location;

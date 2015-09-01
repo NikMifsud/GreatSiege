@@ -27,14 +27,17 @@ public class EnemyCannon : MonoBehaviour {
 	public bool stoneTileClose, isOnStone,enemyHit;
 	GameObject stoneTile;
 	public bool isMud;
+	EnemySpawner enemySpawner;
 	public AudioClip rangedHitEffect;
 	private AudioSource source;
-	public Statistics statistics;
+	Statistics statistics;
 	public int movedForward;
 
 	// Use this for initialization
 	void Start () {
 		isBeingAttacked = false;
+		statistics = Camera.main.GetComponent<Statistics>();
+		enemySpawner = Camera.main.GetComponent<EnemySpawner> ();
 		gridManager = Camera.main.GetComponent<GridManager> ();
 		max_Health = 300;
 		curr_Health = 300;
@@ -104,6 +107,7 @@ public class EnemyCannon : MonoBehaviour {
 			}
 			statistics.enemiesKilled += 1;
 			statistics.enemySiegeDead += 1;
+			enemySpawner.enemiesDead += 1;
 			Destroy (this.gameObject);
 		}
 		

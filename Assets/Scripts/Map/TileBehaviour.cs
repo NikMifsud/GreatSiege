@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
+//Tilebehaviour is attached to each tile. For the exact location of the tile, have to access its Tile tile.
+//handles the texturing/colouring of the tiles and makes use of the playerControl script and the powerUps to know what to highlight etc
+//OnMouseEnter is used in conjunction with the health powerup
+//bottom methods are extra 
 public class TileBehaviour: MonoBehaviour
 {
 	public Tile tile;
@@ -189,13 +193,16 @@ public class TileBehaviour: MonoBehaviour
 							Vector3 up = Vector3.up;
 							if (Physics.Raycast (tile.gameObject.transform.position, up, out objectHit, 50)) {
 								if (objectHit.collider.gameObject.tag == "FootSoldier") {
-									objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 60;
+									objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 100;
 								}
 								if (objectHit.collider.gameObject.tag == "RangedSoldier") {
-									objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 60;
+									objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 100;
 								} 
-								if (objectHit.collider.gameObject.tag == "Artillery") {
-									objectHit.collider.gameObject.GetComponent<Artillery> ().curr_Health += 60;
+								if (objectHit.collider.gameObject.tag == "SiegeUnit") {
+									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 100;
+								}
+								if (objectHit.collider.gameObject.tag == "PikeUnit") {
+									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 100;
 								}
 							}
 						}
@@ -215,13 +222,16 @@ public class TileBehaviour: MonoBehaviour
 							Vector3 up = Vector3.up;
 							if (Physics.Raycast (tile.gameObject.transform.position, up, out objectHit, 50)) {
 								if (objectHit.collider.gameObject.tag == "FootSoldier") {
-									objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 60;
+									objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 100;
 								}
 								if (objectHit.collider.gameObject.tag == "RangedSoldier") {
-									objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 60;
+									objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 100;
 								} 
-								if (objectHit.collider.gameObject.tag == "Artillery") {
-									objectHit.collider.gameObject.GetComponent<Artillery> ().curr_Health += 60;
+								if (objectHit.collider.gameObject.tag == "SiegeUnit") {
+									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 100;
+								}
+								if (objectHit.collider.gameObject.tag == "PikeUnit") {
+									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 100;
 								}
 							}
 						}
@@ -235,7 +245,26 @@ public class TileBehaviour: MonoBehaviour
 					tile.gameObject.GetComponent<TileBehaviour>().powerUp = true;
 					Transform mychildtransform = tile.transform.FindChild ("Cylinder");
 					mychildtransform.GetComponent<Renderer> ().material = highlightedMaterial;
-
+					if(Input.GetMouseButtonDown (0)){
+						if(tile.gameObject.GetComponent<TileBehaviour>().isPassable == false){
+							RaycastHit objectHit;
+							Vector3 up = Vector3.up;
+							if (Physics.Raycast (tile.gameObject.transform.position, up, out objectHit, 50)) {
+								if (objectHit.collider.gameObject.tag == "FootSoldier") {
+									objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 100;
+								}
+								if (objectHit.collider.gameObject.tag == "RangedSoldier") {
+									objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 100;
+								} 
+								if (objectHit.collider.gameObject.tag == "SiegeUnit") {
+									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 100;
+								}
+								if (objectHit.collider.gameObject.tag == "PikeUnit") {
+									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 100;
+								}
+							}
+						}
+					}
 				}
 				else tile.gameObject.GetComponent<TileBehaviour>().powerUp = false;
 			}
@@ -246,19 +275,21 @@ public class TileBehaviour: MonoBehaviour
 					Transform mychildtransform = tile.transform.FindChild ("Cylinder");
 					mychildtransform.GetComponent<Renderer> ().material = highlightedMaterial;
 					if(Input.GetMouseButtonDown (0)){
-						Debug.Log ("clicked");	
 						if(tile.gameObject.GetComponent<TileBehaviour>().isPassable == false){
 							RaycastHit objectHit;
 							Vector3 up = Vector3.up;
 							if (Physics.Raycast (tile.gameObject.transform.position, up, out objectHit, 50)) {
 								if (objectHit.collider.gameObject.tag == "FootSoldier") {
-									objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 60;
+									objectHit.collider.gameObject.GetComponent<Footsoldier> ().curr_Health += 100;
 								}
 								if (objectHit.collider.gameObject.tag == "RangedSoldier") {
-									objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 60;
+									objectHit.collider.gameObject.GetComponent<Rangedsoldier> ().curr_Health += 100;
 								} 
-								if (objectHit.collider.gameObject.tag == "Artillery") {
-									objectHit.collider.gameObject.GetComponent<Artillery> ().curr_Health += 60;
+								if (objectHit.collider.gameObject.tag == "SiegeUnit") {
+									objectHit.collider.gameObject.GetComponent<Musket> ().curr_Health += 100;
+								}
+								if (objectHit.collider.gameObject.tag == "PikeUnit") {
+									objectHit.collider.gameObject.GetComponent<Pike> ().curr_Health += 100;
 								}
 							}
 						}

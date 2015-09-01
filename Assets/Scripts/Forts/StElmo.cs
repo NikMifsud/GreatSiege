@@ -5,6 +5,10 @@ using System.Linq;
 //using System;
 
 
+/*This script is attached to the Fort
+	Basic health management and particle effects when you lose
+*/
+
 public class StElmo : MonoBehaviour {
 	public float curr_Health;
 	public float max_Health;

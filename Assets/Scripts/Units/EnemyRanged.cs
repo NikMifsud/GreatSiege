@@ -28,14 +28,17 @@ public class EnemyRanged : MonoBehaviour {
 	public bool stoneTileClose, isOnStone,enemyHit;
 	GameObject stoneTile;
 	public bool isMud;
+	EnemySpawner enemySpawner;
 	public AudioClip rangedHitEffect;
 	private AudioSource source;
-	public Statistics statistics;
+	Statistics statistics;
 
 	// Use this for initialization
 	void Start () {
 		isBeingAttacked = false;
+		statistics = Camera.main.GetComponent<Statistics>();
 		gridManager = Camera.main.GetComponent<GridManager> ();
+		enemySpawner = Camera.main.GetComponent<EnemySpawner> ();
 		max_Health = 100;
 		curr_Health = 100;
 		Armor = 0;
@@ -120,6 +123,7 @@ public class EnemyRanged : MonoBehaviour {
 			}
 			statistics.enemyRangedDead += 1;
 			statistics.enemiesKilled += 1;
+			enemySpawner.enemiesDead += 1;
 			Destroy (this.gameObject);
 		}
 		

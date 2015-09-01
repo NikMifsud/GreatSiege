@@ -27,15 +27,18 @@ public class Enemy : MonoBehaviour {
 	int enemyCounter,allyCounter,footCounter,rangedCounter,siegeCounter;
 	Vector3 movement;
 	GameObject outpostTile;
+	EnemySpawner enemySpawner;
 	public bool isMud;
 	public AudioClip footHitEffect;
 	private AudioSource source;
-	public Statistics statistics;
+	Statistics statistics;
 
 	// Use this for initialization
 	void Start () {
 		isBeingAttacked = false;
 		gridManager = Camera.main.GetComponent<GridManager> ();
+		statistics = Camera.main.GetComponent<Statistics>();
+		enemySpawner = Camera.main.GetComponent<EnemySpawner> ();
 		max_Health = 100;
 		curr_Health = 100;
 		Armor = 10;
@@ -111,6 +114,7 @@ public class Enemy : MonoBehaviour {
 			}
 			statistics.enemiesKilled += 1;
 			statistics.enemyFootDead += 1;
+			enemySpawner.enemiesDead += 1;
 			Destroy (this.gameObject);
 		}
 
@@ -368,7 +372,9 @@ public class Enemy : MonoBehaviour {
 				movement.y = 0.11f;
 				isMud = false;
 				isOnOutpost = true;
-				Camera.main.GetComponent<EnemySpawner>().enemyCount -= 1;
+		//		Camera.main.GetComponent<EnemySpawner>().Spawn();
+		//		Camera.main.GetComponent<EnemySpawner>().enemyCount -= 1;
+		//		Camera.main.GetComponent<Statistics>().enemiesKilled -= 1;
 			}else if(destinationTile.tag == "MudTile"){
 				movement.y = 0.11f;
 				isMud = true;

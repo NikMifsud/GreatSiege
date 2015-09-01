@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 
+//depricated if removing happinness meter
+
 public class updatesmiley : MonoBehaviour {
 	public happiness HappyUnits;
 	public int Growth;

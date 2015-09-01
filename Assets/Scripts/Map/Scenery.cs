@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
+//creates the tiles of the scenery, to make it bigger change the size of the plane it is attached to in the Scene of Unity
+
 public class Scenery: MonoBehaviour
 {
 	

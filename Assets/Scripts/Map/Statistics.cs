@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//attached to the main camera <-- IMP
+//used to store all the counts of all the different statistics in the game, from outpost to allied dead and enemies killed
+//has the winning termination condition in it which loads the stats screen
+
 public class Statistics : MonoBehaviour {
 
 	public int enemiesKilled;
@@ -41,7 +45,7 @@ public class Statistics : MonoBehaviour {
 			minutes += 1;
 			gametimer = 0;
 		}
-		if (enemiesKilled >= 75 && Leveldone == false) {
+		if (enemiesKilled >= 40 && Leveldone == false) {
 			objectiveComplete = true;
 			statScreen.gameObject.SetActive(true);
 			statScreen.gameObject.GetComponent<UpdateStatistics>().UpdateStatisticScreen();

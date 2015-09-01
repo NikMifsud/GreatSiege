@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
-//Basic skeleton of Tile class which will be used as grid node
+//Basic skeleton of Tile class which will be used as grid node, no need to modify
 public class Tile: GridObject, IHasNeighbours<Tile>
 {
 	public bool Passable;

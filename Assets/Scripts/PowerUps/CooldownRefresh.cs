@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+//cool down power up, finds all the units in the scene and refreshes their cooldown by accessing their own scripts
+//timer used for the cooldown of the actual powerup
 public class CooldownRefresh : MonoBehaviour {
 
 	public bool CooldownButtonPressed;

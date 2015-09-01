@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+// calculates the paths from one tile to another to allow movement, do not modify!!!!
+
 public class Path<Node>: IEnumerable<Node>
 {
 	public Node LastStep { get; private set; }

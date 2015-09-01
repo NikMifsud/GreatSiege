@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 
+//can be removed since deleting happiness meter
+
 public class happiness : MonoBehaviour {
 	public int HappyUnits; 
 	public Text DisplayHappy;

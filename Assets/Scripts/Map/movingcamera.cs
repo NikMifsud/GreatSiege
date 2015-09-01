@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 
+//move camera around with the slider
+
 public class movingcamera : MonoBehaviour 
 {
 	public float currentRotation;

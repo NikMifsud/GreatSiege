@@ -12,19 +12,23 @@ public class EnemySpawner : MonoBehaviour
 	bool spawn;
 	public GameObject tile;
 	public GameObject[] enemies;
+	public int enemiesDead;
+	public List<GameObject[]> enemiesAlive;
 	public Text waves;
 	public int waveNumber;
 	public int siegeCount;
 	GameObject enemy;
+	public Statistics stats;
 	string wave;
 	void Start ()
 	{
 		// Call the Spawn function after a delay of the spawnTime and then continue to call after the same amount of time.
 		//	InvokeRepeating ("Spawn", spawnTime, 0);
 		waveNumber = 0;
-		enemyCount = 0;
+		enemyCount = 1;
 		spawnTime = 0;
 		siegeCount = 0;
+		enemiesDead = 0;
 		spawn = true;
 	}
 	
@@ -39,13 +43,20 @@ public class EnemySpawner : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		wave = waveNumber.ToString();
-		waves.text = "Survive 5 waves: " + wave + "/5";
+		waves.text = "Survive 4 waves: " + wave + "/4";
+		if (enemiesDead == 10 && enemyCount <= 40) {
+				spawnTime = 0;
+				siegeCount = 0;
+				waveNumber += 1;
+				enemiesDead = 0;
+		}
+
 
 		if (spawnTime <= 0) {
 			spawn = true;
 			spawnTime = 0;
-			if(enemyCount == 15 || enemyCount == 30){
-				spawnTime = 120;
+			if(enemyCount == 10 || enemyCount == 20 || enemyCount == 30){
+				spawnTime = 90;
 				siegeCount = 0;
 				waveNumber += 1;
 			}else
@@ -59,9 +70,9 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 	
-	void Spawn ()
+	public void Spawn ()
 	{
-		if (enemyCount <= 75) {
+		if (enemyCount <= 40) {
 			tiles = new List<Transform> ();
 			Transform transform = GameObject.Find ("HexagonGrid").transform;
 			foreach (Transform child in transform) {

@@ -1,9 +1,10 @@
 ﻿#pragma strict
+
+//attached to buttons to navigate between menus
+
 function ChangeToScene(scene:String){
 	
-	
 	Application.LoadLevel(scene);
-	
 	
 }
 

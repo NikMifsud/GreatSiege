@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
+
+//firwheel power up, attached to the actual prefab of the wheel, has a very short cooldown of movement and always uses MoveForward() to move.. the checks are simple... always update CharacterMovement script's unitOriginalTile to see the current position of the units
+
+
 public class FireWheel : MonoBehaviour {
 
 	public int Movement;

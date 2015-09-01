@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//flamethrower button activates this script and activates the flamethrower collider and prefab
+
 public class FlameCone : MonoBehaviour {
 
 	//public FlameThrower flameThrower;
