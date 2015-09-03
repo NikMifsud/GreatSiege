@@ -1,0 +1,739 @@
+fileFormatVersion: 2
+guid: bee140530c8d7464782fd06e083f1b37
+timeCreated: 1440172625
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Chest_JNT
+    100002: CrossbowMan
+    100004: curve1
+    100006: GEO
+    100008: group1
+    100010: Head_JNT
+    100012: joint11
+    100014: joint11 1
+    100016: joint12
+    100018: joint12 1
+    100020: joint13
+    100022: joint13 1
+    100024: joint14
+    100026: joint14 1
+    100028: joint15
+    100030: joint15 1
+    100032: joint16
+    100034: joint16 1
+    100036: joint17
+    100038: joint17 1
+    100040: joint18
+    100042: joint19
+    100044: joint2
+    100046: joint3
+    100048: joint4
+    100050: joint5
+    100052: joint6
+    100054: joint7
+    100056: joint8
+    100058: joint9
+    100060: //RootNode
+    100062: L_Ankle_JNT
+    100064: L_Hip_JNT
+    100066: L_Knee_JNT
+    100068: L_Toe_JNT
+    100070: Lower_Torso_CTRL
+    100072: LowerTorso_JNT
+    100074: Main_CTRL
+    100076: Main_CTRL1
+    100078: Main_JNT
+    100080: Neck_CTRL
+    100082: Neck_JNT
+    100084: nurbsCircle2
+    100086: Other_CTRL
+    100088: pCube1
+    100090: pCube10
+    100092: pCube11
+    100094: pCube2
+    100096: pCube3
+    100098: pCube3 1
+    100100: pCube5
+    100102: pCylinder1
+    100104: pCylinder3
+    100106: persp1
+    100108: polySurface3
+    100110: polySurface4
+    100112: polySurface5
+    100114: polySurface6
+    100116: polySurface7
+    100118: polySurface8
+    100120: R_Ankle_JNT
+    100122: R_Hip_JNT
+    100124: R_Knee_JNT
+    100126: R_Toe_JNT
+    100128: Reloader
+    100130: Upper_Body_CTRL
+    400000: Chest_JNT
+    400002: CrossbowMan
+    400004: curve1
+    400006: GEO
+    400008: group1
+    400010: Head_JNT
+    400012: joint11
+    400014: joint11 1
+    400016: joint12
+    400018: joint12 1
+    400020: joint13
+    400022: joint13 1
+    400024: joint14
+    400026: joint14 1
+    400028: joint15
+    400030: joint15 1
+    400032: joint16
+    400034: joint16 1
+    400036: joint17
+    400038: joint17 1
+    400040: joint18
+    400042: joint19
+    400044: joint2
+    400046: joint3
+    400048: joint4
+    400050: joint5
+    400052: joint6
+    400054: joint7
+    400056: joint8
+    400058: joint9
+    400060: //RootNode
+    400062: L_Ankle_JNT
+    400064: L_Hip_JNT
+    400066: L_Knee_JNT
+    400068: L_Toe_JNT
+    400070: Lower_Torso_CTRL
+    400072: LowerTorso_JNT
+    400074: Main_CTRL
+    400076: Main_CTRL1
+    400078: Main_JNT
+    400080: Neck_CTRL
+    400082: Neck_JNT
+    400084: nurbsCircle2
+    400086: Other_CTRL
+    400088: pCube1
+    400090: pCube10
+    400092: pCube11
+    400094: pCube2
+    400096: pCube3
+    400098: pCube3 1
+    400100: pCube5
+    400102: pCylinder1
+    400104: pCylinder3
+    400106: persp1
+    400108: polySurface3
+    400110: polySurface4
+    400112: polySurface5
+    400114: polySurface6
+    400116: polySurface7
+    400118: polySurface8
+    400120: R_Ankle_JNT
+    400122: R_Hip_JNT
+    400124: R_Knee_JNT
+    400126: R_Toe_JNT
+    400128: Reloader
+    400130: Upper_Body_CTRL
+    2300000: pCube1
+    2300002: pCube10
+    2300004: pCube11
+    2300006: pCube2
+    2300008: pCube5
+    2300010: pCylinder1
+    2300012: pCylinder3
+    2300014: polySurface3
+    2300016: polySurface4
+    2300018: polySurface7
+    2300020: polySurface8
+    2300022: Reloader
+    3300000: pCube1
+    3300002: pCube10
+    3300004: pCube11
+    3300006: pCube2
+    3300008: pCube5
+    3300010: pCylinder1
+    3300012: pCylinder3
+    3300014: polySurface3
+    3300016: polySurface4
+    3300018: polySurface7
+    3300020: polySurface8
+    3300022: Reloader
+    4300000: polySurface4
+    4300002: polySurface3
+    4300004: polySurface7
+    4300006: polySurface8
+    4300008: pCube1
+    4300010: pCube2
+    4300012: pCylinder1
+    4300014: pCube5
+    4300016: GEO
+    4300018: polySurface5
+    4300020: polySurface6
+    4300022: Reloader
+    4300024: pCylinder3
+    4300026: pCube10
+    4300028: pCube11
+    7400000: Idle
+    7400002: Attack
+    7400004: Death
+    9500000: //RootNode
+    13700000: GEO
+    13700002: polySurface5
+    13700004: polySurface6
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: CrossbowMan
+        weight: 1
+      - path: CrossbowMan/Main_CTRL
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/group1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/group1/pCube3 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14/joint15/joint16
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14/joint15/joint16/joint17
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14/joint15/joint16/polySurface7
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1/joint15 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1/joint15 1/joint16 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1/joint15 1/joint16 1/joint17 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1/joint15 1/joint16 1/polySurface8
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/pCube1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/pCube2
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/pCube5
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/pCylinder1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/Neck_CTRL
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/Neck_CTRL/polySurface4
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL/polySurface3
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/L_Hip_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/L_Hip_JNT/L_Knee_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/L_Hip_JNT/L_Knee_JNT/L_Ankle_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/L_Hip_JNT/L_Knee_JNT/L_Ankle_JNT/L_Toe_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint2
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint2/joint3
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint2/joint3/joint4
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint2/joint3/joint4/joint5
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint6
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint6/joint7
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint6/joint7/joint8
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint6/joint7/joint8/joint9
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/Neck_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/Neck_JNT/Head_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/R_Hip_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/R_Hip_JNT/R_Knee_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/R_Hip_JNT/R_Knee_JNT/R_Ankle_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/R_Hip_JNT/R_Knee_JNT/R_Ankle_JNT/R_Toe_JNT
+        weight: 1
+      - path: CrossbowMan/Other_CTRL
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/GEO
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/pCube3
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/pCube3/polySurface5
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/pCube3/polySurface6
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader/nurbsCircle2
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader/nurbsCircle2/pCylinder3
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader/nurbsCircle2/pCylinder3/pCube10
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader/nurbsCircle2/pCylinder3/pCube11
+        weight: 1
+      - path: persp1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      firstFrame: 100
+      lastFrame: 320
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: CrossbowMan
+        weight: 1
+      - path: CrossbowMan/Main_CTRL
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/group1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/group1/pCube3 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14/joint15/joint16
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14/joint15/joint16/joint17
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14/joint15/joint16/polySurface7
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1/joint15 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1/joint15 1/joint16 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1/joint15 1/joint16 1/joint17 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1/joint15 1/joint16 1/polySurface8
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/pCube1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/pCube2
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/pCube5
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/pCylinder1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/Neck_CTRL
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/Neck_CTRL/polySurface4
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL/polySurface3
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/L_Hip_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/L_Hip_JNT/L_Knee_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/L_Hip_JNT/L_Knee_JNT/L_Ankle_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/L_Hip_JNT/L_Knee_JNT/L_Ankle_JNT/L_Toe_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint2
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint2/joint3
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint2/joint3/joint4
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint2/joint3/joint4/joint5
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint6
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint6/joint7
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint6/joint7/joint8
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint6/joint7/joint8/joint9
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/Neck_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/Neck_JNT/Head_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/R_Hip_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/R_Hip_JNT/R_Knee_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/R_Hip_JNT/R_Knee_JNT/R_Ankle_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/R_Hip_JNT/R_Knee_JNT/R_Ankle_JNT/R_Toe_JNT
+        weight: 1
+      - path: CrossbowMan/Other_CTRL
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/GEO
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/pCube3
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/pCube3/polySurface5
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/pCube3/polySurface6
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader/nurbsCircle2
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader/nurbsCircle2/pCylinder3
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader/nurbsCircle2/pCylinder3/pCube10
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader/nurbsCircle2/pCylinder3/pCube11
+        weight: 1
+      - path: persp1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Death
+      takeName: Take 001
+      firstFrame: 320
+      lastFrame: 360
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: CrossbowMan
+        weight: 1
+      - path: CrossbowMan/Main_CTRL
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/group1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/group1/pCube3 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14/joint15/joint16
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14/joint15/joint16/joint17
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint18/joint11/joint12/joint13/joint14/joint15/joint16/polySurface7
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1/joint15 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1/joint15 1/joint16 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1/joint15 1/joint16 1/joint17 1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/joint19/joint11 1/joint12 1/joint13
+          1/joint14 1/joint15 1/joint16 1/polySurface8
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/pCube1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/pCube2
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/pCube5
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/curve1/pCylinder1
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/Neck_CTRL
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/Neck_CTRL/polySurface4
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_CTRL1/Upper_Body_CTRL/polySurface3
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/L_Hip_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/L_Hip_JNT/L_Knee_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/L_Hip_JNT/L_Knee_JNT/L_Ankle_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/L_Hip_JNT/L_Knee_JNT/L_Ankle_JNT/L_Toe_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint2
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint2/joint3
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint2/joint3/joint4
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint2/joint3/joint4/joint5
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint6
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint6/joint7
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint6/joint7/joint8
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/joint6/joint7/joint8/joint9
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/Neck_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/LowerTorso_JNT/Chest_JNT/Neck_JNT/Head_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/R_Hip_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/R_Hip_JNT/R_Knee_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/R_Hip_JNT/R_Knee_JNT/R_Ankle_JNT
+        weight: 1
+      - path: CrossbowMan/Main_CTRL/Main_JNT/R_Hip_JNT/R_Knee_JNT/R_Ankle_JNT/R_Toe_JNT
+        weight: 1
+      - path: CrossbowMan/Other_CTRL
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/GEO
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/pCube3
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/pCube3/polySurface5
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/pCube3/polySurface6
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader/nurbsCircle2
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader/nurbsCircle2/pCylinder3
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader/nurbsCircle2/pCylinder3/pCube10
+        weight: 1
+      - path: CrossbowMan/Other_CTRL/Reloader/nurbsCircle2/pCylinder3/pCube11
+        weight: 1
+      - path: persp1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

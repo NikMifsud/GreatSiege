@@ -1,0 +1,559 @@
+fileFormatVersion: 2
+guid: ebcc55951ee55cd4188f5f65a0e68aab
+timeCreated: 1440172628
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: BreastPlate
+    100002: Chest_JNT
+    100004: GEO
+    100006: group1
+    100008: Head_JNT
+    100010: //RootNode
+    100012: L_Ankle_JNT
+    100014: L_Arm_CTRL
+    100016: L_Bracer
+    100018: L_Elbow_JNT
+    100020: L_Hand_JNT
+    100022: L_Hip_JNT
+    100024: L_Knee_JNT
+    100026: L_Leg_CTRL
+    100028: L_Shoulder_JNT
+    100030: L_Toe_JNT
+    100032: L_Wrist_JNT
+    100034: locator1
+    100036: locator2
+    100038: locator3
+    100040: locator4
+    100042: locator5
+    100044: Lower_Torso_CTRL
+    100046: LowerTorso_JNT
+    100048: Main_CTRL1
+    100050: Main_JNT
+    100052: Neck_CTRL
+    100054: Neck_JNT
+    100056: pCube1
+    100058: pCylinder1
+    100060: pPlane1
+    100062: pPlane2
+    100064: pSphere1
+    100066: pSphere2
+    100068: pSphere3
+    100070: R_Ankle_JNT
+    100072: R_Arm_CTRL
+    100074: R_Bracer
+    100076: R_Elbow_JNT
+    100078: R_HAnd_JNT
+    100080: R_Hip_JNT
+    100082: R_Knee_JNT
+    100084: R_Leg_CTRL
+    100086: R_Shoulder_JNT
+    100088: R_Toe_JNT
+    100090: R_Wrist_JNT
+    100092: Upper_Body_CTRL
+    400000: BreastPlate
+    400002: Chest_JNT
+    400004: GEO
+    400006: group1
+    400008: Head_JNT
+    400010: //RootNode
+    400012: L_Ankle_JNT
+    400014: L_Arm_CTRL
+    400016: L_Bracer
+    400018: L_Elbow_JNT
+    400020: L_Hand_JNT
+    400022: L_Hip_JNT
+    400024: L_Knee_JNT
+    400026: L_Leg_CTRL
+    400028: L_Shoulder_JNT
+    400030: L_Toe_JNT
+    400032: L_Wrist_JNT
+    400034: locator1
+    400036: locator2
+    400038: locator3
+    400040: locator4
+    400042: locator5
+    400044: Lower_Torso_CTRL
+    400046: LowerTorso_JNT
+    400048: Main_CTRL1
+    400050: Main_JNT
+    400052: Neck_CTRL
+    400054: Neck_JNT
+    400056: pCube1
+    400058: pCylinder1
+    400060: pPlane1
+    400062: pPlane2
+    400064: pSphere1
+    400066: pSphere2
+    400068: pSphere3
+    400070: R_Ankle_JNT
+    400072: R_Arm_CTRL
+    400074: R_Bracer
+    400076: R_Elbow_JNT
+    400078: R_HAnd_JNT
+    400080: R_Hip_JNT
+    400082: R_Knee_JNT
+    400084: R_Leg_CTRL
+    400086: R_Shoulder_JNT
+    400088: R_Toe_JNT
+    400090: R_Wrist_JNT
+    400092: Upper_Body_CTRL
+    2300000: BreastPlate
+    2300002: L_Bracer
+    2300004: pCube1
+    2300006: pCylinder1
+    2300008: pPlane1
+    2300010: pPlane2
+    2300012: pSphere1
+    2300014: pSphere2
+    2300016: pSphere3
+    2300018: R_Bracer
+    3300000: BreastPlate
+    3300002: L_Bracer
+    3300004: pCube1
+    3300006: pCylinder1
+    3300008: pPlane1
+    3300010: pPlane2
+    3300012: pSphere1
+    3300014: pSphere2
+    3300016: pSphere3
+    3300018: R_Bracer
+    4300000: pCylinder1
+    4300002: pCube1
+    4300004: pPlane2
+    4300006: pPlane1
+    4300008: pSphere2
+    4300010: pSphere3
+    4300012: pSphere1
+    4300014: BreastPlate
+    4300016: GEO
+    4300018: R_Bracer
+    4300020: L_Bracer
+    7400000: Idle
+    7400002: Attack
+    7400004: Death
+    9500000: //RootNode
+    13700000: GEO
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 124
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: GEO
+        weight: 1
+      - path: Main_CTRL1
+        weight: 1
+      - path: Main_CTRL1/L_Leg_CTRL
+        weight: 1
+      - path: Main_CTRL1/L_Leg_CTRL/locator4
+        weight: 1
+      - path: Main_CTRL1/R_Leg_CTRL
+        weight: 1
+      - path: Main_CTRL1/R_Leg_CTRL/locator3
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/BreastPlate
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/Neck_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/Neck_CTRL/pSphere1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pCube1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pPlane1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pPlane2
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pSphere2
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pSphere3
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/L_Arm_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/L_Arm_CTRL/locator2
+        weight: 1
+      - path: Main_JNT
+        weight: 1
+      - path: Main_JNT/L_Hip_JNT
+        weight: 1
+      - path: Main_JNT/L_Hip_JNT/L_Knee_JNT
+        weight: 1
+      - path: Main_JNT/L_Hip_JNT/L_Knee_JNT/L_Ankle_JNT
+        weight: 1
+      - path: Main_JNT/L_Hip_JNT/L_Knee_JNT/L_Ankle_JNT/L_Toe_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT/L_Elbow_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Bracer
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Wrist_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Wrist_JNT/L_Hand_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/Neck_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/Neck_JNT/Head_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT/R_Elbow_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Bracer
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Wrist_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Wrist_JNT/R_HAnd_JNT
+        weight: 1
+      - path: Main_JNT/R_Hip_JNT
+        weight: 1
+      - path: Main_JNT/R_Hip_JNT/R_Knee_JNT
+        weight: 1
+      - path: Main_JNT/R_Hip_JNT/R_Knee_JNT/R_Ankle_JNT
+        weight: 1
+      - path: Main_JNT/R_Hip_JNT/R_Knee_JNT/R_Ankle_JNT/R_Toe_JNT
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      firstFrame: 124
+      lastFrame: 207
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: GEO
+        weight: 1
+      - path: Main_CTRL1
+        weight: 1
+      - path: Main_CTRL1/L_Leg_CTRL
+        weight: 1
+      - path: Main_CTRL1/L_Leg_CTRL/locator4
+        weight: 1
+      - path: Main_CTRL1/R_Leg_CTRL
+        weight: 1
+      - path: Main_CTRL1/R_Leg_CTRL/locator3
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/BreastPlate
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/Neck_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/Neck_CTRL/pSphere1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pCube1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pPlane1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pPlane2
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pSphere2
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pSphere3
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/L_Arm_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/L_Arm_CTRL/locator2
+        weight: 1
+      - path: Main_JNT
+        weight: 1
+      - path: Main_JNT/L_Hip_JNT
+        weight: 1
+      - path: Main_JNT/L_Hip_JNT/L_Knee_JNT
+        weight: 1
+      - path: Main_JNT/L_Hip_JNT/L_Knee_JNT/L_Ankle_JNT
+        weight: 1
+      - path: Main_JNT/L_Hip_JNT/L_Knee_JNT/L_Ankle_JNT/L_Toe_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT/L_Elbow_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Bracer
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Wrist_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Wrist_JNT/L_Hand_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/Neck_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/Neck_JNT/Head_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT/R_Elbow_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Bracer
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Wrist_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Wrist_JNT/R_HAnd_JNT
+        weight: 1
+      - path: Main_JNT/R_Hip_JNT
+        weight: 1
+      - path: Main_JNT/R_Hip_JNT/R_Knee_JNT
+        weight: 1
+      - path: Main_JNT/R_Hip_JNT/R_Knee_JNT/R_Ankle_JNT
+        weight: 1
+      - path: Main_JNT/R_Hip_JNT/R_Knee_JNT/R_Ankle_JNT/R_Toe_JNT
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Death
+      takeName: Take 001
+      firstFrame: 208
+      lastFrame: 264
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: GEO
+        weight: 1
+      - path: Main_CTRL1
+        weight: 1
+      - path: Main_CTRL1/L_Leg_CTRL
+        weight: 1
+      - path: Main_CTRL1/L_Leg_CTRL/locator4
+        weight: 1
+      - path: Main_CTRL1/R_Leg_CTRL
+        weight: 1
+      - path: Main_CTRL1/R_Leg_CTRL/locator3
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/BreastPlate
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/Neck_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/Neck_CTRL/pSphere1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pCube1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pPlane1
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pPlane2
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pSphere2
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/group1/pSphere3
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/L_Arm_CTRL
+        weight: 1
+      - path: Main_CTRL1/Upper_Body_CTRL/Lower_Torso_CTRL/R_Arm_CTRL/locator5/pCylinder1/L_Arm_CTRL/locator2
+        weight: 1
+      - path: Main_JNT
+        weight: 1
+      - path: Main_JNT/L_Hip_JNT
+        weight: 1
+      - path: Main_JNT/L_Hip_JNT/L_Knee_JNT
+        weight: 1
+      - path: Main_JNT/L_Hip_JNT/L_Knee_JNT/L_Ankle_JNT
+        weight: 1
+      - path: Main_JNT/L_Hip_JNT/L_Knee_JNT/L_Ankle_JNT/L_Toe_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT/L_Elbow_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Bracer
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Wrist_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Wrist_JNT/L_Hand_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/Neck_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/Neck_JNT/Head_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT/R_Elbow_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Bracer
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Wrist_JNT
+        weight: 1
+      - path: Main_JNT/LowerTorso_JNT/Chest_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Wrist_JNT/R_HAnd_JNT
+        weight: 1
+      - path: Main_JNT/R_Hip_JNT
+        weight: 1
+      - path: Main_JNT/R_Hip_JNT/R_Knee_JNT
+        weight: 1
+      - path: Main_JNT/R_Hip_JNT/R_Knee_JNT/R_Ankle_JNT
+        weight: 1
+      - path: Main_JNT/R_Hip_JNT/R_Knee_JNT/R_Ankle_JNT/R_Toe_JNT
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

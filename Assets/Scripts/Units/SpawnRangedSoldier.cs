@@ -5,62 +5,84 @@ public class SpawnRangedSoldier : MonoBehaviour {
 	public bool SpawnSoldier;
 	public GameObject Soldier;
 	private GameMaster gameMaster;
+	public economy economy;
 	private PlayerControl playerControl;
 	public List<Transform> tiles;
 	public Material highlightedTexture,mudTexture,dirtTexture,outpostTexture,stoneTexture;
 	public economy food;
+	public Statistics stats;
+	public AudioClip clip;
+	private AudioSource source;
 	// Use this for initialization
 	void Start () {
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
+		stats = Camera.main.GetComponent<Statistics> ();
+		source = Camera.main.GetComponent<AudioSource> ();
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
 		if (SpawnSoldier == true && Input.GetMouseButtonDown (0)) {
-			if (food.Food >= 50) {
 				//deselect all those in the scene in order to avoid user error
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hit = new RaycastHit ();
 				if (Physics.Raycast (ray, out hit)) {
-					if (hit.collider.tag == "RangedUnit" || hit.collider.tag == "SiegeUnit" || hit.collider.tag == "FootUnit") {
+					if (hit.collider.tag == "RangedUnit" || hit.collider.tag == "SiegeUnit" || hit.collider.tag == "FootUnit" || hit.collider.tag == "PikeUnit") {
 						SpawnSoldier = false;
 						gameMaster.gameState = 0;
 					} else if (hit.collider.GetComponent<TileBehaviour> ().isPassable == true && (hit.collider.tag == "SpawnStoneTile" || hit.collider.tag == "SpawnDirtTile" || hit.collider.tag == "SpawnOutpostTile" || hit.collider.tag == "SpawnMudTile")) {
 						var cubeTemp = hit.collider.transform.position;
 						if (hit.collider.gameObject.tag == "SpawnStoneTile") {
-							Soldier.transform.FindChild ("Ranged").GetComponent<Rangedsoldier> ().AttackRange = 3;
-							Soldier.transform.FindChild ("Ranged").GetComponent<Rangedsoldier> ().Armor = 5;
-							cubeTemp.y = 0.2f;
-						} else
+							Soldier.GetComponent<Rangedsoldier> ().AttackRange = 5;
+							Soldier.GetComponent<Rangedsoldier> ().Armor = 5;
+							cubeTemp.y = 0.15f;
+						} if(hit.collider.gameObject.tag == "SpawnOutpostTile"){
+							Soldier.GetComponent<Rangedsoldier> ().AttackRange = 4;
 							cubeTemp.y = 0.1f;
-						Transform myUnitTransform = Soldier.transform.FindChild ("ranged");
-						myUnitTransform.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
+							economy.outpost += 1;
+						}
+						if(hit.collider.gameObject.tag == "SpawnMudTile" || hit.collider.gameObject.tag == "SpawnDirtTile"){
+							Soldier.GetComponent<Rangedsoldier> ().AttackRange = 4;
+							cubeTemp.y = 0.1f;
+						}
+						
+						Soldier.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
 						Instantiate (Soldier, cubeTemp, Quaternion.identity);
 						food.Food -= 50;
+						stats.foodSpent += 50;
 						hit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = false;
 						RemoveSpawnArea ();
 						SpawnSoldier = false;
 						gameMaster.gameState = 0;
+						
 					} else {
 						RemoveSpawnArea ();
 						SpawnSoldier = false;
 						gameMaster.gameState = 0;
 					}
-				} else {
-					RemoveSpawnArea ();
-					SpawnSoldier = false;
-					gameMaster.gameState = 0;
-				}
+				
+			}else{
+				RemoveSpawnArea ();
+				SpawnSoldier = false;
+				gameMaster.gameState = 0;
 			}
 		}
 	}
 	
 	public void ButtonClicked () {
 		playerControl.highlightingTiles = false;
-		SpawnSoldier = true;
-		gameMaster.gameState = 3;
-		GenerateSpawnArea();
+		if (food.Food >= 50) {
+			source.PlayOneShot(clip,1f);
+			SpawnSoldier = true;
+			GenerateSpawnArea ();
+			gameMaster.gameState = 3;
+		} else {
+			SpawnSoldier = false;
+			gameMaster.gameState = 0;
+		}
+
 	}
 
 	public void GenerateSpawnArea(){
@@ -71,7 +93,7 @@ public class SpawnRangedSoldier : MonoBehaviour {
 			tiles.Add(child);
 		}
 		tiles.Reverse ();
-		tiles.RemoveRange (28, (tiles.Count - 28));
+		tiles.RemoveRange (22, (tiles.Count - 22));
 		tiles.ToArray ();
 		for (int k = 0; k < tiles.Count; k++) {
 			if(tiles[k].gameObject.tag == "StoneTile")

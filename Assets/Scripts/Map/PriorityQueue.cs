@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+//grid management, no need to touch
+
 class PriorityQueue<P, V>
 {
 	private readonly SortedDictionary<P, Queue<V>> list = new SortedDictionary<P, Queue<V>>();

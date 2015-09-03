@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{B638DD07-4512-8DB0-21F5-DA834CC7003C}") = "GreatSiege", "Assembly-CSharp.csproj", "{73F9263A-EE4C-F5DF-F0E7-03FE5205BBC5}"
 EndProject
-Project("{B638DD07-4512-8DB0-21F5-DA834CC7003C}") = "GreatSiege", "Assembly-CSharp-Editor.csproj", "{75A0E2AA-BE90-9920-FE1E-C409E9594AFF}"
-EndProject
 Project("{B638DD07-4512-8DB0-21F5-DA834CC7003C}") = "GreatSiege", "Assembly-UnityScript.unityproj", "{1F1CA035-01EF-69B3-F01A-E3F525009DFF}"
 EndProject
 Global
@@ -17,10 +15,6 @@ Global
 		{73F9263A-EE4C-F5DF-F0E7-03FE5205BBC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73F9263A-EE4C-F5DF-F0E7-03FE5205BBC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73F9263A-EE4C-F5DF-F0E7-03FE5205BBC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{75A0E2AA-BE90-9920-FE1E-C409E9594AFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75A0E2AA-BE90-9920-FE1E-C409E9594AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75A0E2AA-BE90-9920-FE1E-C409E9594AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75A0E2AA-BE90-9920-FE1E-C409E9594AFF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1F1CA035-01EF-69B3-F01A-E3F525009DFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1F1CA035-01EF-69B3-F01A-E3F525009DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F1CA035-01EF-69B3-F01A-E3F525009DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,7 +23,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																						GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																																							GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

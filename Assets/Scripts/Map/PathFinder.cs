@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// calculates the paths from one tile to another to allow movement, do not modify!!!!
+
 public static class PathFinder
 {
 	public static Path<Tile> FindPath(

@@ -4,41 +4,54 @@ using System.Collections.Generic;
 public class spawnsoldier : MonoBehaviour {
 	public bool SpawnSoldier;
 	public GameObject Soldier;
+	public economy economy;
 	private GameMaster gameMaster;
 	private PlayerControl playerControl;
 	public Transform[] tileList;
+	public happiness HappyUnits;
 	public Material highlightedTexture,mudTexture,dirtTexture,outpostTexture,stoneTexture;
 	public List<Transform> tiles;
 	public economy food;
+	public Statistics stats;
+	public AudioClip clip;
+	private AudioSource source;
 	// Use this for initialization
 	void Start () {
 		gameMaster = Camera.main.GetComponent<GameMaster> ();
 		playerControl = Camera.main.GetComponent<PlayerControl> ();
+		stats = Camera.main.GetComponent<Statistics> ();
+		source = Camera.main.GetComponent<AudioSource> ();
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
 		if (SpawnSoldier == true && Input.GetMouseButtonDown (0)) {
-			if (food.Food >= 30) {
 				//deselect all those in the scene in order to avoid user error
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hit = new RaycastHit ();
 				if (Physics.Raycast (ray, out hit)) {
-					if (hit.collider.tag == "RangedUnit" || hit.collider.tag == "SiegeUnit" || hit.collider.tag == "FootUnit") {
+					if (hit.collider.tag == "RangedUnit" || hit.collider.tag == "SiegeUnit" || hit.collider.tag == "FootUnit" || hit.collider.tag == "PikeUnit") {
 						SpawnSoldier = false;
 						gameMaster.gameState = 0;
 						RemoveSpawnArea ();
 					} else if (hit.collider.GetComponent<TileBehaviour> ().isPassable == true && (hit.collider.tag == "SpawnStoneTile" || hit.collider.tag == "SpawnDirtTile" || hit.collider.tag == "SpawnOutpostTile" || hit.collider.tag == "SpawnMudTile")) {
 						var cubeTemp = hit.collider.transform.position;
 						if (hit.collider.gameObject.tag == "SpawnStoneTile") {
-							Soldier.transform.FindChild ("FootSoldier").GetComponent<Footsoldier> ().Armor = 15;
-							cubeTemp.y = 0.2f;
-						} else
+							cubeTemp.y = 0.15f;
+						} if(hit.collider.gameObject.tag == "SpawnOutpostTile"){
 							cubeTemp.y = 0.1f;
-						Transform myUnitTransform = Soldier.transform.FindChild ("FootSoldier");
-						myUnitTransform.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
+							economy.outpost += 1;
+						}
+						if(hit.collider.gameObject.tag == "SpawnMudTile" || hit.collider.gameObject.tag == "SpawnDirtTile"){
+							cubeTemp.y = 0.1f;
+						}
+					//	Transform myUnitTransform = Soldier.transform.FindChild ("FootSoldier");
+						Soldier.GetComponent<CharacterMovement> ().unitOriginalTile = hit.collider.gameObject.GetComponent<TileBehaviour> ();
 						Instantiate (Soldier, cubeTemp, Quaternion.identity);
 						food.Food = food.Food - 30;
+						stats.foodSpent += 30;
+						HappyUnits.HappyUnits = HappyUnits.HappyUnits - 10;
 						hit.collider.gameObject.GetComponent<TileBehaviour> ().isPassable = false;
 						RemoveSpawnArea ();
 						SpawnSoldier = false;
@@ -48,20 +61,27 @@ public class spawnsoldier : MonoBehaviour {
 						SpawnSoldier = false;
 						gameMaster.gameState = 0;
 					}
-				} else {
-					RemoveSpawnArea ();
-					SpawnSoldier = false;
-					gameMaster.gameState = 0;
-				}
+				
+			} else{
+				RemoveSpawnArea ();
+				SpawnSoldier = false;
+				gameMaster.gameState = 0;
 			}
 		}
+
 	}
 
 	public void ButtonClicked () {
 		playerControl.highlightingTiles = false;
-		SpawnSoldier = true;
-		gameMaster.gameState = 3;
-		GenerateSpawnArea();
+		if (food.Food >= 30) {
+			source.PlayOneShot(clip,1f);
+			SpawnSoldier = true;
+			GenerateSpawnArea ();
+			gameMaster.gameState = 3;
+		} else {
+			SpawnSoldier = false;
+			gameMaster.gameState = 0;
+		}
 	}
 
 	public void GenerateSpawnArea(){
@@ -72,7 +92,7 @@ public class spawnsoldier : MonoBehaviour {
 			tiles.Add(child);
 		}
 		tiles.Reverse ();
-		tiles.RemoveRange (28, (tiles.Count - 28));
+		tiles.RemoveRange (22, (tiles.Count - 22));
 		tiles.ToArray ();
 		for (int k = 0; k < tiles.Count; k++) {
 			if(tiles[k].gameObject.tag == "StoneTile")

@@ -9,6 +9,7 @@ public class timerbarcannon : MonoBehaviour {
 	public Animator finishedanim;
 	public bool done;
 	public bool canMove;
+	bool mudTimer;
 	// Use this for initialization
 	void Start () {
 		Animator timeranim = GetComponent<Animator>();
@@ -17,13 +18,25 @@ public class timerbarcannon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (activemovement.Movementtime <= 0) {
+		if (activemovement.canMove == true) {
 			timeranim.SetBool ("movement", true);
 			finishedanim.SetBool ("finished", true);
-		} 
-		myAmount = activemovement.Movementtime / 30;
-			Image myImage = GetComponent<Image>();
+		}
+
+		if (activemovement.isMud) {
+			mudTimer = true;
+		}
+
+		if (activemovement.canMove == false) {
+			timeranim.SetBool ("movement", false);
+			finishedanim.SetBool ("finished", false);
+			Image myImage = GetComponent<Image> ();
+			if(mudTimer)
+				myAmount = activemovement.Movementtime / 35;
+			if(!mudTimer) 
+				myAmount = activemovement.Movementtime / 30;
 			myImage.fillAmount = myAmount;
+		}
 		Transform cannon = this.transform.Find ("cannon");
 	}
 }

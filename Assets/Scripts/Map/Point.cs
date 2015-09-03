@@ -1,6 +1,6 @@
 ﻿using System;
 
-//struct holding x and y coordinates
+//struct holding x and y coordinates, no need to touch
 public struct Point
 {
 	public int X, Y;

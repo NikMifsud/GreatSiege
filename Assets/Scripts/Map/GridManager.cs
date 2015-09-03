@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
+//Script used to create the board of tiles
+// Uses SelectTileType to get the next tile... numbers in that method are the checks/biases to place only 2/3 outpost and cluster the stone tiles
+//CreateGrid() creates the actual grid and puts all the tiles in a board object
+//Other methods are used as mathematicl functions to place everything near eachother etc (dont really need to change anyhting in here except biases if u want to change board size)
+
 public class GridManager: MonoBehaviour
 {
 
@@ -124,7 +129,7 @@ public class GridManager: MonoBehaviour
 
 		//int[] integers = new int[] {0,1,2,4};
 
-		if (tileCounter >= 0 && tileCounter <= 75) {
+		if (tileCounter >= 0 && tileCounter <= 50) { //75
 			if(stoneCounter == 15){
 				num = 3;
 			}
@@ -194,12 +199,14 @@ public class GridManager: MonoBehaviour
 				Board.Add(tb.tile.Location, tb);
 			}
 		}
+
 		//variable to indicate if all rows have the same number of hexes in them
 		//this is checked by comparing width of the first hex row plus half of the hexWidth with groundWidth
 		bool equalLineLengths = (gridSize.x + 0.5) * tileWidth <= groundWidth;
 		//Neighboring tile coordinates of all the tiles are calculated
-		foreach(TileBehaviour tb in Board.Values)
-			tb.tile.FindNeighbours(Board, gridSize, equalLineLengths);
+		foreach (TileBehaviour tb in Board.Values) {
+			tb.tile.FindNeighbours (Board, gridSize, equalLineLengths);
+		}
 	}
 
 	//Distance between destination tile and some other tile in the grid
@@ -215,7 +222,7 @@ public class GridManager: MonoBehaviour
 		
 		return Mathf.Max(deltaX, deltaY, deltaZ);
 	}
-
+	/*
 	private void DrawPath(IEnumerable<Tile> path)
 	{
 		if (this.path == null)
@@ -238,13 +245,13 @@ public class GridManager: MonoBehaviour
 			line.transform.parent = lines.transform;
 		}
 	}
-
+*/
 	public void generateAndShowPath()
 	{
 		//Don't do anything if origin or destination is not defined yet
 		if (originTileTB == null || destTileTB == null)
 		{
-			DrawPath(new List<Tile>());
+//			DrawPath(new List<Tile>());
 			return;
 		}
 		//We assume that the distance between any two adjacent tiles is 1
@@ -252,7 +259,7 @@ public class GridManager: MonoBehaviour
 		//Func<Tile, Tile, double> distance = (node1, node2) => 1;
 		
 		var path = PathFinder.FindPath(selectedCharacter.gameObject.GetComponent<CharacterMovement>().unitOriginalTile.tile, destTileTB.tile);
-		DrawPath(path);
+		//DrawPath(path);
 		CharacterMovement cm = selectedCharacter.gameObject.GetComponent<CharacterMovement>();
 		cm.StartMoving(path.ToList());
 	}
@@ -261,5 +268,14 @@ public class GridManager: MonoBehaviour
 	{
 		setSizes(); 
 		createGrid();
+
+		//so that u can click through the fort 
+		Destroy (GameObject.FindGameObjectWithTag("Fort").gameObject.GetComponent<Rigidbody>());
+		Destroy (GameObject.FindGameObjectWithTag("Fort").gameObject.GetComponent<MeshCollider>());
+		Destroy (GameObject.FindGameObjectWithTag("Fort1").gameObject.GetComponent<Rigidbody>());
+		Destroy (GameObject.FindGameObjectWithTag("Fort1").gameObject.GetComponent<MeshCollider>());
+		Destroy (GameObject.Find("pCube3").gameObject.GetComponent<MeshCollider>());
+		Destroy (GameObject.Find("pCube1").gameObject.GetComponent<Rigidbody>());
+		Destroy (GameObject.Find("pCube1").gameObject.GetComponent<MeshCollider>());
 	}
 }
