@@ -1,21 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Map\Statistics.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Units\EnemySpawner.cs">
     <Files>
-      <File FileName="Assets\Scripts\Map\GameMaster.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Units\EnemySpawner.cs" Line="98" Column="1" />
-      <File FileName="Assets\Scripts\Map\PlayerControl.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Map\IHasNeighbours.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Map\Statistics.cs" Line="68" Column="30" />
-      <File FileName="Assets\Scripts\Map\thisbetterwork.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Map\Tile.cs" Line="1" Column="1" />
-      <File FileName="Assets\dontkillme.cs" Line="1" Column="1" />
-      <File FileName="Assets\Musket.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Map\Point.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Map\PriorityQueue.cs" Line="21" Column="2" />
-      <File FileName="Assets\Scripts\Forts\StElmo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Units\SpawnSiege.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Units\disablinghp.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Units\EnemySpawner.cs" Line="108" Column="24" />
+      <File FileName="Assets\Scripts\Units\Enemy.cs" Line="209" Column="17" />
+      <File FileName="Assets\Scripts\Units\SpawnEnemy.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Map\Statistics.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
