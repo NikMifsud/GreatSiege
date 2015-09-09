@@ -60,7 +60,43 @@ public class Statistics : MonoBehaviour {
 		}
 
 		if (Application.loadedLevelName == "Knights2") {
-			if (minutes >= 1 && Leveldone == false) {
+			if (minutes >= 10 && Leveldone == false) { // if Dragut = dead instead of 10 mins since dragut will b spawned on wave number 3
+				objectiveComplete = true;
+				statScreen.gameObject.SetActive (true);
+				statScreen.gameObject.GetComponent<UpdateStatistics> ().UpdateStatisticScreen ();
+				
+				gameMaster.gameState = 4;
+				Time.timeScale = 0;
+				Leveldone = true;
+			}
+		}
+
+		if (Application.loadedLevelName == "Knights3") {
+			if (EnemySpawner.waveNumber >= 4 && Leveldone == false) {
+				objectiveComplete = true;
+				statScreen.gameObject.SetActive (true);
+				statScreen.gameObject.GetComponent<UpdateStatistics> ().UpdateStatisticScreen ();
+				
+				gameMaster.gameState = 4;
+				Time.timeScale = 0;
+				Leveldone = true;
+			}
+		}
+
+		if (Application.loadedLevelName == "Knights4") {
+			if (enemiesKilled >= 40  && Leveldone == false) { // and Vallette = alive
+				objectiveComplete = true;
+				statScreen.gameObject.SetActive (true);
+				statScreen.gameObject.GetComponent<UpdateStatistics> ().UpdateStatisticScreen ();
+				
+				gameMaster.gameState = 4;
+				Time.timeScale = 0;
+				Leveldone = true;
+			}
+		}
+
+		if (Application.loadedLevelName == "Knights5") { // destroy seige tower + capture 2 control points
+			if (enemiesKilled >= 40  && Leveldone == false) { // and Vallette = alive
 				objectiveComplete = true;
 				statScreen.gameObject.SetActive (true);
 				statScreen.gameObject.GetComponent<UpdateStatistics> ().UpdateStatisticScreen ();

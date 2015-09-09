@@ -103,6 +103,7 @@
      <Compile Include="Assets\Scripts\TextMapCharUI.cs" />
      <Compile Include="Assets\Scripts\Units\Artillery.cs" />
      <Compile Include="Assets\Scripts\Units\CharacterMovement.cs" />
+     <Compile Include="Assets\Scripts\Units\Dragut.cs" />
      <Compile Include="Assets\Scripts\Units\Enemy.cs" />
      <Compile Include="Assets\Scripts\Units\EnemyCannon.cs" />
      <Compile Include="Assets\Scripts\Units\EnemyRanged.cs" />

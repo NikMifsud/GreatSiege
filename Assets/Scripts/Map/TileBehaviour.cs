@@ -361,6 +361,7 @@ public class TileBehaviour: MonoBehaviour
 	{
 		if (this.tag != "FortTile") {
 			if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Fort") {
+
 				Destroy (this.gameObject);
 			}
 		}

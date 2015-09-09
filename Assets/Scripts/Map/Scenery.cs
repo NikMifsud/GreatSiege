@@ -189,7 +189,7 @@ public class Scenery: MonoBehaviour
 			}
 		}
 
-		hexGridGO.transform.position = new Vector3(-3f,-0.07f,3.4f);
+		hexGridGO.transform.position = new Vector3(-1.44f,-0.07f,2.4f);
 	}
 	
 	//Distance between destination tile and some other tile in the grid

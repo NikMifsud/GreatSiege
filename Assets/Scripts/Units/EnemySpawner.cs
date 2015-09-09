@@ -12,10 +12,12 @@ public class EnemySpawner : MonoBehaviour
 	bool spawn;
 	public GameObject tile;
 	public GameObject[] enemies;
+	//public GameObject Dragut;
+	public bool DragutSpawned;
 	public int enemiesDead;
 	public List<GameObject[]> enemiesAlive;
 	public Text waves;
-	public int waveNumber;
+	public static int waveNumber;
 	public int siegeCount;
 	public int dragutCount;
 	GameObject enemy;
@@ -25,11 +27,12 @@ public class EnemySpawner : MonoBehaviour
 	{
 		// Call the Spawn function after a delay of the spawnTime and then continue to call after the same amount of time.
 		//	InvokeRepeating ("Spawn", spawnTime, 0);
-		waveNumber = 0;
+		waveNumber = 1;
 		enemyCount = 1;
 		spawnTime = 0;
 		siegeCount = 0;
 		dragutCount = 0;
+		DragutSpawned = false;
 		enemiesDead = 0;
 		spawn = true;
 	}
@@ -49,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
 			waves.text = "Survive 4 waves: " + wave + "/4";
 		}
 		if (Application.loadedLevelName == "Knights2") {
-			waves.text = "Kill Dragut and survive for 5 minutes";
+			waves.text = "Kill Dragut";
 		} 
 		if (enemiesDead == 10 && enemyCount <= 40) {
 			spawnTime = 0;
@@ -98,7 +101,7 @@ public class EnemySpawner : MonoBehaviour
 			if (Application.loadedLevelName == "Knights2"){
 					if((siegeCount < 2) && (dragutCount <1)){
 						enemy = enemies[Random.Range(0,4)];
-					}else if (dragutCount >= 1){
+					}else if ((dragutCount >= 1) && (siegeCount <2)){
 						enemy = enemies[Random.Range(0,3)];
 					}else {
 						enemy = enemies[Random.Range(0,2)];
@@ -112,6 +115,7 @@ public class EnemySpawner : MonoBehaviour
 					enemy = enemies[Random.Range(0,2)];
 				}
 			}
+
 			Transform myUnitTransform = null;
 			if(enemy.gameObject.tag == "RangedEnemy"){
 				myUnitTransform = enemy.transform.FindChild ("EnemyRanged");
@@ -145,16 +149,21 @@ public class EnemySpawner : MonoBehaviour
 			}
 			spawnTile.gameObject.GetComponent<TileBehaviour> ().isEnemy = true;
 			spawnTile.gameObject.GetComponent<TileBehaviour> ().isPassable = false;
-			if(enemy.tag == "RangedEnemy" || enemy.tag == "Enemy" || enemy.tag == "Dragut"){
+			if((enemy.tag == "RangedEnemy") || (enemy.tag == "Enemy") || (enemy.tag == "Dragut")){
 				myUnitTransform.GetComponent<CharacterMovement> ().unitOriginalTile = spawnTile.gameObject.GetComponent<TileBehaviour> ();
 			}
 			if(enemy.tag == "EnemySiege"){
 				enemy.gameObject.GetComponent<CharacterMovement>().unitOriginalTile = spawnTile.gameObject.GetComponent<TileBehaviour> ();
 			}
 			Instantiate (enemy, position, Quaternion.identity);
+			/*if ((Application.loadedLevelName == "Knights2") && (DragutSpawned == false) && waveNumber == 1 ){
+				Instantiate (enemies [3], position, Quaternion.identity);
+				DragutSpawned = true;
+			}*/
 			enemyCount += 1;
+
+
 			SpawnDone ();
-			
 		}
 	}
 }
